@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>076E90BE-F448-41D5-8CAC-6B4E2F20E6C4</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>076E90BE-F448-41D5-8CAC-6B4E2F20E6C4.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>browser-ext project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>browser-ext (macOS)</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
+			<key>timeStartedRecording</key>
+			<real>699055605.20897698</real>
+			<key>timeStoppedRecording</key>
+			<real>699055607.56334901</real>
+			<key>title</key>
+			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
+			<key>uniqueIdentifier</key>
+			<string>076E90BE-F448-41D5-8CAC-6B4E2F20E6C4</string>
+		</dict>
+		<key>EF66DF67-E69E-4609-9785-E69FB1384C32</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>EF66DF67-E69E-4609-9785-E69FB1384C32.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>browser-ext project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>browser-ext (macOS)</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
+			<key>timeStartedRecording</key>
+			<real>699055493.13436604</real>
+			<key>timeStoppedRecording</key>
+			<real>699055494.96759105</real>
+			<key>title</key>
+			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
+			<key>uniqueIdentifier</key>
+			<string>EF66DF67-E69E-4609-9785-E69FB1384C32</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

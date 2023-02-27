@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>files</key>
+	<dict>
+		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
+		<data>
+		GT2V2S79Gun+HdY9ovpwxbgEcbg=
+		</data>
+		<key>Base.lproj/LaunchScreen.storyboardc/Info.plist</key>
+		<data>
+		n2t8gsDpfE6XkhG31p7IQJRxTxU=
+		</data>
+		<key>Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
+		<data>
+		U0x8EM0781fCPb62BbZIXKeDlZ4=
+		</data>
+		<key>Base.lproj/Main.html</key>
+		<data>
+		d9k8eycxcOZRcBwHtvb2eNTGtI4=
+		</data>
+		<key>Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib</key>
+		<data>
+		5s0K3BecC9LetBoalWw2ag3n6IY=
+		</data>
+		<key>Base.lproj/Main.storyboardc/Info.plist</key>
+		<data>
+		MDrKFvFWroTb0+KEbQShBcoBvo4=
+		</data>
+		<key>Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib</key>
+		<data>
+		DuAAHYrnPTdRfQAlCMCYyEV0pIY=
+		</data>
+		<key>Icon.png</key>
+		<data>
+		iNsdE0mEMGVpnNZlYaqPpNRNCtk=
+		</data>
+		<key>Info.plist</key>
+		<data>
+		gK0roEaNyQAOeFpVUYd9Dtv5eaU=
+		</data>
+		<key>PkgInfo</key>
+		<data>
+		n57qDP4tZfLD1rCS43W0B4LQjzE=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/Info.plist</key>
+		<data>
+		v4ThZpuKVYuPBIh+774biDvwHVc=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/_CodeSignature/CodeResources</key>
+		<data>
+		BRsUOiVsERFFVQRwQjiyY9JNLHU=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/_locales/en/messages.json</key>
+		<data>
+		Tq6ZZd7n6HRdHSY3pOqqTYDDTzg=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/browser-ext Extension</key>
+		<data>
+		yDyHO9wJ9kqIpKFhzJtpZ27ccJc=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/build/background.js</key>
+		<data>
+		fXKdqzf6Z8AnP+Cyc0B3E7xWS1Y=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/build/content.js</key>
+		<data>
+		2e6lThnKCv/Vv2IyKlS0dkVlrjk=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/build/injected.js</key>
+		<data>
+		TIl0DuRE/d9xum/D1dEhRgODwRA=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/build/popup.css</key>
+		<data>
+		4y6TiPEbFWrqE2I3RPmrHgp+lZc=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/build/popup.js</key>
+		<data>
+		canVOxojNQAdZyabDdTX7iFgfFY=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-128.png</key>
+		<data>
+		rYa1lv1LgkO3fkP9h6gRSjlQgqk=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-256.png</key>
+		<data>
+		05xbekvTg28KsH9RRIKQRL8tqQs=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-48.png</key>
+		<data>
+		BWUZe8raKzOzA2cDWIYFoBPxxw8=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-512.png</key>
+		<data>
+		shzpVHJMsAu4q820Fb+YzByiFhc=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-64.png</key>
+		<data>
+		HZC4YIb4ZLg4lpjNAKFqSaka6r0=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-96.png</key>
+		<data>
+		IPAOd1HfCtCI7ybhVhwA5TU/BZ8=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-16.png</key>
+		<data>
+		Bkb2Cy8VYIcWl7wFZ2HcWZcCoyA=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-19.png</key>
+		<data>
+		XLkdODJ73CVbwn/1LCAsfB6scPg=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-32.png</key>
+		<data>
+		0cQgf/z3urGdzsmtmc2Wnim1+lg=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-38.png</key>
+		<data>
+		eas7Tl3/r2JMZf6nK84ZjoBJrZo=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-48.png</key>
+		<data>
+		fxyz1xgkIR877Cf/7uYNUqXrxoM=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-72.png</key>
+		<data>
+		pHL3CJwjPY30T9sFvvcA2qlraBw=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/manifest.json</key>
+		<data>
+		QkSqGWABN3NB/OQtYRMwF4GrJXQ=
+		</data>
+		<key>PlugIns/browser-ext Extension.appex/popup.html</key>
+		<data>
+		AT2v9zfS/gk5GJBXDdS3IBmvEwo=
+		</data>
+		<key>Script.js</key>
+		<data>
+		wV/zIZqbenTpMDSjB6Gb26OFPrs=
+		</data>
+		<key>Style.css</key>
+		<data>
+		jmfSY7ip+LLQdF7ltwtWtMOUYWY=
+		</data>
+	</dict>
+	<key>files2</key>
+	<dict>
+		<key>Base.lproj/LaunchScreen.storyboardc/01J-lp-oVM-view-Ze5-6b-2t3.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			/SsfCAMT9oGpkcPNLc7KDmu9SQ+0PXFnVnI57PWbY78=
+			</data>
+		</dict>
+		<key>Base.lproj/LaunchScreen.storyboardc/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			HyVdXMU7Ux4/KalAao30mpWOK/lEPT4gvYN09wf31cg=
+			</data>
+		</dict>
+		<key>Base.lproj/LaunchScreen.storyboardc/UIViewController-01J-lp-oVM.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			cWq7q+iQcmpSoaFGecnyPdKFEPFwRD3slgUmxFADkVs=
+			</data>
+		</dict>
+		<key>Base.lproj/Main.html</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			+Jcd3chbSNPLuab1pqQCDo0iAXqoj1B43461n83d65M=
+			</data>
+		</dict>
+		<key>Base.lproj/Main.storyboardc/BYZ-38-t0r-view-8bC-Xf-vdC.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			rZpWCswy4M9O7FlwHMpagy/xQhnoLb5OaiZvPSPv50U=
+			</data>
+		</dict>
+		<key>Base.lproj/Main.storyboardc/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			PpvapAjR62rl6Ym4E6hkTgpKmBICxTaQXeUqcpHmmqQ=
+			</data>
+		</dict>
+		<key>Base.lproj/Main.storyboardc/UIViewController-BYZ-38-t0r.nib</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Oqb0rnpFTrk4n0+JEQaR4OCwg4iFchc3udo/N/Zq2T4=
+			</data>
+		</dict>
+		<key>Icon.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			vH8TDIU7iMyQOmaJW7IBgZIj54Owy86jQeDLMdDf8gQ=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/Info.plist</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			stufxI7i2ZtaJ7J52SbAHJr2iKEIdRhgdKXxQccj8QY=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/_CodeSignature/CodeResources</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			SolQBvU/GCP+6FuQU1Yqn2JUEr7P3um01r9XPB1e/QM=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/_locales/en/messages.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			ZVW9on8r4fDjhCkqPnHNk2Z7uJoQ1JABeHB4cfSwPk0=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/browser-ext Extension</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2P4nz6x7Snri+LRLyGg8ugDcc8F9mdIzdz99BnMrZss=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/build/background.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			bltDwQq54jolL1bxR4hW1X0khlnTg8jjWX71YGdBVCQ=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/build/content.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			qx4TmRUgoTLJLr7zG4HqmFrsiH+DrJTDaheGkDS9EII=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/build/injected.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JSJbwN9q8j7VfBs6mv314mg2wxS4ypYpw1PEvIOAMOI=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/build/popup.css</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			K4tb9tfUtDMRk2Z4rTnfvxSDs9lPYuml3fnTFcSJwPw=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/build/popup.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			OGtvmDoKNBL+uvtSwgvDT9oaHAaA7zUzwl5dSGTL1nM=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-128.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			TV8I8bcVP9rAnVA4AJRAWtkJveIenMpYsd/7+rsMLzo=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-256.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			kksdsW0Y1svz0bT0i3UzQGBmBDxJGr2eTCZmaqTS+XM=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-48.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			mBNPpZ78p0eH4WsNdF/EXw/sFHq5f8PqERARlLulYbY=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-512.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			waQn18oFc3GbhXXm2HEn6xFQk3HKehp9crGljWAMsGQ=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-64.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			CJwxajQk49Cd0RfR22yEPO6pjDbg+Aa4Ocxi+812CiM=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/icon-96.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			zuzRjCepizxOWXh9ftCPth38GUxy1Ea/4zS3dw19OXo=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-16.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			xmXH4YHb+Pq/YuC1e8JLIun93LuM3+/8MvB3r8oTKls=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-19.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			qSX/1Ux4BOUIhixJK5NkvyTomLwp0yISfsQ97uF8/5g=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-32.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			pGDg4NcSdD5EQaZgaiwxNosbSEXmZnpRc79RfitKc1c=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-38.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BUU3dwrCSvNOiFkBQWdPkrwASjUvxSxbizW+Izt3LBA=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-48.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			JLZV5da+fZkfw0m2KfMqHSixWBCJvZoUNlt3la7gm54=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/images/toolbar-icon-72.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			TwM7A1Bkuv4C3SWorFNwG+w38mWo3TaMtglLdDXxcFw=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/manifest.json</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			jz6DkwLtNtI2h7aWS5xluUHqfkYD7PgISmaHHGlsJ2I=
+			</data>
+		</dict>
+		<key>PlugIns/browser-ext Extension.appex/popup.html</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KzlOGUxwogmtYy09ouYBEl7H5b0pxU6plB/0e8eHu80=
+			</data>
+		</dict>
+		<key>Script.js</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			LRVaT2vPomLLc9yQwZC5QLzz5OUdDowmv6dcuNyqh1k=
+			</data>
+		</dict>
+		<key>Style.css</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			Iyn8tL1LhG2ZHCWV/lFJ1fIbDsTt4KIsonLsJKP/rUs=
+			</data>
+		</dict>
+	</dict>
+	<key>rules</key>
+	<dict>
+		<key>^.*</key>
+		<true/>
+		<key>^.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
+		<key>^version.plist$</key>
+		<true/>
+	</dict>
+	<key>rules2</key>
+	<dict>
+		<key>.*\.dSYM($|/)</key>
+		<dict>
+			<key>weight</key>
+			<real>11</real>
+		</dict>
+		<key>^(.*/)?\.DS_Store$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>2000</real>
+		</dict>
+		<key>^.*</key>
+		<true/>
+		<key>^.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
+		<key>^Info\.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^PkgInfo$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^embedded\.provisionprofile$</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^version\.plist$</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+	</dict>
+</dict>
+</plist>
