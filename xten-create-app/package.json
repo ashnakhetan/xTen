@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Clone xten repo",
     "bin": {
-      "my-custom-cli": "./index.js"
+      "xten-create-app": "cli.js"
     },
     "repository": {
       "type": "git",
