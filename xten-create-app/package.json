@@ -1,24 +1,26 @@
 {
     "name": "xten-create-app",
     "version": "1.0.0",
-    "description": "Clone xten repo",
+    "description": "CLI command to create xTen browser extensions",
     "bin": {
-      "xten-create-app": "cli.js"
+        "xten-create-app": "index.js"
     },
     "repository": {
-      "type": "git",
-      "url": "https://github.com/cs210/2023-87Capital.git"
+        "type": "git",
+        "url": "https://github.com/cs210/2023-87Capital.git"
     },
     "keywords": [
-      "extension",
-      "github",
-      "browser",
+        "xten",
+        "browser extensions",
         "chrome",
         "firefox",
         "safari"
     ],
     "license": "MIT",
     "dependencies": {
-      "child_process": "^1.0.2"
+        "commader": "^1.0.0",
+        "commander": "^8.2.0",
+        "figlet": "^1.5.0",
+        "shelljs": "^0.8.4"
     }
-  }
+}
