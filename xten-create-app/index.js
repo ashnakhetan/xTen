@@ -13,7 +13,7 @@ console.log(figlet.textSync("xten-create-app"));
 const program = new Command();
 program
   .version("1.0.0")
-  .description("Clone xten repo")
+  .description("CLI command to create xTen browser extensions")
   .option("-c, --create-xten-app", "Create browser extension")
   .argument("[project-name]", "project name", "xten-app")
   .parse(process.argv);
