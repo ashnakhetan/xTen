@@ -1,0 +1,1 @@
+Command to clone foundations repo and install dependencies for xten browser app

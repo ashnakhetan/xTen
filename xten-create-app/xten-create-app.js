@@ -2,14 +2,12 @@
 
 const figlet = require("figlet");
 const { Command } = require("commander");
+const packageJson = require("./package.json");
 
 /* What is our figlet usage policy
   it looks cool so I'm using it here */
-
-// console.log(figlet.textSync("xTen"));
 console.log(figlet.textSync("xten-create-app"));
 
-// Switching to commander to follow Ruslan's example
 const program = new Command();
 program
   .version("1.0.0")
@@ -20,19 +18,27 @@ program
 
 const options = program.opts();
 
-// What other options should we have?
 if (options.createXtenApp) {
   const { spawn } = require("child_process");
+  // Need updated foundations repo
   const repoUrl = "https://github.com/cs210/2023-87Capital.git";
   let folderName = program.args[0];
 
-  if (folderName === undefined) {
-    folderName = "xten-app";
+  if (typeof folderName === 'undefined') {
+    console.error('Please specify the App directory:');
+    console.log();
+    console.log('<app-directory>');
+    console.log();
+    console.log('For example:');
+    console.log('my-xten-app');
+    console.log();
+    process.exit(1);
   }
 
-// What dependencies do we require?
+  // Install dependencies
   const installDeps = () => {
     console.log("Installing dependencies...");
+    
     const install = spawn("npm", ["install"], { cwd: `./${folderName}` });
 
     install.stdout.on("data", (data) => {
@@ -52,7 +58,8 @@ if (options.createXtenApp) {
     });
   };
 
-  // Gotta switch repos and update package.json too
+
+  // TODO: switch repos and update package.json too
   const cloneRepo = () => {
     console.log("Cloning repository...");
     const clone = spawn("git", ["clone", repoUrl, folderName]);
@@ -67,22 +74,7 @@ if (options.createXtenApp) {
     clone.on("close", (code) => {
       console.log(`Repository cloned with code ${code}`);
       console.log(`Setting up boilerplate for ${folderName}...`);
-      const setup = spawn("npx", ["create-react-app", folderName], {
-        cwd: `./${folderName}`,
-      });
-  
-      setup.stdout.on("data", (data) => {
-        console.log(data.toString());
-      });
-  
-      setup.stderr.on("data", (data) => {
-        console.error(data.toString());
-      });
-  
-      setup.on("close", (code) => {
-        console.log(`Boilerplate setup with code ${code}`);
-        installDeps();
-      });
+      installDeps();
     });
   };
 cloneRepo();
