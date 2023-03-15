@@ -6,7 +6,7 @@ const packageJson = require("./package.json");
 
 /* What is our figlet usage policy
   it looks cool so I'm using it here */
-console.log(figlet.textSync("xten-create-app"));
+console.log(figlet.textSync("xten"));
 
 const program = new Command();
 program

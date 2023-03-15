@@ -1,13 +1,9 @@
 {
-    "name": "xten-create-app",
+    "name": "xten-build",
     "version": "1.0.0",
-    "description": "CLI command to create xTen browser extension app",
+    "description": "CLI command to buil xTen browser extension app",
     "bin": {
-        "xten-create-app": "xten-create-app.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/cs210/2023-87Capital.git"
+        "xten-build": "xten-build.js"
     },
     "keywords": [
         "xten",
@@ -35,5 +31,8 @@
         "typescript": "^4.9.5",
         "watcher": "^2.2.2",
         "yorkie": "^2.0.0"
-    }
+    },
+    "scripts": {
+        "build": "node xten-build.js xten-build"
+      }
 }
