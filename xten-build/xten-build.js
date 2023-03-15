@@ -17,6 +17,9 @@ program
     console.log('Building the project...');
 
     // Run the esbuild build function
+    // what directory should we be in?
+    // Do we need any dependencies?
+    // Do we need to pass in any arguments?
     esbuild
       .build({
         entryPoints: [
