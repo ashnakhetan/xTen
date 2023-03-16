@@ -1,4 +1,0 @@
-Target dependency graph (2 targets)
-browser-ext Extension (macOS) in browser-ext, no dependencies
-browser-ext (macOS) in browser-ext, depends on:
-browser-ext Extension (macOS) in browser-ext (explicit)
