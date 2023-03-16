@@ -75,8 +75,10 @@ export const Home = () => {
 
 
     return (
-        <div style={{width: '300px', height: '400px', color: "white", backgroundColor: "#282c34"}}>
-            <header style={{color: "white", backgroundColor: "#282c34", fontSize: "20px", alignItems: "center", justifyContent: "center;"}}>
+        <div className="App">
+        {/* // style={{width: '300px', height: '400px', color: "white", backgroundColor: "#282c34"}}> */}
+            <header className="App-header">
+            {/* // style={{color: "white", backgroundColor: "#282c34", fontSize: "20px", alignItems: "center", justifyContent: "center;"}}> */}
                 <b>Home Page</b>
                 <p>URL: {url}</p>
                 {/* <p>
