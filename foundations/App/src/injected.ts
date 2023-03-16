@@ -10,4 +10,11 @@
 
 console.log("Injected script");
 
-export {};
+export const getCurrentTabUrl = (callback: (url: string | undefined) => void): void => {
+    const queryInfo = {active: true, lastFocusedWindow: true};
+
+    chrome.tabs && chrome.tabs.query(queryInfo, tabs => {
+        console.log(tabs[0]);
+        callback(tabs[0].url);
+    });
+}

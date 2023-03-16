@@ -7,7 +7,13 @@
   "gitHooks": {
     "pre-commit": "prettier --write . && git add -A"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.13",
+    "openai": "^3.2.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.13",
     "@types/chrome": "^0.0.129",
