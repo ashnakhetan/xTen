@@ -1,0 +1,9 @@
+# node modules
+node_modules/
+
+## all build folders
+build/
+
+
+## User settings
+xcuserdata/
