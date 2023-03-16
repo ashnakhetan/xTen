@@ -1,3 +1,6 @@
+# .DS_STORE (MACOS)
+.DS_Store
+
 # node modules
 node_modules/
 
