@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>268EB0B4-5C34-4273-A1F3-023D1C47BB65</key>
+		<key>1B1B4F2F-018B-478D-B4B3-CC8491CF8EEF</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -15,47 +15,13 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>268EB0B4-5C34-4273-A1F3-023D1C47BB65.xcactivitylog</string>
+			<string>1B1B4F2F-018B-478D-B4B3-CC8491CF8EEF.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
 			<dict>
 				<key>highLevelStatus</key>
-				<string>S</string>
-			</dict>
-			<key>schemeIdentifier-containerName</key>
-			<string>browser-ext project</string>
-			<key>schemeIdentifier-schemeName</key>
-			<string>browser-ext (iOS)</string>
-			<key>schemeIdentifier-sharedScheme</key>
-			<integer>1</integer>
-			<key>signature</key>
-			<string>Building project browser-ext with scheme browser-ext (iOS) and configuration Release</string>
-			<key>timeStartedRecording</key>
-			<real>699160604.73456502</real>
-			<key>timeStoppedRecording</key>
-			<real>699160607.01576102</real>
-			<key>title</key>
-			<string>Building project browser-ext with scheme browser-ext (iOS) and configuration Release</string>
-			<key>uniqueIdentifier</key>
-			<string>268EB0B4-5C34-4273-A1F3-023D1C47BB65</string>
-		</dict>
-		<key>EF66DF67-E69E-4609-9785-E69FB1384C32</key>
-		<dict>
-			<key>className</key>
-			<string>IDECommandLineBuildLog</string>
-			<key>documentTypeString</key>
-			<string>&lt;nil&gt;</string>
-			<key>domainType</key>
-			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
-			<key>fileName</key>
-			<string>EF66DF67-E69E-4609-9785-E69FB1384C32.xcactivitylog</string>
-			<key>hasPrimaryLog</key>
-			<true/>
-			<key>primaryObservable</key>
-			<dict>
-				<key>highLevelStatus</key>
-				<string>S</string>
+				<string>E</string>
 			</dict>
 			<key>schemeIdentifier-containerName</key>
 			<string>browser-ext project</string>
@@ -66,13 +32,47 @@
 			<key>signature</key>
 			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
 			<key>timeStartedRecording</key>
-			<real>699055493.13436604</real>
+			<real>700615692.12071502</real>
 			<key>timeStoppedRecording</key>
-			<real>699055494.96759105</real>
+			<real>700615692.75855196</real>
 			<key>title</key>
 			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
 			<key>uniqueIdentifier</key>
-			<string>EF66DF67-E69E-4609-9785-E69FB1384C32</string>
+			<string>1B1B4F2F-018B-478D-B4B3-CC8491CF8EEF</string>
+		</dict>
+		<key>F6C33F01-177B-4B80-AB3D-D795005FCBAF</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>F6C33F01-177B-4B80-AB3D-D795005FCBAF.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>browser-ext project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>browser-ext (macOS)</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
+			<key>timeStartedRecording</key>
+			<real>700615710.63688397</real>
+			<key>timeStoppedRecording</key>
+			<real>700615710.94245303</real>
+			<key>title</key>
+			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
+			<key>uniqueIdentifier</key>
+			<string>F6C33F01-177B-4B80-AB3D-D795005FCBAF</string>
 		</dict>
 	</dict>
 </dict>

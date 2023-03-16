@@ -5,7 +5,9 @@
   "author": "F what you heard it's me ya boy",
   "description": "base react extention - esbuild",
   "permissions": [
-    "tabs"
+    "tabs",
+    "webNavigation",
+    "activeTab"
   ],
   "action": {
     "default_popup": "popup.html",
