@@ -2,47 +2,49 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import './App.css';
+import { OpenAI } from "./OpenAI.js";
+// import dotenv from 'dotenv';
+import API_KEY from './apikey';
 
 export const AskGPT = () => {
-    let {push} = useHistory();
-    const [data, setData] = useState('');
-    const [query, setQuery] = useState('');
-    const [search, setSearch] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
+  // dotenv.config();
+  // Creating a new instance of the OpenAI class and passing in the OPENAI_KEY environment variable
+  const openAI = new OpenAI(API_KEY);
+  const model = 'text-davinci-003';
 
-    useEffect(() => {
-        const fetchData = async () => {
-          if (search) {
-            setIsLoading(true);
-            console.log("QUESTION: " + search);
-            try {
-            const res = await fetch('https://openai-server-xten.herokuapp.com', {
-              body: JSON.stringify({
-                name: search
-              }),
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              method: 'POST'
-            })
-            console.log(res.ok);
-            console.log(res);
-            const data = await res.json();
-            console.log("HERE IS YOUR MESSGE A: " + data.message.text);
+  let {push} = useHistory();
+  const [data, setData] = useState('');
+  const [query, setQuery] = useState('');
+  const [search, setSearch] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  // const generatePrompt = (topic) => {
+  //   return `Write an blog post about "${topic}", it should in HTML format, include 5 unique points, using informative tone.`
+  // };
+
+  // Use the generateText method to generate text from the OpenAI API and passing the generated prompt, the model and max token value
+  useEffect(() => {
+    const fetchData = async () => {
+      if (search) {
+        await openAI.generateText(search, model, 800)
+        .then(text => {
+            // Logging the generated text to the console
+            // In the future, this will be replaced to upload the returned blog text to a WordPress site using the WordPress REST API
+            console.log(text);
             setData(data);
-            setIsLoading(false);
-          }
-          catch (error) {
-            console.log(error);
-          }
-        }};
-    
-        fetchData();
-      }, [search]);
+            setIsLoading(isLoading);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+      }
+    };
+    fetchData();
+  }, [search]);
 
     return (
         <div className="App">
-            <header className="App-header">
+            <header id="app-head">
                 <p>Ask ChatGPT a question...</p>
                 <form>
                     <label>

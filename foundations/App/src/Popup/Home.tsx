@@ -75,17 +75,17 @@ export const Home = () => {
 
 
     return (
-        <div className="App">
-            <header className="App-header">
+        <div style={{width: '300px', height: '400px', color: "white", backgroundColor: "#282c34"}}>
+            <header style={{color: "white", backgroundColor: "#282c34", fontSize: "20px", alignItems: "center", justifyContent: "center;"}}>
                 <b>Home Page</b>
                 <p>URL: {url}</p>
                 {/* <p>
                     {url}
                 </p> */}
-                <Button onClick={sendTestMessage}>Get Page Logo</Button>
+                {/* <Button onClick={sendTestMessage}>Get Page Logo</Button>
                 <Button onClick={sendRemoveMessage}>Remove logo</Button>
                 <p>Response from content:</p>
-                <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_92x30dp.png" alt="logo from page" width="150"></img>
+                <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_92x30dp.png" alt="logo from page" width="150"></img> */}
                 {/* <p>
                     {responseFromContent}
                 </p> */}

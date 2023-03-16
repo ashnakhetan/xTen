@@ -6,7 +6,7 @@
 	<integer>10</integer>
 	<key>logs</key>
 	<dict>
-		<key>1B1B4F2F-018B-478D-B4B3-CC8491CF8EEF</key>
+		<key>6F7CAA79-1C29-4E7B-9BBB-F0F88E24DFD7</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -15,7 +15,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>1B1B4F2F-018B-478D-B4B3-CC8491CF8EEF.xcactivitylog</string>
+			<string>6F7CAA79-1C29-4E7B-9BBB-F0F88E24DFD7.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -32,15 +32,15 @@
 			<key>signature</key>
 			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
 			<key>timeStartedRecording</key>
-			<real>700615692.12071502</real>
+			<real>700662984.58267605</real>
 			<key>timeStoppedRecording</key>
-			<real>700615692.75855196</real>
+			<real>700662985.05396295</real>
 			<key>title</key>
 			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
 			<key>uniqueIdentifier</key>
-			<string>1B1B4F2F-018B-478D-B4B3-CC8491CF8EEF</string>
+			<string>6F7CAA79-1C29-4E7B-9BBB-F0F88E24DFD7</string>
 		</dict>
-		<key>F6C33F01-177B-4B80-AB3D-D795005FCBAF</key>
+		<key>C4AAEC98-AC77-4E19-A22C-385C3FC909ED</key>
 		<dict>
 			<key>className</key>
 			<string>IDECommandLineBuildLog</string>
@@ -49,7 +49,7 @@
 			<key>domainType</key>
 			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
 			<key>fileName</key>
-			<string>F6C33F01-177B-4B80-AB3D-D795005FCBAF.xcactivitylog</string>
+			<string>C4AAEC98-AC77-4E19-A22C-385C3FC909ED.xcactivitylog</string>
 			<key>hasPrimaryLog</key>
 			<true/>
 			<key>primaryObservable</key>
@@ -66,13 +66,13 @@
 			<key>signature</key>
 			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
 			<key>timeStartedRecording</key>
-			<real>700615710.63688397</real>
+			<real>700663026.08603799</real>
 			<key>timeStoppedRecording</key>
-			<real>700615710.94245303</real>
+			<real>700663026.487643</real>
 			<key>title</key>
 			<string>Building project browser-ext with scheme browser-ext (macOS) and configuration Release</string>
 			<key>uniqueIdentifier</key>
-			<string>F6C33F01-177B-4B80-AB3D-D795005FCBAF</string>
+			<string>C4AAEC98-AC77-4E19-A22C-385C3FC909ED</string>
 		</dict>
 	</dict>
 </dict>
