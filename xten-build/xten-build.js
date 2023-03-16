@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { Command } = require('commander');
+const { execSync } = require('child_process');
 const esbuild = require('esbuild');
 
 const program = new Command();
@@ -16,10 +17,11 @@ program
   .action(() => {
     console.log('Building the project...');
 
+    // Install dependencies
+    console.log('Installing dependencies...');
+    execSync('npm install --only=prod', { stdio: 'inherit' });
+
     // Run the esbuild build function
-    // what directory should we be in?
-    // Do we need any dependencies?
-    // Do we need to pass in any arguments?
     esbuild
       .build({
         entryPoints: [
