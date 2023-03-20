@@ -5,7 +5,9 @@
   "author": "F what you heard it's me ya boy",
   "description": "base react extention - esbuild",
   "permissions": [
-    "tabs"
+    "tabs",
+    "<all_urls>",
+    "activeTab"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -15,6 +17,10 @@
     "https://*/*"
   ],
   "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "background.js"
+    ],
     "service_workers": ["build/background.js"]
   },
   "icons": {
@@ -28,7 +34,7 @@
   "content_scripts": [
     {
       "matches": ["file://*/*", "http://*/*", "https://*/*"],
-      "js": ["build/content.js"],
+      "js": ["build/content.js", "browser-polyfill.js"],
       "run_at": "document_end"
     }
   ]

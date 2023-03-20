@@ -14,5 +14,10 @@
   "icons": {
     "192": "logo192.png",
     "512": "logo512.png"
-  }
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "activeTab"
+  ]
 }
