@@ -6,6 +6,7 @@
  * Read more about content scripts:
  * https://developer.chrome.com/docs/extensions/mv2/content_scripts/
  */
+import browser, { Cookies } from "webextension-polyfill";
 
 function addScriptToWindow(scriptLocation: string) {
   try {

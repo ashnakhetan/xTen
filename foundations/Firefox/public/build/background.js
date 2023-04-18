@@ -1,1 +1,1 @@
-"use strict";(()=>{console.log("background script");})();
+(()=>{console.log("background script");})();

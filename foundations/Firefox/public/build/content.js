@@ -1,2 +1,2 @@
-"use strict";(()=>{function n(c){try{let t=document.head||document.documentElement,e=document.createElement("script");e.setAttribute("async","false"),e.setAttribute("type","text/javascript"),e.setAttribute("src",c),t.insertBefore(e,t.children[0]),t.removeChild(e)}catch(t){console.error(`Failed to inject script
-`,t)}}console.log("content script");n(chrome.runtime.getURL("/build/injected.js"));})();
+(()=>{function r(o){try{let e=document.head||document.documentElement,t=document.createElement("script");t.setAttribute("async","false"),t.setAttribute("type","text/javascript"),t.setAttribute("src",o),e.insertBefore(t,e.children[0]),e.removeChild(t)}catch(e){console.error(`Failed to inject script
+`,e)}}console.log("content script");r(chrome.runtime.getURL("/build/injected.js"));})();
