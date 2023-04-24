@@ -11,3 +11,7 @@ If you look into the console of the extension you should see the test message sh
 
 ## later steps
 As we start adding packages to @xten, we're going to start getting our own dependencies so we will have to run `pnpm install` in that folder as well but for now we have nothing.
+
+
+## OPENAI notice
+Code added is server side so make sure to never ship any openai configs with it – devs would likely want to have a way for users to input their own key in and use that.
