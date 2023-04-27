@@ -25,6 +25,6 @@ function IndexPopup() {
       </a>
     </div>
   )
-}
+} 
 
 export default IndexPopup
