@@ -1,7 +1,11 @@
-export default class OpenAIApi {
+import { Configuration, OpenAIApi } from 'openai';
+
+export default class OpenAIPLugin {
     constructor(apiKey) {
       this.apiKey = apiKey;
-      this.apiEndpoint = 'https://api.openai.com/v1/engines/davinci-codex/completions';
+      this.apiEndpoint = 'https://api.openai.com/v1/completions';
+      this.configuration = new Configuration({ apiKey });
+      this.openai = new OpenAIApi(this.configuration);
     }
     
     // OpenAI API summarize text function
@@ -36,5 +40,27 @@ export default class OpenAIApi {
         console.log(jsonResponse);
         return jsonResponse.choices[0].text;
       }
+    // More OpenAI API functions
+    // Get list of avilable models
+    async getAvailableModels() {
+        fetch(apiEndpoint, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+        })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Error during API request: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Available models:', data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
 }
-// More OpenAI API functions

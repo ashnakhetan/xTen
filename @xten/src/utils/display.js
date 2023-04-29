@@ -1,11 +1,11 @@
 
 // This function is used to display a tooltip or modal with the given text
 
-export function displayText(summary, x, y) {
+export function displayText(text, x, y) {
   // Create a tooltip or modal with the summarized text
   const tooltip = document.createElement('div');
   tooltip.classList.add('tooltip');
-  tooltip.innerHTML = summary;
+  tooltip.innerHTML = text;
   tooltip.style.position = 'fixed';
   tooltip.style.left = `${x}px`;
   tooltip.style.top = `${y}px`;
