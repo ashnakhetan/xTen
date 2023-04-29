@@ -1,5 +1,10 @@
 import { Configuration, OpenAIApi } from 'openai';
 
+/* 
+Open AI API Plugin, used to interact with the OpenAI API 
+and perform various tasks such as summarizing text. 
+Add more tasks by generating more prompts for functions.
+*/
 export default class OpenAIPLugin {
     constructor(apiKey) {
       this.apiKey = apiKey;
