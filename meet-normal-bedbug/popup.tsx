@@ -1,10 +1,15 @@
-import { useState } from "react"
+import { useState } from "react";
 import xten from '@xten/xten';
+import { scrapePage } from '../@xten/src/utils/scrapePage';
+
+const contentTypes = ['title, h1, h2, h3, h4, h5, h6, img'];
 
 function IndexPopup() {
   const [data, setData] = useState("")
   console.log(xten);
-  xten.printMsg()
+  xten.printMsg();
+  chrome.tabs.query({ active: true, currentWindow: true }, tabs => scrapePage(tabs, contentTypes));
+
   return (
     <div
       style={{
@@ -15,7 +20,7 @@ function IndexPopup() {
       <h2>
         Welcome to your{" "}
         <a href="https://www.plasmo.com" target="_blank">
-          Plasmo
+          PlasmoXD
         </a>{" "}
         Extension!
       </h2>
