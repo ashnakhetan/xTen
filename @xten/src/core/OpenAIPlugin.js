@@ -68,4 +68,24 @@ export default class OpenAIPLugin {
           console.error('Error:', error);
         });
     }
+    // API call to recommend new url's based on a given list of url's
+    async recommendUrls(urls, numUrls) {
+      const prompt = "Recommend" + numUrls + "new urls based on the following list of urls:\n" + urls.join("\n");
+      const response = await fetch(this.apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+        body: JSON.stringify({
+          model: 'text-davinci-003',
+          prompt: prompt,
+          temperature: 0.7,
+          max_tokens: 500,
+          top_p: 1.0,
+          frequency_penalty: 0.0,
+          presence_penalty: 1,
+        }),
+      });
+    }
 }
