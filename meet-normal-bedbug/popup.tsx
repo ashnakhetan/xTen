@@ -5,6 +5,8 @@ function IndexPopup() {
   const [data, setData] = useState("")
   console.log(xten);
   xten.printMsg()
+  xten.injectUI("", "block-herotitleblock", "https://www.utu.fi/");
+
   return (
     <div
       style={{
