@@ -1,10 +1,9 @@
 # Welcome to xTen!
 
 ## Steps
-
-Run `pnpm install` in the plasmo project.\
-Run `pnpm dev` in the plasmo project.\
-Add the build folder as you would add any extension in chrome (we're literally only adding the extension here!)
+    1. Run `pnpm install` in the plasmo project.
+    2. Run `pnpm dev` in the plasmo project.
+    3. Add the build folder as you would add any extension in chrome (we're literally only adding the extension here!)
 
 If you look into the console of the extension you should see the test message show up!
 
