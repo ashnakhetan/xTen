@@ -1,17 +1,17 @@
-# Welcome to MkDocs
+# Welcome to xTen!
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+## Steps
 
-## Commands
+Run `pnpm install` in the plasmo project.\
+Run `pnpm dev` in the plasmo project.\
+Add the build folder as you would add any extension in chrome (we're literally only adding the extension here!)
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
+If you look into the console of the extension you should see the test message show up!
 
-## Project layout
+## Later steps
+As we start adding packages to @xten, we're going to start getting our own dependencies so we will have to run `pnpm install` in that folder as well but for now we have nothing.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+
+## OpenAI notice
+Code added is server side so make sure to never ship any openai configs with it – devs would likely want to have a way for users to input their own key in and use that.
+

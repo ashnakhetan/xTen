@@ -5,10 +5,6 @@ theme:
   name: material
 nav:
   - Home: index.md
-  - Getting started:
-    - Installation: getting-started.md
-  - Setup:
-    - setup/index.md
   - Functions:
     - functions/index.md
     - Summarize: functions/summarize.md
