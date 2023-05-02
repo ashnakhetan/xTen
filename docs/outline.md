@@ -1,0 +1,1 @@
+![Screenshot](project-sketch.png)
