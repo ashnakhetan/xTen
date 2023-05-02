@@ -1,3 +1,14 @@
 site_name: xTen documentation
+site_description: >-
+  Welcome to xTen! xTen makes it easy to incorporate AI tools into your extensions — try it out today!
 theme:
   name: material
+nav:
+  - Home: index.md
+  - Getting started:
+    - Installation: getting-started.md
+  - Setup:
+    - setup/index.md
+  - Functions:
+    - functions/index.md
+    - Summarize: functions/summarize.md
