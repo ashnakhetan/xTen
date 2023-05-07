@@ -14,29 +14,34 @@ export function scrapePage(tabs, contentTypes) {
         const doc = parser.parseFromString(html, 'text/html');
   
         // get all elements that might be one of the contentTypes
-        const possibleTitlesAndLogos = doc.querySelectorAll(contentTypes);
+        const possibleElements = doc.querySelectorAll(contentTypes);
   
         // Find the first element that has either a title attribute or an alt attribute
-        let titleOrLogo = null;
-        for (let i = 0; i < possibleTitlesAndLogos.length; i++) {
-          const element = possibleTitlesAndLogos[i];
+        // let titleOrLogo = null;
+        let listElements = new Array();
+        for (let i = 0; i < possibleElements.length; i++) {
+          const element = possibleElements[i];
+          console.log(element);
+          console.log(element.hasAttribute('title'));
           if (element.hasAttribute('title') || element.hasAttribute('alt')) {
-            titleOrLogo = element;
-            break;
+            console.log(element, "here");
+            listElements.push(element);
+            // break;
           }
         }
   
         // If no title or logo was found, use the first element as the title or logo
-        if (!titleOrLogo && possibleTitlesAndLogos.length > 0) {
-          titleOrLogo = possibleTitlesAndLogos[0];
+        if (listElements.length == 0 && possibleElements.length > 0) {
+          listElements.push(possibleElements[0]);
         }
+        console.log(listElements);
   
         // Log the text content or source URL of the title or logo to the console
-        if (titleOrLogo) {
-          if (titleOrLogo.tagName === 'IMG') {
-            console.log(titleOrLogo.src);
+        for (i=0; i<listElements.length; i++) {
+          if (listElements[i].tagName === 'IMG') {
+            console.log(listElements[i].src);
           } else {
-            console.log(titleOrLogo.textContent);
+            console.log(listElements[i].textContent);
           }
         }
       })

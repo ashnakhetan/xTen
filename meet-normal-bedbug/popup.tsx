@@ -1,15 +1,18 @@
 import { useState } from "react";
 import xten from '@xten/xten';
 import { scrapePage } from '../@xten/src/utils/scrapePage';
+import { ScraperPlugin } from '../@xten/src/plugins/scraper/scraperPlugin';
 
-const contentTypes = ['title, h1, h2, h3, h4, h5, h6, img'];
+const contentTypes = ['title, h1, h2, h3, h4'];
+// const contentTypes = ['title, h1, h2, h3, h4, h5, h6, img'];
+
 
 function IndexPopup() {
   const [data, setData] = useState("")
   console.log(xten);
   xten.printMsg();
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => scrapePage(tabs, contentTypes));
-
+  ScraperPlugin.scrape(contentTypes);
+  
   return (
     <div
       style={{
