@@ -70,7 +70,7 @@ export default class OpenAIPLugin {
     }
     // API call to recommend new url's based on a given list of url's
     async recommendUrls(urls, numUrls) {
-      const prompt = "Recommend" + numUrls + "new urls based on the following list of urls:\n" + urls.join("\n");
+      const prompt = "Recommend" + numUrls + "new websites to visit based on the following list of visited sites:\n" + urls.join("\n");
       const response = await fetch(this.apiEndpoint, {
         method: 'POST',
         headers: {
@@ -87,5 +87,15 @@ export default class OpenAIPLugin {
           presence_penalty: 1,
         }),
       });
+
+      if (!response.ok) {
+        const errorBody = await response.json();
+        console.log(errorBody);
+        throw new Error(`Error during API request: ${response.statusText}`);
+      }
+  
+      const jsonResponse = await response.json();
+      console.log(jsonResponse);
+      return jsonResponse.choices[0].text;
     }
 }

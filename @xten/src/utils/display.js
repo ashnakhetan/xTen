@@ -63,3 +63,18 @@ export function displayLoading(x, y) {
   }
   document.body.appendChild(loading);
 }
+
+// function to hide or remove the current tooltip or loading
+
+export function hideTooltip() {
+  const tooltip = document.querySelector('.tooltip');
+  const loading = document.querySelector('.loading');
+
+  if (tooltip) {
+    tooltip.remove();
+  }
+
+  if (loading) {
+    loading.remove();
+  }
+}

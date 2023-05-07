@@ -1,4 +1,4 @@
-import { displayLoading, displayText } from '../../utils/display.js';
+import { displayLoading, displayText, hideTooltip } from '../../utils/display.js';
 import OpenAIPlugin from '../../core/OpenAIPlugin.js';
 
 // This particular plugin instantiates an openAIPlugin and attaches an event listener to the document
@@ -23,7 +23,7 @@ export class SummarizerPlugin {
          * we want the tooltip to appear in the middle of the selected text
          * update the coordinates every time a new selection is made
          */
-
+        /* Display in the left middle of the page */
         const selection = window.getSelection();
         const range = selection.getRangeAt(0);
         const rect = range.getBoundingClientRect();
@@ -39,13 +39,12 @@ export class SummarizerPlugin {
 
         try {
           const summary = await this.openAIPlugin.summarizeText(selectedText);
-          document.querySelector('.loading').remove();
-  
+          hideTooltip();    
           displayText(summary, x, y);
           console.log(`Summary: ${summary}`);
         } catch (error) {
           console.error(`Error getting summary: ${error}`);
-          document.querySelector('.loading').remove();
+          hideTooltip
         }
       }
     });

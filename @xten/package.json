@@ -11,12 +11,10 @@
     "extension",
     "sdk"
   ],
-  "dependencies": {
-    "openai": "^3.2.1"
-  },
   "author": "xten",
   "license": "ISC",
   "dependencies": {
+    "file-saver": "^2.0.5",
     "openai": "^3.2.1"
   }
 }
