@@ -1,11 +1,11 @@
-import { useState } from "react"
-import xten from '@xten/xten';
+import React, { useState } from "react"
+
+import xten from "~../@xten"
 
 function IndexPopup() {
   const [data, setData] = useState("")
-  console.log(xten);
+  console.log(xten)
   xten.printMsg()
-  xten.injectUI("", "block-herotitleblock", "https://www.utu.fi/");
 
   return (
     <div
