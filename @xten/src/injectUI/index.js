@@ -38,141 +38,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Injector = void 0;
 var client_1 = require("react-dom/client");
-// import fs from 'fs';
-// while (!fs.existsSync(`${currentPath}/package.json`) && currentPath !== '/') {
-//   currentPath = require('path').normalize(`${currentPath}/..`);
-// }
-// if (currentPath === '/') {
-//   console.log('Root directory not found');
-// } else {
-//   console.log(`Root directory is ${currentPath}`);
-// }
 var getOverlayAnchor = function (point) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
     return [2 /*return*/, document.querySelector(point)];
 }); }); };
 var getOverlayAnchorList = function (point) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
     return [2 /*return*/, document.querySelectorAll(point)];
 }); }); };
-// export const config: PlasmoCSConfig = {
-//   matches: ["https://www.utu.fi/*"]
-// }
-// export const getRootContainer = () =>
-//   new Promise((resolve) => {
-//     const checkInterval = setInterval(() => {
-//       const rootContainer = document.getElementById("block-herotitleblock")
-//       if (rootContainer) {
-//         clearInterval(checkInterval)
-//         resolve(rootContainer)
-//       }
-//     }, 137)
-//   })
-// const PlasmoOverlay: FC<PlasmoCSUIProps> = () => {
-//   return (
-//     <span
-//       style={{
-//         background: "yellow",
-//         padding: 12
-//       }}>
-//       HELLO WORLD ROOT CONTAINER
-//     </span>
-//   )
-// }
-// export const render: PlasmoRender = async ({ createRootContainer }) => {
-//   const rootContainer = await createRootContainer()
-//   const root = createRoot(rootContainer)
-//   root.render()
-// }
-// export const Hook = async (point: HookPoint) => {
-//   if (typeof point === "string") {
-//     const anchor = await getOverlayAnchor(point);
-//     mountShadowHost({ host, anchor, observer });
-//   } 
-// }
-// const mountShadowHost: PlasmoMountShadowHost = ({
-//   shadowHost,
-//   anchor,
-//   observer
-// }) => {
-//   anchor?.element?.appendChild(shadowHost)
-//   // observer.disconnect() // OPTIONAL DEMO: stop the observer as needed
-// }
-// export const createShadowRoot: PlasmoCreateShadowRoot = (shadowHost) =>
-//   shadowHost.attachShadow({ mode: "open" })
-// export const injectUI = (elem = "", querySelector, website) => {
-//   const config: PlasmoCSConfig = {
-//     matches: ["${website}"]
-//   };
-//   const getRootConfig = () =>
-//     new Promise((resolve) => {
-//       const checkInterval = setInterval(() => {
-//         const rootContainer = document.getElementById("${querySelector}")
-//         if (rootContainer) {
-//           clearInterval(checkInterval)
-//           resolve(rootContainer)
-//         }
-//       }, 137)
-//     });
-// const PlasmoOverlay: FC<PlasmoCSUIProps> = () => {
-//       return (
-//         <span
-//           style={{
-//             background: "yellow",
-//             padding: 12
-//           }}>
-//           HELLO WORLD ROOT CONTAINER
-//         </span>
-//       )
-//     };
-// const render = async ({ createRootContainer }) => {
-//       const rootContainer = await createRootContainer()
-//       const root = createRoot(rootContainer)
-//       root.render(<PlasmoOverlay />)
-// };
-// const config = `export const config: PlasmoCSConfig = {
-//   matches: ["${website}"]
-// }`;
-// const getRootConfig = `export const getRootContainer = () =>
-//   new Promise((resolve) => {
-//     const checkInterval = setInterval(() => {
-//       const rootContainer = document.getElementById("${querySelector}")
-//       if (rootContainer) {
-//         clearInterval(checkInterval)
-//         resolve(rootContainer)
-//       }
-//     }, 137)
-//   })`;
-// const Overlay = `
-//     const PlasmoOverlay: FC<PlasmoCSUIProps> = () => {
-//       return (
-//         <span
-//           style={{
-//             background: "yellow",
-//             padding: 12
-//           }}>
-//           HELLO WORLD ROOT CONTAINER
-//         </span>
-//       )
-//     }`;
-// const render = `export const render: PlasmoRender = async ({ createRootContainer }) => {
-//       const rootContainer = await createRootContainer()
-//       const root = createRoot(rootContainer)
-//       root.render(<PlasmoOverlay />)
-//     }`;
-// return { config, getRootConfig, Overlay, render }
-// let currentPath = __dirname;
-// console.log("curr path", currentPath);
-// console.log("process cwd", process.cwd());
-// console.log("pathname", new URL(import.meta.url).pathname); // prints the directory path of this file
-// }
-// import fs from 'fs-extra';
-// import path from 'path';
-// function modifyDevFile(devFilePath) {
-//   const rootPath = path.resolve(__dirname, '../');
-//   const filePath = path.join(rootPath, devFilePath);
-//   const content = fs.readFileSync(filePath, 'utf8');
-//   const modifiedContent = content.replace(/some-regex/g, 'replacement');
-//   fs.writeFileSync(filePath, modifiedContent, 'utf8');
-// };
 var Inject = /** @class */ (function () {
     function Inject() {
         var _this = this;
@@ -181,18 +52,26 @@ var Inject = /** @class */ (function () {
         };
         this.getConfig = function () { return _this.config; };
         this.getRootContainerConfig = function () { return _this.getRootContainer; };
+        this.getRootContainerBy = function (selector, getElementFn) {
+            return new Promise(function (resolve) {
+                var checkInterval = setInterval(function () {
+                    var rootContainer = getElementFn(selector);
+                    if (rootContainer) {
+                        clearInterval(checkInterval);
+                        resolve(rootContainer);
+                    }
+                }, 137);
+            });
+        };
+        // Custom functions for getting elements
+        this.querySelectorFn = function (selector) { return document.querySelector(selector); };
+        this.getElementByIdFn = function (selector) { return document.getElementById(selector); };
+        // Class methods using the generalized function and custom functions
+        this.injectByQuery = function (q) {
+            _this.getRootContainer = function () { return _this.getRootContainerBy(q, _this.querySelectorFn); };
+        };
         this.injectById = function (id) {
-            _this.getRootContainer = function () {
-                return new Promise(function (resolve) {
-                    var checkInterval = setInterval(function () {
-                        var rootContainer = document.getElementById(id);
-                        if (rootContainer) {
-                            clearInterval(checkInterval);
-                            resolve(rootContainer);
-                        }
-                    }, 137);
-                });
-            };
+            _this.getRootContainer = function () { return _this.getRootContainerBy(id, _this.getElementByIdFn); };
         };
         this.getRenderer = function () { return _this.render; };
         this.renderElem = function (elem) {
