@@ -1,7 +1,7 @@
 import { useState } from "react";
 import xten from "@xten/xten";
 import { urlRecommenderPlugin } from "../@xten/src/plugins/recommender/urlRecommenderPlugin";
-import { saveAs, fileSave } from "file-saver";
+import { saveAs } from "file-saver";
 
 const apiKey = "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";
 const recommenderPlugin = new urlRecommenderPlugin(apiKey);
@@ -9,8 +9,65 @@ const recommenderPlugin = new urlRecommenderPlugin(apiKey);
 function IndexPopup() {
   const [showAIPrompt, setShowAIPrompt] = useState(false);
 
+  // TODO: Add a new popup for custom user plugin
+  // user plugin structure:
+  // chat gpt plugin call + some sort of data to pupulate the prompt + a method to interact with the plugin = responde and a way of displaying the response
+  // chat gpt plugin call = user completion or chat plugin
+  // data to populate the prompt = util function that accesses some sort of api to get the data from the browser
+  // method to interact with the plugin = a way to send the data to the plugin and get the response back
+  // response = the response from the plugin displayed using one of the display components
+
   const toggleAIPrompt = () => {
     setShowAIPrompt(!showAIPrompt);
+  };
+
+  const createCompletionPlugin = (prompt, pluginName) => {
+    return `
+    // Path: meet-normal-bedbug/src/plugins/${pluginName}.tsx
+
+    import { Configuration, OpenAIApi } from 'openai';
+
+    /* template for completion plugin using user prompts */
+    
+    export default class OpenAIPLugin {
+        constructor(apiKey) {
+          this.apiKey = apiKey;
+          this.apiEndpoint = 'https://api.openai.com/v1/completions';
+          this.configuration = new Configuration({ apiKey });
+          this.openai = new OpenAIApi(this.configuration);
+        }
+    
+        async ${pluginName}(text) {
+            const prompt = "${prompt}";
+            const response = await fetch(this.apiEndpoint, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer \${this.apiKey}',
+              },
+              body: JSON.stringify({
+                model: 'text-davinci-003',
+                prompt: prompt,
+                temperature: 0.7,
+                max_tokens: 500,
+                top_p: 1.0,
+                frequency_penalty: 0.0,
+                presence_penalty: 1,
+              }),
+            });
+        
+            if (!response.ok) {
+              const errorBody = await response.json();
+              console.log(errorBody);
+              throw new Error('Error during API request: \${response.statusText}');
+            }
+        
+            const jsonResponse = await response.json();
+            console.log(jsonResponse);
+            return jsonResponse.choices[0].text;
+          }
+        }
+    `;
   };
 
     // New component for AI prompt popup
@@ -26,26 +83,20 @@ function IndexPopup() {
       setPromptText(e.target.value);
     };
 
-    const handleSaveChat = () => {
+    const handleSaveCompletion = () => {
       console.log("Plugin Name:", pluginName, "Prompt:", promptText);
-      const fileName = `${pluginName}.txt`;
-      const fileContent = `Chat Prompt:\n\n${promptText}`;
-      const blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
-      const file = new File([blob], fileName, { type: "text/plain;charset=utf-8" });
+      const fileName = `${pluginName}.js`;
 
-      try {
-        await fileSave(file, {
-          suggestedName: fileName,
-          startIn: "downloads",
-        });
-        console.log(' File saved!');
-      } catch (err) {
-        console.log('Error saving file:', err);
-      }
+      // Create the template with the user-defined prompt and plugin name
+      const fileContent = createCompletionPlugin(promptText, pluginName);
 
+      const blob = new Blob([fileContent], { type: "text/javascript;charset=utf-8" });
+      const file = new File([blob], fileName, { type: "text/javascript;charset=utf-8" });
+
+      saveAs(file);
     };
 
-    const handleSaveCompletion = () => {
+    const handleSaveChat = () => {
       console.log("Plugin Name:", pluginName, "Prompt:", promptText);
       // Do something with the pluginName and promptText here
     };
