@@ -4,9 +4,8 @@
 # node modules
 node_modules/
 
-## all build folders
-build/
+./meet-nromal-bedbug/node_modules
 
+./@xten/node_modules
 
-## User settings
-xcuserdata/
+node_modules
