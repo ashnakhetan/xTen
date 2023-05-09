@@ -3,7 +3,7 @@ This is a sample project that links the @xten package into a plasmo project
 
 ## Steps
 
-Run `pnpm install` in the plasmo project.\
+Run `pnpm install` in the plasmo project (meet-normal-bedbug, in this case).\
 Run `pnpm dev` in the plasmo project.\
 Add the build folder as you would add any extension in chrome (we're literally only adding the extension here!)
 
