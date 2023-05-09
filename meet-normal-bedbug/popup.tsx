@@ -11,7 +11,8 @@ function IndexPopup() {
   const [data, setData] = useState("")
   console.log(xten);
   xten.printMsg();
-  ScraperPlugin.scrape(contentTypes);
+  const scraperPlug = new ScraperPlugin()
+  scraperPlug.scrape(contentTypes);
   
   return (
     <div
