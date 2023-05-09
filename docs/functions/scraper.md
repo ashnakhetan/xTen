@@ -19,18 +19,19 @@ Product information: might be something like “'.product-price'”
 Structured Data
 
 Steps:
-Import the utility function
+
+1. Import the utility function
 ```
 import { scrapePage } from '../@xten/src/utils/scrapePage';
 ```
 
 
-Define a list of content types
+2. Define a list of content types
 ```
 const contentTypes = ['title, h1, h2, h3, h4'];
 ```
 
-Then, in your app’s function, you can call:
+3. Then, in your app’s function, you can call:
 ```
 ScraperPlugin.scrape(contentTypes);
 ```
