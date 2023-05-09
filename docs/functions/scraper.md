@@ -7,6 +7,7 @@ Input: list of elements you wish to extract:
 Output: array of elements on page matching the input
 
 For example, if you want to extract:
+```
 Text: “title”, “h1”, “p”, “ul” “ol”, “li”
 Links: “a”
 Images: “img”
@@ -17,6 +18,7 @@ Social Media Embeds
 Comments
 Product information: might be something like “'.product-price'”
 Structured Data
+```
 
 Steps:
 
