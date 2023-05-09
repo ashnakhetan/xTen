@@ -11,9 +11,10 @@ If you look into the console of the extension you should see the test message sh
 As we start adding packages to @xten, we're going to start getting our own dependencies so we will have to run `pnpm install` in that folder as well but for now we have nothing.
 
 ## Uploading your Extension to Chrome
-    1. Head over to chrome://extensions and enable Developer Mode.
-    2. Click on "Load Unpacked" and navigate to your extension's build/chrome-mv3-dev (or build/chrome-mv3-prod) directory.
-    3. To see your popup, click on the puzzle piece icon on the Chrome toolbar, and click on your extension.
+
+1. Head over to chrome://extensions and enable Developer Mode.
+2. Click on "Load Unpacked" and navigate to your extension's build/chrome-mv3-dev (or build/chrome-mv3-prod) directory.
+3. To see your popup, click on the puzzle piece icon on the Chrome toolbar, and click on your extension.
 
 
 ## OpenAI notice
