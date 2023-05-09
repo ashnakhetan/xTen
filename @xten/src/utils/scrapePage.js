@@ -40,12 +40,13 @@ export function scrapePage(tabs, contentTypes) {
         for (i=0; i<listElements.length; i++) {
           if (listElements[i].tagName === 'IMG') {
             console.log(listElements[i].src);
+            return listElements[0].src;
           } else {
             console.log(listElements[i].textContent);
+            return listElements[0].textContent;
           }
         }
       })
       .catch(error => console.log(error));
 
-    return listElements;
     }
