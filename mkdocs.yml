@@ -9,3 +9,5 @@ nav:
   - Software outline: outline.md 
   - Functions:
     - Summarize: functions/summarize.md
+    - Scraper: functions/scraper.md
+    - UI Injection: functions/ui_injection.md
