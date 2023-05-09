@@ -409,10 +409,11 @@
 <h2 id="later-steps">Later steps</h2>
 <p>As we start adding packages to @xten, we're going to start getting our own dependencies so we will have to run <code>pnpm install</code> in that folder as well but for now we have nothing.</p>
 <h2 id="uploading-your-extension-to-chrome">Uploading your Extension to Chrome</h2>
-<pre><code>1. Head over to chrome://extensions and enable Developer Mode.
-2. Click on "Load Unpacked" and navigate to your extension's build/chrome-mv3-dev (or build/chrome-mv3-prod) directory.
-3. To see your popup, click on the puzzle piece icon on the Chrome toolbar, and click on your extension.
-</code></pre>
+<ol>
+<li>Head over to chrome://extensions and enable Developer Mode.</li>
+<li>Click on "Load Unpacked" and navigate to your extension's build/chrome-mv3-dev (or build/chrome-mv3-prod) directory.</li>
+<li>To see your popup, click on the puzzle piece icon on the Chrome toolbar, and click on your extension.</li>
+</ol>
 <h2 id="openai-notice">OpenAI notice</h2>
 <p>Code added is server side so make sure to never ship any openai configs with it – devs would likely want to have a way for users to input their own key in and use that.</p>
 
