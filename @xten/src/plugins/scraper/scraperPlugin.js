@@ -5,8 +5,11 @@ import { scrapePage } from '../../utils/scrapePage.js'
 export class ScraperPlugin {
   constructor() {
   }
-    // get tabs from the dev
+  // get tabs and call scrapePage function
   scrape(contentTypes) {
-    chrome.tabs.query({ active: true, currentWindow: true }, tabs => scrapePage(tabs, contentTypes));
+    let listElements = new Array();
+    chrome.tabs.query({ active: true, currentWindow: true }, listElements = (tabs => scrapePage(tabs, contentTypes)));
+    // console.log(listElements);
+    return listElements;
   }
 }

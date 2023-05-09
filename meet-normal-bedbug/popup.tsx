@@ -12,7 +12,8 @@ function IndexPopup() {
   console.log(xten);
   xten.printMsg();
   const scraperPlug = new ScraperPlugin()
-  scraperPlug.scrape(contentTypes);
+  const listElements = scraperPlug.scrape(contentTypes);
+  console.log("list elements: ", listElements);
   
   return (
     <div
@@ -23,15 +24,16 @@ function IndexPopup() {
       }}>
       <h2>
         Welcome to your{" "}
-        <a href="https://www.plasmo.com" target="_blank">
-          PlasmoXD
+        <a href="https://cs210.github.io/2023-87Capital/" target="_blank">
+          xTen
         </a>{" "}
-        Extension!
+        sion!
       </h2>
       <input onChange={(e) => setData(e.target.value)} value={data} />
-      <a href="https://docs.plasmo.com" target="_blank">
+      <a href="https://cs210.github.io/2023-87Capital/" target="_blank">
         View Docs
       </a>
+      <h3>{listElements[0]}</h3>
     </div>
   )
 } 

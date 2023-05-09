@@ -4,6 +4,7 @@ export function scrapePage(tabs, contentTypes) {
     const url = currentTab.url;
   
     console.log("Current tab URL: ", url);
+    let listElements = new Array();
   
     // gets the HTML content of the website
     fetch(url)
@@ -18,7 +19,6 @@ export function scrapePage(tabs, contentTypes) {
   
         // Find the first element that has either a title attribute or an alt attribute
         // let titleOrLogo = null;
-        let listElements = new Array();
         for (let i = 0; i < possibleElements.length; i++) {
           const element = possibleElements[i];
           console.log(element);
@@ -46,4 +46,6 @@ export function scrapePage(tabs, contentTypes) {
         }
       })
       .catch(error => console.log(error));
+
+    return listElements;
     }
