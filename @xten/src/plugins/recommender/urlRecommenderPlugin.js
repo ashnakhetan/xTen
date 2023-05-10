@@ -15,6 +15,9 @@ export class urlRecommenderPlugin {
         this.openAIPlugin = new OpenAIPlugin(apiKey);
     }
     // TODO: change the amount of lookback time based on input from the user
+    // TODO: change the number of recommended urls based on input from the user
+    // TODO: change the number of used urls for the query based on input from the user plus randomize the urls used
+    // TODO: change the number of returned urls based on input from the user
     async recommendUrlsMonth() {
         const history = await collectBrowsingHistoryDay();
         const urls = [];

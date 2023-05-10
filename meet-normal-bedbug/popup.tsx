@@ -10,7 +10,7 @@ function IndexPopup() {
 
   const [customPlugins, setCustomPlugins] = useState([]);
 
-  /* TODO: Add a new popup screen for creating a custom user plugin
+  /* TODO: Add backend for custom plugins
    * user plugin structure:
    * chat gpt plugin call + some sort of data to pupulate the prompt + a method to interact with the plugin = responde and a way of displaying the response
    * chat gpt plugin call = user completion or chat plugin
@@ -20,6 +20,9 @@ function IndexPopup() {
    * The plugin should then be saved and displayed in the main popup screen under the other plugins
    * Still trying to figure out how to pipe the data from one piece to another
    */
+
+  /* TODO: Break down popup.tsx into components */
+
 
 
   const [showAIPrompt, setShowAIPrompt] = useState(false);
@@ -77,7 +80,7 @@ function IndexPopup() {
     `;
   };
 
-    // New component for AI prompt popup
+  // New component for AI prompt popup
   const AIPromptScreen = () => {
     const [pluginName, setPluginName] = useState('');
     const [promptText, setPromptText] = useState('');
@@ -150,7 +153,7 @@ function IndexPopup() {
     );
   };
 
-  /* Custom Plug in creation WIP */
+  /* WIP: Custom Plug in creation component */
   const [showDropdowns, setShowDropdowns] = useState(false);
   const toggleDropdowns = () => {
     setShowDropdowns(!showDropdowns);
@@ -250,6 +253,7 @@ function IndexPopup() {
     );
   };
 
+  /* Recommend Urls component */
   const [recommendedUrls, setRecommendedUrls] = useState([]);
 
   const suggestWebsites = async () => {
@@ -272,10 +276,11 @@ function IndexPopup() {
 
 
   const executeCustomPlugin = async (plugin) => {
-    // TODO: Replace this with the actual code to execute the plugin and display the response
+  /* TODO: Replace this with the actual code to execute the plugin and display the response */
     console.log("Executing custom plugin:", plugin.name);
   };
   
+  /* Main popup component */
   console.log(xten);
   xten.printMsg();
   return (
@@ -327,9 +332,10 @@ function IndexPopup() {
             <h3>Custom Plugins:</h3>
             {customPlugins.map((plugin, index) => (
               <div key={index}>
-                <p>{plugin.name}</p>
-                <button onClick={() => executeCustomPlugin(plugin)}>
-                  Execute
+                <button 
+                style={{ marginBottom: 8 }}
+                onClick={() => executeCustomPlugin(plugin)}>
+                  {plugin.name}
                 </button>
               </div>
             ))}

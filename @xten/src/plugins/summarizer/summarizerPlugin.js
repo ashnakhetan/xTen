@@ -23,6 +23,7 @@ export class SummarizerPlugin {
          * we want the tooltip to appear in the middle of the selected text
          * update the coordinates every time a new selection is made
          */
+        
         /* Display in the left middle of the page */
         const selection = window.getSelection();
         const range = selection.getRangeAt(0);
