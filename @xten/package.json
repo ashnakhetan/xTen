@@ -11,9 +11,6 @@
     "extension",
     "sdk"
   ],
-  "dependencies": {
-    "openai": "^3.2.1"
-  },
   "author": "xten",
   "license": "ISC",
   "dependencies": {
