@@ -8,7 +8,7 @@ const PlasmoOverlay: FC<PlasmoCSUIProps> = () => {
   return (
     <span
       style={{
-        background: "yellow",
+        background: "red",
         padding: 12
       }}>
       HELLO WORLD ROOT CONTAINER

@@ -1,17 +1,9 @@
-// src/index.js
-import { summarize } from './src/plugins/summarizer/summarize';
-import SummarizerPlugin from './src/plugins/summarizer/summarizerPlugin';
-
-export {
-  summarize,
-  SummarizerPlugin,
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var index_js_1 = require("./src/injectUI/index.js");
+var summarize_1 = require("./src/plugins/summarizer/summarize");
+var summarizerPlugin_1 = require("./src/plugins/summarizer/summarizerPlugin");
+var printMsg = function () {
+    console.log("This is a message from the demo package");
 };
-
-const xten = {
-  printMsg: () => {
-    console.log("Hello from xten!");
-  },
-  // Other methods and properties...
-};
-
-export default xten;
+exports.default = { Injector: index_js_1.Injector, summarizeText: summarize_1.summarizeText, SummarizerPlugin: summarizerPlugin_1.SummarizerPlugin, printMsg: printMsg };
