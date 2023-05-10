@@ -1,7 +1,0 @@
-version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
-options: "78e230f5fefbe8ce55e71529a322e4905e7b00a1a142bcd629b79a7561abc3d4"
-build_start_time: [1676916613, 183526039]
-build_end_time: [1676916617, 737059116]
-inputs:
-  "/Users/ruslanaljabari/Desktop/do_scaffold/esbuild-react-chrome-extension/Safari/Shared (App)/ViewController.swift": [1676910329, 489669322]
-  "/Users/ruslanaljabari/Desktop/do_scaffold/esbuild-react-chrome-extension/Safari/macOS (App)/AppDelegate.swift": [1676910329, 496431112]

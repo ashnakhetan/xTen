@@ -1,7 +1,0 @@
-version: "Apple Swift version 5.7.1 (swiftlang-5.7.1.135.3 clang-1400.0.29.51)"
-options: "b3cf372ca55d991b91b3297627d0ad34d25e7237eb171b052a27564568cbaf53"
-build_start_time: [1676924820, 342692852]
-build_end_time: [1676924820, 357728004]
-inputs:
-  ? "/Users/ruslanaljabari/Desktop/do_scaffold/esbuild-react-chrome-extension/Safari/Shared (Extension)/SafariWebExtensionHandler.swift"
-  : !dirty [1676910571, 177426338]
