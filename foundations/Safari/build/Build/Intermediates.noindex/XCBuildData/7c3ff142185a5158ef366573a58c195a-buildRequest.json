@@ -1,0 +1,63 @@
+{
+  "_buildCommand2" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildOnly"
+  },
+  "buildCommand" : "build",
+  "configuredTargets" : [
+    {
+      "guid" : "78b4c72f7522612fe6a2244bba78fe7f6a86cff6854f24543126978a05525fc6"
+    }
+  ],
+  "containerPath" : "/Users/ashnakhetan/Desktop/CS210/2023-87Capital/foundations/Safari/browser-ext.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "x86_64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "macosx",
+      "sdk" : "macosx13.1",
+      "sdkVariant" : "macos",
+      "supportedArchitectures" : [
+        "x86_64",
+        "arm64e",
+        "arm64"
+      ],
+      "targetArchitecture" : "x86_64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/ashnakhetan/Desktop/CS210/2023-87Capital/foundations/Safari/build/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/ashnakhetan/Desktop/CS210/2023-87Capital/foundations/Safari/build/Build/Products",
+      "derivedDataPath" : "/Users/ashnakhetan/Desktop/CS210/2023-87Capital/foundations/Safari/build",
+      "indexDataStoreFolderPath" : "/Users/ashnakhetan/Desktop/CS210/2023-87Capital/foundations/Safari/build/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/ashnakhetan/Desktop/CS210/2023-87Capital/foundations/Safari/build/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/ashnakhetan/Desktop/CS210/2023-87Capital/foundations/Safari/build/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Release",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "build",
+          "ENABLE_PREVIEWS" : "NO"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "schemeCommand2" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}
