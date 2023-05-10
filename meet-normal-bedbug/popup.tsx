@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import xten from "@xten/xten";
 import { urlRecommenderPlugin } from "../@xten/src/plugins/recommender/urlRecommenderPlugin";
 import { ScraperPlugin } from "../@xten/src/plugins/scraper/scraperPlugin"
 import { scrapePage } from "../@xten/src/utils/scrapePage"
 import { saveAs } from "file-saver";
+
+// Plugin builder modules, we want to be able to dynamically add to them in the future
+import { aiPrompts as initialAiPrompts} from "../@xten/src/plugin_builder_modules/aiPrompts";
+import { dataSources as initialDataSources} from "../@xten/src/plugin_builder_modules/dataSources";
+import { displayMethods as initialDisplayMethods} from "../@xten/src/plugin_builder_modules/displayMethods";
 
 const apiKey = "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";
 const recommenderPlugin = new urlRecommenderPlugin(apiKey);
@@ -34,6 +39,18 @@ function IndexPopup() {
    */
 
   /* TODO: Break down popup.tsx into components */
+
+  /* Initialie the modules for the plugin builder */
+  const [aiPrompts, setAiPrompts] = useState({});
+  const [dataSources, setDataSources] = useState({});
+  const [displayMethods, setDisplayMethods] = useState({});
+
+  // Initialize local copies of modules when the component mounts
+  useEffect(() => {
+    setAiPrompts({ ...initialAiPrompts });
+    setDataSources({ ...initialDataSources });
+    setDisplayMethods({ ...initialDisplayMethods });
+  }, []);
 
 
 
@@ -116,6 +133,33 @@ function IndexPopup() {
       const file = new File([blob], fileName, { type: "text/javascript;charset=utf-8" });
 
       saveAs(file);
+
+
+      /* Add the ai prompt to the list of ai modules plugins following this structure */
+      /*
+        aiPrompt1: {
+            name: 'plugin name',
+            type: 'aiPrompt',
+            description: 'This is a description of aiPrompt1',
+            // This is the function that will be called when the user clicks on the aiPrompt
+            execute: function () {
+              fileContent
+            }
+        } 
+        */
+      const newAiPrompt = {
+        name: pluginName,
+        type: "aiPrompt",
+        description: "This is a description of aiPrompt1",
+        execute: function () {
+          fileContent;
+        }
+      };
+
+      setAiPrompts({ ...aiPrompts, [pluginName]: newAiPrompt });
+
+
+  
     };
 
     const handleSaveChat = () => {
@@ -165,12 +209,11 @@ function IndexPopup() {
     );
   };
 
-  /* WIP: Custom Plug in creation component */
+  /*-----------------------WIP: Custom Plug in creation component-----------------------*/
   const [showDropdowns, setShowDropdowns] = useState(false);
   const toggleDropdowns = () => {
     setShowDropdowns(!showDropdowns);
   };
-
 
   const DropdownsScreen = () => {
     
@@ -180,20 +223,42 @@ function IndexPopup() {
       setPluginName(e.target.value);
     };
 
-    const saveCustomPlugin = () => {
-      const newPlugin = {
-        name: pluginName,
-      };
-      setCustomPlugins([...customPlugins, newPlugin]);
-    };
     
     const [selectedData, setSelectedData] = useState("");
     const [selectedPrompt, setSelectedPrompt] = useState("");
     const [selectedDisplay, setSelectedDisplay] = useState("");
-  
-    const dataOption = ["Option 1A", "Option 1B", "Option 1C"];
-    const promptOption = ["Option 2A", "Option 2B", "Option 2C"];
-    const displayOption = ["Option 3A", "Option 3B", "Option 3C"];
+    
+    // Iterate over the names of the data sources from the dataSources array
+    // and display them as options in the dropdown, same for prompts and displays
+    const dataOption = Object.values(dataSources).map((source) => source.name);
+    const displayOption = Object.values(displayMethods).map((display) => display.name);
+    const promptOption = Object.values(aiPrompts).map((prompt) => prompt.name);
+
+    const saveCustomPlugin = () => {
+      // Get the selected data source, AI prompt, and display method
+      const selectedDataSource = dataSources[selectedData];
+      const selectedAiPrompt = aiPrompts[selectedPrompt];
+      const selectedDisplayMethod = displayMethods[selectedDisplay];
+    
+      // Define a new function that uses these components
+      const newPluginExecute = function () {
+        // Execute the data source function and pass its output to the AI prompt function
+        const data = selectedDataSource.execute();
+        // in the future make async
+        const promptOutput = selectedAiPrompt.execute(data);
+    
+        // Pass the AI prompt's output to the display method
+        selectedDisplayMethod.execute(promptOutput);
+      };
+    
+      const newPlugin = {
+        name: pluginName,
+        execute: newPluginExecute
+      };
+    
+      setCustomPlugins([...customPlugins, newPlugin]);
+    };
+
   
     return (
       <div style={{
@@ -264,6 +329,7 @@ function IndexPopup() {
       </div>
     );
   };
+  /*-----------------------End of WIP-----------------------*/
 
   /* Recommend Urls component */
   const [recommendedUrls, setRecommendedUrls] = useState([]);
@@ -289,7 +355,9 @@ function IndexPopup() {
 
   const executeCustomPlugin = async (plugin) => {
   /* TODO: Replace this with the actual code to execute the plugin and display the response */
-    console.log("Executing custom plugin:", plugin.name);
+    console.log("Executing custom plugin...");
+    console.log(plugin);
+    plugin.execute();
   };
   
   /* Main popup component */
