@@ -2,7 +2,7 @@
 
 # Run npm install
 echo "Running npm install in @xten folder..."
-npm install
+pnpm install
 
 # Run npm link
 echo "Running npm link in @xten folder..."
@@ -13,7 +13,7 @@ cd ../meet-normal-bedbug
 
 # Run npm link to connect the package
 echo "Running npm link to connect @xten package in meet-normal-bedbug folder..."
-npm link
+pnpm link
 
 # Confirm that the package is linked and ready to use
 echo "Package linked and ready to use in the extension."
