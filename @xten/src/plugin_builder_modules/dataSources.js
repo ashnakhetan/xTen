@@ -1,12 +1,22 @@
-export const dataSources = {
-    dataSource1: {
-        name: 'dataSource1',
+import {collectBrowsingHistoryWeek} from '../utils/colllect_browsing_history.js'
+
+export const dataSources = [
+    {
+        id: 'dataSource1',
+        name: 'Browser History',
         type: 'dataSource',
-        description: 'This is a description of dataSource1',
+        description: 'Retreives your browser history.',
         // This is the function that will be called when the user clicks on the dataSource
-        execute: function () {
+        execute: async function () {
             console.log('dataSource1 was clicked');
+            /* Add a wrapper to retreive this as text*/
+            const history = await collectBrowsingHistoryWeek();
+            const urls = [];
+            for (let i = 0; i < history.length; i++) {
+                urls.push(history[i].url);
+            }
+            return urls;
         }
     }
     // More dataSources
-};
+];

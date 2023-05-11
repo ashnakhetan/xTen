@@ -3,6 +3,12 @@
 
 export function displayText(text, x, y) {
   // Create a tooltip or modal with the summarized text
+  /* if no coordinates are provided grab the center of the page */
+  if (!x || !y) {
+    x = window.innerWidth / 2;
+    y = window.innerHeight / 2;
+  }
+
   const tooltip = document.createElement('div');
   tooltip.classList.add('tooltip');
   tooltip.innerHTML = text;
@@ -40,6 +46,12 @@ export function displayText(text, x, y) {
 // This function is used to display a tooltip while the user is awaiting a response from the API
 
 export function displayLoading(x, y) {
+  // if no coordinates are provided grab the center of the page
+  if (!x || !y) {
+    x = window.innerWidth / 2;
+    y = window.innerHeight / 2;
+  }
+  
   const loading = document.createElement('div');
   loading.classList.add('loading');
   loading.innerHTML = 'Loading...';

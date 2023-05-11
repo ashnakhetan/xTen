@@ -22,8 +22,6 @@ export class urlRecommenderPlugin {
         const history = await collectBrowsingHistoryDay();
         const urls = [];
         for (let i = 0; i < history.length; i++) {
-            // DEBUG print the url and the last time it was visited
-            console.log(`URL: ${history[i].url}, Last Visit Time: ${history[i].lastVisitTime}`);
             urls.push(history[i].url);
         }
         // display loading message in middle, upper page

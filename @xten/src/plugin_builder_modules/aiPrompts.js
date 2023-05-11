@@ -1,12 +1,10 @@
-export const aiPrompts = {
-    aiPrompt1: {
-        name: 'aiPrompt1',
+export const aiPrompts = [
+    {
+        id: 'aiPrompt1',
+        name: 'Summarize Text',
         type: 'aiPrompt',
-        description: 'This is a description of aiPrompt1',
-        // This is the function that will be called when the user clicks on the aiPrompt
-        execute: function () {
-            console.log('aiPrompt1 was clicked');
-        }
+        description: 'Summarizes text.',
+        text: 'Summarize this text.',
     }
     // More aiPrompts
-};
+];
