@@ -1,4 +1,4 @@
-![Screenshot](https://github.com/cs210/2023-87Capital/tree/ishita-documentation/xten_sdk.png)
+<img src="https://github.com/cs210/2023-87Capital/tree/ishita-documentation/xten_sdk.png">
 xTen is a package that enables developers to create cross-platform browser extensions powered by AI. The toolkit provides an extensible architecture for integrating AI APIs, simplifying the development process and offering advanced features such as intelligent web scraping, code injection, and personalized suggestions.
 xTen consists of:
 1. A JavaScript SDK with well-defined functions and methods for browser extension development.
