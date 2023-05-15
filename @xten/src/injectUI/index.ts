@@ -49,6 +49,29 @@ class Inject {
     });
   };
 
+  getAllImageIds = (): string[] => {
+    // Retrieve all images in the webpage
+    const images: HTMLCollectionOf<HTMLImageElement> = document.getElementsByTagName('img');
+
+    // Array to store the image IDs
+    const imageIds: string[] = [];
+
+    // Iterate over each image element and extract the ID
+    for (let i = 0; i < images.length; i++) {
+      const image: HTMLImageElement = images[i];
+      const imageId: string = image.id;
+
+      // Add the image ID to the array if it exists
+      if (imageId) {
+        imageIds.push(imageId);
+      }
+    }
+    // Output the image IDs
+    console.log(imageIds);;
+    return imageIds;
+  }
+  
+
   // Custom functions for getting elements
   private querySelectorFn = (selector) => document.querySelector(selector);
   private getElementByIdFn = (selector) => document.getElementById(selector);
@@ -61,6 +84,7 @@ class Inject {
   injectById = (id) => {
     this.getRootContainer = () => this.getRootContainerBy(id, this.getElementByIdFn);
   };
+
 
   getRenderer = () => this.render
 
