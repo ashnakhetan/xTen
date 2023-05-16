@@ -10,7 +10,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "@xten/xten": "link:../@xten",
+    "xten-pkg": "link:../@xten",
     "openai": "^3.2.1",
     "plasmo": "0.68.0",
     "react": "18.2.0",
