@@ -1,6 +1,6 @@
 {
   "name": "@xten/xten",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "browser extension sdk",
   "main": "index.js",
   "scripts": {
