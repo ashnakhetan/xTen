@@ -1,18 +1,17 @@
-import { useState } from "react";
-import xten from "@xten/xten";
-import { urlRecommenderPlugin } from "../@xten/src/plugins/recommender/urlRecommenderPlugin";
+import { saveAs } from "file-saver"
+import { useState } from "react"
+import xten from "xten-pkg"
+
+import { urlRecommenderPlugin } from "../@xten/src/plugins/recommender/urlRecommenderPlugin"
 import { ScraperPlugin } from "../@xten/src/plugins/scraper/scraperPlugin"
 import { scrapePage } from "../@xten/src/utils/scrapePage"
-import { saveAs } from "file-saver";
 
-const apiKey = "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";
-const recommenderPlugin = new urlRecommenderPlugin(apiKey);
-
+const apiKey = "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"
+const recommenderPlugin = new urlRecommenderPlugin(apiKey)
 
 const contentTypes = ["title, h1, h2, h3, h4"]
 
 function IndexPopup() {
-
   /* TODO: Add interface for scrapper plug in */
   const scrapperPlugin = () => {
     const scraperPlug = new ScraperPlugin()
@@ -20,7 +19,7 @@ function IndexPopup() {
     console.log("list elements: ", listElements)
   }
 
-  const [customPlugins, setCustomPlugins] = useState([]);
+  const [customPlugins, setCustomPlugins] = useState([])
 
   /* TODO: Add backend for custom plugins
    * user plugin structure:
@@ -35,13 +34,11 @@ function IndexPopup() {
 
   /* TODO: Break down popup.tsx into components */
 
-
-
-  const [showAIPrompt, setShowAIPrompt] = useState(false);
+  const [showAIPrompt, setShowAIPrompt] = useState(false)
 
   const toggleAIPrompt = () => {
-    setShowAIPrompt(!showAIPrompt);
-  };
+    setShowAIPrompt(!showAIPrompt)
+  }
 
   const createCompletionPlugin = (prompt, pluginName) => {
     return `
@@ -89,39 +86,43 @@ function IndexPopup() {
             return jsonResponse.choices[0].text;
           }
         }
-    `;
-  };
+    `
+  }
 
   // New component for AI prompt popup
   const AIPromptScreen = () => {
-    const [pluginName, setPluginName] = useState('');
-    const [promptText, setPromptText] = useState('');
+    const [pluginName, setPluginName] = useState("")
+    const [promptText, setPromptText] = useState("")
 
     const handlePluginNameChange = (e) => {
-      setPluginName(e.target.value);
-    };
+      setPluginName(e.target.value)
+    }
 
     const handlePromptTextChange = (e) => {
-      setPromptText(e.target.value);
-    };
+      setPromptText(e.target.value)
+    }
 
     const handleSaveCompletion = () => {
-      console.log("Plugin Name:", pluginName, "Prompt:", promptText);
-      const fileName = `${pluginName}.js`;
+      console.log("Plugin Name:", pluginName, "Prompt:", promptText)
+      const fileName = `${pluginName}.js`
 
       // Create the template with the user-defined prompt and plugin name
-      const fileContent = createCompletionPlugin(promptText, pluginName);
+      const fileContent = createCompletionPlugin(promptText, pluginName)
 
-      const blob = new Blob([fileContent], { type: "text/javascript;charset=utf-8" });
-      const file = new File([blob], fileName, { type: "text/javascript;charset=utf-8" });
+      const blob = new Blob([fileContent], {
+        type: "text/javascript;charset=utf-8"
+      })
+      const file = new File([blob], fileName, {
+        type: "text/javascript;charset=utf-8"
+      })
 
-      saveAs(file);
-    };
+      saveAs(file)
+    }
 
     const handleSaveChat = () => {
-      console.log("Plugin Name:", pluginName, "Prompt:", promptText);
+      console.log("Plugin Name:", pluginName, "Prompt:", promptText)
       // Do something with the pluginName and promptText here
-    };
+    }
 
     return (
       <div
@@ -132,11 +133,10 @@ function IndexPopup() {
           minHeight: 400,
           minWidth: 400,
           fontFamily: "monospace"
-        }}
-      >
+        }}>
         <h2>Create AI Prompt</h2>
         <input
-          style = {{ width: "100%", marginBottom: 8, fontFamily: "monospace" }}
+          style={{ width: "100%", marginBottom: 8, fontFamily: "monospace" }}
           type="text"
           placeholder="Plugin Name"
           value={pluginName}
@@ -148,72 +148,66 @@ function IndexPopup() {
           value={promptText}
           onChange={handlePromptTextChange}
         />
-        <button 
-        onClick={handleSaveChat} 
-        disabled={!pluginName || !promptText}
-        >
+        <button onClick={handleSaveChat} disabled={!pluginName || !promptText}>
           Save as Chat Prompt
         </button>
         <button
           onClick={handleSaveCompletion}
-          disabled={!pluginName || !promptText}
-        >
+          disabled={!pluginName || !promptText}>
           Save as Completion Prompt
         </button>
         <button onClick={toggleAIPrompt}>Close</button>
       </div>
-    );
-  };
+    )
+  }
 
   /* WIP: Custom Plug in creation component */
-  const [showDropdowns, setShowDropdowns] = useState(false);
+  const [showDropdowns, setShowDropdowns] = useState(false)
   const toggleDropdowns = () => {
-    setShowDropdowns(!showDropdowns);
-  };
-
+    setShowDropdowns(!showDropdowns)
+  }
 
   const DropdownsScreen = () => {
-    
-    const [pluginName, setPluginName] = useState('');
+    const [pluginName, setPluginName] = useState("")
 
     const handlePluginNameChange = (e) => {
-      setPluginName(e.target.value);
-    };
+      setPluginName(e.target.value)
+    }
 
     const saveCustomPlugin = () => {
       const newPlugin = {
-        name: pluginName,
-      };
-      setCustomPlugins([...customPlugins, newPlugin]);
-    };
-    
-    const [selectedData, setSelectedData] = useState("");
-    const [selectedPrompt, setSelectedPrompt] = useState("");
-    const [selectedDisplay, setSelectedDisplay] = useState("");
-  
-    const dataOption = ["Option 1A", "Option 1B", "Option 1C"];
-    const promptOption = ["Option 2A", "Option 2B", "Option 2C"];
-    const displayOption = ["Option 3A", "Option 3B", "Option 3C"];
-  
-    return (
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        padding: 16,
-        fontFamily: "monospace",
-        minWidth: 400
-      }}>
-        <h2>Plugin Creation Screen</h2>
-        <div style={{ 
-          marginBottom: 8,
-          display: "flex",
-          flexDirection: "row"
+        name: pluginName
+      }
+      setCustomPlugins([...customPlugins, newPlugin])
+    }
 
+    const [selectedData, setSelectedData] = useState("")
+    const [selectedPrompt, setSelectedPrompt] = useState("")
+    const [selectedDisplay, setSelectedDisplay] = useState("")
+
+    const dataOption = ["Option 1A", "Option 1B", "Option 1C"]
+    const promptOption = ["Option 2A", "Option 2B", "Option 2C"]
+    const displayOption = ["Option 3A", "Option 3B", "Option 3C"]
+
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          padding: 16,
+          fontFamily: "monospace",
+          minWidth: 400
+        }}>
+        <h2>Plugin Creation Screen</h2>
+        <div
+          style={{
+            marginBottom: 8,
+            display: "flex",
+            flexDirection: "row"
           }}>
           <select
             value={selectedData}
-            onChange={(e) => setSelectedData(e.target.value)}
-          >
+            onChange={(e) => setSelectedData(e.target.value)}>
             <option value="">Select a data source ...</option>
             {dataOption.map((option, index) => (
               <option key={index} value={option}>
@@ -224,8 +218,7 @@ function IndexPopup() {
           <span style={{ margin: "0 8px" }}>+</span>
           <select
             value={selectedPrompt}
-            onChange={(e) => setSelectedPrompt(e.target.value)}
-          >
+            onChange={(e) => setSelectedPrompt(e.target.value)}>
             <option value="">Select an AI query...</option>
             {promptOption.map((option, index) => (
               <option key={index} value={option}>
@@ -236,8 +229,7 @@ function IndexPopup() {
           <span style={{ margin: "0 8px" }}>+</span>
           <select
             value={selectedDisplay}
-            onChange={(e) => setSelectedDisplay(e.target.value)}
-          >
+            onChange={(e) => setSelectedDisplay(e.target.value)}>
             <option value="">Select a display option...</option>
             {displayOption.map((option, index) => (
               <option key={index} value={option}>
@@ -248,56 +240,56 @@ function IndexPopup() {
         </div>
         <h2>Name your Plugin</h2>
         <input
-          style = {{ width: "100%", marginBottom: 8, fontFamily: "monospace" }}
+          style={{ width: "100%", marginBottom: 8, fontFamily: "monospace" }}
           type="text"
           placeholder="Plugin Name"
           value={pluginName}
           onChange={handlePluginNameChange}
         />
-        <button 
-        style={{ marginBottom: 8 }}
-        disabled={!pluginName || !selectedData || !selectedPrompt || !selectedDisplay}
-        onClick={saveCustomPlugin}>
-          Save Plugin</button>
-        <button onClick={toggleDropdowns}>
-          Close</button>
+        <button
+          style={{ marginBottom: 8 }}
+          disabled={
+            !pluginName || !selectedData || !selectedPrompt || !selectedDisplay
+          }
+          onClick={saveCustomPlugin}>
+          Save Plugin
+        </button>
+        <button onClick={toggleDropdowns}>Close</button>
       </div>
-    );
-  };
+    )
+  }
 
   /* Recommend Urls component */
-  const [recommendedUrls, setRecommendedUrls] = useState([]);
+  const [recommendedUrls, setRecommendedUrls] = useState([])
 
   const suggestWebsites = async () => {
-    console.log("Suggesting websites...");
-    const urls = await recommenderPlugin.recommendUrlsMonth();
-    console.log("Printing suggested websites!");
-    console.log(urls);
-    console.log("Setting suggested websites array");
-    const new_arr = urls.split('\n').filter(url => url.trim() !== '');
-    console.log("New array of urls:");
+    console.log("Suggesting websites...")
+    const urls = await recommenderPlugin.recommendUrlsMonth()
+    console.log("Printing suggested websites!")
+    console.log(urls)
+    console.log("Setting suggested websites array")
+    const new_arr = urls.split("\n").filter((url) => url.trim() !== "")
+    console.log("New array of urls:")
     /* drop the first entry in the array, plus delete the first 3 characters of every entry */
     new_arr.forEach((url, index) => {
-      new_arr[index] = url.substring(3);
-    });
-    console.log(new_arr);
-    setRecommendedUrls(new_arr);
-    console.log("Recommended URLs state after setting:");
-    console.log(recommendedUrls);
-  };
-
+      new_arr[index] = url.substring(3)
+    })
+    console.log(new_arr)
+    setRecommendedUrls(new_arr)
+    console.log("Recommended URLs state after setting:")
+    console.log(recommendedUrls)
+  }
 
   const executeCustomPlugin = async (plugin) => {
-  /* TODO: Replace this with the actual code to execute the plugin and display the response */
-    console.log("Executing custom plugin:", plugin.name);
-  };
-  
+    /* TODO: Replace this with the actual code to execute the plugin and display the response */
+    console.log("Executing custom plugin:", plugin.name)
+  }
+
   /* Main popup component */
-  console.log(xten);
-  xten.printMsg();
+  console.log(xten)
   return (
     <div>
-      {!showAIPrompt && !showDropdowns ?(
+      {!showAIPrompt && !showDropdowns ? (
         <div
           style={{
             display: "flex",
@@ -306,29 +298,27 @@ function IndexPopup() {
             minHeight: 400,
             minWidth: 400,
             fontFamily: "monospace"
-          }}
-        >
+          }}>
           <h2>
             Welcome to your{" "}
             <a
               href="https://github.com/cs210/2023-87Capital/wiki"
-              target="_blank"
-            >
+              target="_blank">
               xTen
             </a>
             sion!
           </h2>
-          <button 
-          style={{ marginBottom: 8 }}
-          onClick={toggleAIPrompt}>Create AI Prompt</button>
-          
-          <button 
-          style={{ marginBottom: 8 }}
-          onClick={toggleDropdowns}>Plugin Creation Screen</button>
-          
-          <button 
-          style={{ marginBottom: 8 }}
-          onClick={suggestWebsites}>Suggest Websites</button>
+          <button style={{ marginBottom: 8 }} onClick={toggleAIPrompt}>
+            Create AI Prompt
+          </button>
+
+          <button style={{ marginBottom: 8 }} onClick={toggleDropdowns}>
+            Plugin Creation Screen
+          </button>
+
+          <button style={{ marginBottom: 8 }} onClick={suggestWebsites}>
+            Suggest Websites
+          </button>
           <div>
             <h3>Recommended Websites:</h3>
             {recommendedUrls.map((url, index) => (
@@ -344,9 +334,9 @@ function IndexPopup() {
             <h3>Custom Plugins:</h3>
             {customPlugins.map((plugin, index) => (
               <div key={index}>
-                <button 
-                style={{ marginBottom: 8 }}
-                onClick={() => executeCustomPlugin(plugin)}>
+                <button
+                  style={{ marginBottom: 8 }}
+                  onClick={() => executeCustomPlugin(plugin)}>
                   {plugin.name}
                 </button>
               </div>
@@ -359,7 +349,7 @@ function IndexPopup() {
         <AIPromptScreen />
       )}
     </div>
-  );
+  )
 }
 
-export default IndexPopup;
+export default IndexPopup
