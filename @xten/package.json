@@ -1,11 +1,10 @@
 {
   "name": "xten-pkg",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "browser extension sdk",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development",
-    "postinstall": "npm-insights:log"
+    "dev": "webpack --mode development"
   },
   "keywords": [
     "browser",
