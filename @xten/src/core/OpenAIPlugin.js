@@ -8,7 +8,9 @@ Add more tasks by generating more prompts for functions.
 export default class OpenAIPLugin {
     constructor(apiKey) {
       this.apiKey = apiKey;
-      this.apiEndpoint = 'https://api.openai.com/v1/completions';
+      this.apiEndpoint =     'https://api.openai.com/v1/completions';
+      this.apiChatEndpoint = 'https://api.openai.com/v1/chat/completions';
+      this.apiEditEndpoint = 'https://api.openai.com/v1/edits';
       this.configuration = new Configuration({ apiKey });
       this.openai = new OpenAIApi(this.configuration);
     }
@@ -113,6 +115,37 @@ export default class OpenAIPLugin {
         body: JSON.stringify({
           model: 'text-davinci-003',
           prompt: prompt,
+          temperature: 0.7,
+          max_tokens: 500,
+          top_p: 1.0,
+          frequency_penalty: 0.0,
+          presence_penalty: 1,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorBody = await response.json();
+        console.log(errorBody);
+        throw new Error(`Error during API request: ${response.statusText}`);
+      }
+  
+      const jsonResponse = await response.json();
+      console.log(jsonResponse);
+      return jsonResponse.choices[0].text;
+    }
+
+    /*---------------------Chat Calls---------------------*/
+    // API call to chat with the AI
+    async chat(query) {
+      const response = await fetch(this.apiChatEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${this.apiKey}`,
+        },
+        body: JSON.stringify({
+          model: 'gpt-3.5-turbo-0301',
+          messages: query,
           temperature: 0.7,
           max_tokens: 500,
           top_p: 1.0,

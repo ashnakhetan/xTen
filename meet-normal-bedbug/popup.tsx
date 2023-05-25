@@ -252,7 +252,7 @@ function IndexPopup() {
     
       // Define a new function that uses these components
       const newPluginExecute = async function () {
-        // Execute the data source function and pass its output to the AI prompt function
+        // Execute the data source function and pass its output to the AI plugin
         const data = await selectedDataSource.execute();
         // We initialize the plugin once, we need to call the customprompt call with the selectedAiPrompt.prompt
         // and the data as the prompt input
