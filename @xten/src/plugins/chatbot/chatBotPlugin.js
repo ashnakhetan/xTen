@@ -7,124 +7,59 @@ export class chatBotPlugin {
         this.openAIPlugin = new OpenAIPlugin(apiKey);
         // Start conversation history
         
-        if (history === undefined) {
-            this.history = [];
-        }
-        else {
-            if (Array.isArray(history)) {
-                this.history = history;
-                // feed the history to the AI
-            }
-            else {
-                error = "History must be an array";
-                console.error(error);
-                throw error;
-            }
+        if (Array.isArray(history)) {
+            this.history = history.map(msg => typeof msg === 'string' ? { role: 'user', content: msg } : msg);
+        } else {
+            throw new Error("History must be an array");
         }
 
-        // Initialize conversation context
-        if (conversationContext === undefined) {
-            this.context = "This is a conversation between a user and a chatbot.";
-        }
-        else {
-            if(typeof conversationContext === 'string') {
-                this.context = conversationContext;
-            }
-            else {
-                error = "Conversation context must be a string";
-                console.error(error);
-                throw error;
-            }
-        }
-
-        // Initialize personality
-        if (personality === undefined) {
-            this.personality = "Friendly, helpful, and kind.";
-        }
-        else {
-            if(typeof personality === 'string') {
-                this.personality = personality;
-            }
-            else {
-                error = "Personality must be a string";
-                console.error(error);
-                throw error;
-            }
-        }
-
-        // Initialize max history
-        if (maxHistory === undefined) {
-            this.maxHistory = 1000;
-        }
-        else {
-            if(typeof maxHistory === 'number') {
-                this.maxHistory = maxHistory;
-            }
-            else {
-                error = "Max history must be a number";
-                console.error(error);
-                throw error;
-            }
-        }
-
-        // Initialize max message length
-        if (maxMessageLength === undefined) {
-            this.maxMessageLength = 256;
-        }
-        else {
-            if(typeof maxMessageLength === 'number') {
-                this.maxMessageLength = maxMessageLength;
-            }
-            else {
-                error = "Max message length must be a number";
-                console.error(error);
-                throw error;
-            }
-        }
+        this.context = typeof conversationContext === 'string' ? conversationContext : "This is a conversation between a user and a chatbot.";
+        this.personality = typeof personality === 'string' ? personality : "Friendly, helpful, and kind.";
+        this.maxHistory = typeof maxHistory === 'number' ? maxHistory : 1000;
+        this.maxMessageLength = typeof maxMessageLength === 'number' ? maxMessageLength : 256;
+  
     };
 
     async askQuestion(userQuestion) {
         try {
-            userRole = "User";
-            // add the question to the history
-            this.addMessageToHistory(userRole , userQuestion + " \n");
-            const response = await this.openAIPlugin.chat(this.history);     
+            let userRole = "user";
+            this.addMessageToHistory(userRole , userQuestion);
+            // Ask the question
+            const response = await this.openAIPlugin.chat(this.history);   
+            // Process the response
+            let botRole = response.choices[0].role;
+            let botMessage = response.choices[0].message.content;
+            this.addMessageToHistory(botRole, botMessage);
+            // return the response's body
+            return botMessage;  
         }
         catch (error) {
             console.error(`Error asking question: ${error}`);
         }
-        // add the response to the history
-        botRole = response.choices[0].role;
-        botMessage = response.choices[0].message.content;
-        this.addMessageToHistory(botRole, botMessage);
-        // return the response's body from the AI
-        return botMessage;
     }
 
     async initializeSession() {
-        // Send the context to the AI to initialize the session as a system message
-        systemRole = "System";
-        systemMessage = this.context + " The chatbot is " + this.personality + " The conversation goes as follows: "
+        let systemRole = "system";
+        let systemMessage = `${this.context} The chatbot is ${this.personality}. The conversation goes as follows: `;
         try {
-            // add the context to the history
+            // Initialize the chat session
             this.addMessageToHistory(systemRole, systemMessage);
             const sessionMessage = await this.openAIPlugin.chat(this.history);
+            // Process the response
+            let botRole = sessionMessage.choices[0].role;
+            let botMessage = sessionMessage.choices[0].message.content;
+            this.addMessageToHistory(botRole, botMessage);
+            // return the response's body
+            return botMessage;
         }
         catch (error) {
             console.error(`Error initializing chat session: ${error}`);
         }
-        // Process the response
-        botRole = sessionMessage.choices[0].role;
-        botMessage = sessionMessage.choices[0].message.content;
-        // add the message to the history
-        this.addMessageToHistory(botRole, botMessage);
-        // return the response's body from the AI
-        return botMessage;
     }
 
     addMessageToHistory(role, message) {
         // TODO: if the chat is over a certain size, use chatgpt to summarize it and add it to the history
-        this.history.push(`${role}: ${message}`);
+        this.history.push({ role: role, content: message });
     }
 
     async refreshContext() {
