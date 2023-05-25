@@ -153,7 +153,6 @@ export default class OpenAIPLugin {
           presence_penalty: 1,
         }),
       });
-
       if (!response.ok) {
         const errorBody = await response.json();
         console.log(errorBody);
@@ -162,6 +161,6 @@ export default class OpenAIPLugin {
   
       const jsonResponse = await response.json();
       console.log(jsonResponse);
-      return jsonResponse.choices[0].text;
+      return jsonResponse;
     }
 }

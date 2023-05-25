@@ -11,6 +11,10 @@ import { aiPrompts as initialAiPrompts} from "../@xten/src/plugin_builder_module
 import { dataSources as initialDataSources} from "../@xten/src/plugin_builder_modules/dataSources";
 import { displayMethods as initialDisplayMethods} from "../@xten/src/plugin_builder_modules/displayMethods";
 import { displayLoading } from "~../@xten/src/utils/display";
+import { hideTooltip } from "~../@xten/src/utils/display";
+
+// Chatbot plugin
+import { chatBotPlugin } from "../@xten/src/plugins/chatbot/chatbotPlugin.js";
 
 const apiKey = "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";
 const recommenderPlugin = new urlRecommenderPlugin(apiKey);
@@ -18,11 +22,13 @@ const recommenderPlugin = new urlRecommenderPlugin(apiKey);
 // Base chatgpt plugin used for plugin builder
 const chatGptPlugin = new OpenAIPLugin(apiKey);
 
+const chatbot = new chatBotPlugin(apiKey);
+
 
 const contentTypes = ["title, h1, h2, h3, h4"]
 
 function IndexPopup() {
-
+  const [screen, setScreen] = useState("home");
   /* TODO: Add interface for scrapper plug in */
   const scrapperPlugin = () => {
     const scraperPlug = new ScraperPlugin()
@@ -57,65 +63,6 @@ function IndexPopup() {
     setDisplayMethods([ ...initialDisplayMethods ]);
   }, []);
 
-
-
-  const [showAIPrompt, setShowAIPrompt] = useState(false);
-
-  const toggleAIPrompt = () => {
-    setShowAIPrompt(!showAIPrompt);
-  };
-  /*------------------ AI PLugin Creation File Template ------------------*/
-
-  const createCompletionPlugin = (prompt, pluginName) => {
-    return `
-    // Path: meet-normal-bedbug/src/plugins/${pluginName}.tsx
-
-    import { Configuration, OpenAIApi } from 'openai';
-
-    /* template for completion plugin using user prompts */
-    
-    export default class OpenAIPLugin {
-        constructor(apiKey) {
-          this.apiKey = apiKey;
-          this.apiEndpoint = 'https://api.openai.com/v1/completions';
-          this.configuration = new Configuration({ apiKey });
-          this.openai = new OpenAIApi(this.configuration);
-        }
-    
-        async ${pluginName}(text) {
-            const prompt = "${prompt}";
-            const response = await fetch(this.apiEndpoint, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer \${this.apiKey}',
-              },
-              body: JSON.stringify({
-                model: 'text-davinci-003',
-                prompt: prompt,
-                temperature: 0.7,
-                max_tokens: 500,
-                top_p: 1.0,
-                frequency_penalty: 0.0,
-                presence_penalty: 1,
-              }),
-            });
-        
-            if (!response.ok) {
-              const errorBody = await response.json();
-              console.log(errorBody);
-              throw new Error('Error during API request: \${response.statusText}');
-            }
-        
-            const jsonResponse = await response.json();
-            console.log(jsonResponse);
-            return jsonResponse.choices[0].text;
-          }
-        }
-    `;
-  };
-  /*------------------ End of AI PLugin Creation File Template ------------------*/
-
   /*------------------ AI Prompt Creation Component ------------------*/
   const AIPromptScreen = () => {
     const [pluginName, setPluginName] = useState('');
@@ -134,12 +81,12 @@ function IndexPopup() {
       const fileName = `${pluginName}.js`;
 
       // Create the template with the user-defined prompt and plugin name
-      const fileContent = createCompletionPlugin(promptText, pluginName);
+      // const fileContent = createCompletionPlugin(promptText, pluginName);
 
-      const blob = new Blob([fileContent], { type: "text/javascript;charset=utf-8" });
-      const file = new File([blob], fileName, { type: "text/javascript;charset=utf-8" });
+      // const blob = new Blob([fileContent], { type: "text/javascript;charset=utf-8" });
+      // const file = new File([blob], fileName, { type: "text/javascript;charset=utf-8" });
 
-      saveAs(file);
+      // saveAs(file);
 
 
       /* Add the ai prompt to the list of ai modules plugins following this structure */
@@ -208,17 +155,13 @@ function IndexPopup() {
         >
           Save as Completion Prompt
         </button>
-        <button onClick={toggleAIPrompt}>Close</button>
+        <button onClick={()=> setScreen('home')}>Close</button>
       </div>
     );
   };
   /*------------------ End of AI Prompt Creation Component ------------------*/
 
   /*-----------------------WIP: Custom Plug in creation component-----------------------*/
-  const [showDropdowns, setShowDropdowns] = useState(false);
-  const toggleDropdowns = () => {
-    setShowDropdowns(!showDropdowns);
-  };
 
   const DropdownsScreen = () => {
     
@@ -347,14 +290,163 @@ function IndexPopup() {
         <button 
         style={{ marginBottom: 8 }}
         disabled={!pluginName || !selectedData || !selectedPrompt || !selectedDisplay}
-        onClick={saveCustomPlugin}>
-          Save Plugin</button>
-        <button onClick={toggleDropdowns}>
-          Close</button>
+        onClick={saveCustomPlugin}>Save Plugin
+        </button>
+        <button onClick={() =>setScreen('home')}>Close</button>
       </div>
     );
   };
   /*-----------------------End of Plugin Builder-----------------------*/
+
+  /*-----------------------WIP: Chat Bot Plugin -----------------------*/
+
+  const ChatbotSetupScreen = () => {
+    const [loading, setLoading] = useState(false);
+    const [personality, setPersonality] = useState('');
+    const [startSession, setStartSession] = useState(false);
+  
+    useEffect(() => {
+      const initializeChatbot = async () => {
+        if (startSession) {
+          try {
+            setLoading(true);
+            chatbot.setPersonality(personality);
+            await chatbot.initializeSession();
+          } catch (error) {
+            console.error(error);
+          } finally {
+            setScreen('chat');
+            setStartSession(false);
+            setLoading(false);
+          }
+        }
+      };
+      initializeChatbot();
+    }, [startSession]);
+  
+    const handlePersonalityChange = (e) => {
+      setPersonality(e.target.value);
+    };
+  
+    const handleStartChat = () => {
+      setStartSession(true);
+    };
+  
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          padding: 16,
+          fontFamily: "monospace",
+          minWidth: 400
+        }}
+      >
+        <h2>Setup Chatbot</h2>
+        <textarea
+          style={{ width: "100%", minHeight: 200, marginBottom: 8 }}
+          placeholder="Describe the chatbot's personality here (optional)"
+          value={personality}
+          onChange={handlePersonalityChange}
+        />
+        <button 
+        style={{ marginBottom: 8 }}
+        onClick={()=>handleStartChat()}
+        disabled={loading}
+        >Start Chat</button>
+        <button onClick={()=> setScreen('home')}>Close</button>
+      </div>
+    );
+  };
+
+  const ChatScreen = () => {
+    const [chatHistory, setChatHistory] = useState([]);
+    const [userInput, setUserInput] = useState('');
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+      // Get chat history when the component is loaded
+      // remove loading message
+      hideTooltip();
+      setLoading(false);
+      setChatHistory(chatbot.getHistory().slice(1));
+    }, []);
+  
+    const handleUserInputChange = (e) => {
+      setUserInput(e.target.value);
+    };
+  
+    const handleSend = async () => {
+      setLoading(true);
+      try {
+        // Add the user's input to the chat history to be displayed locally
+        setUserInput('');
+        chatHistory.push({"role" : "user", "content": userInput});
+        let response = await chatbot.askQuestion(userInput);
+        setChatHistory(chatbot.getHistory().slice(1));
+        setLoading(false);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    const handeClearChat = () => {
+      // if still waiting for response, wait for it to finish before clearing
+      setScreen('home');
+      while (loading) {
+        console.log('waiting for response');
+      }
+      chatbot.clearHistory();
+      setChatHistory([]);
+    };
+  
+    return (
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          padding: 16,
+          fontFamily: "monospace",
+          minWidth: 400
+        }}
+      >
+        <h2>Chat</h2>
+        <div
+          style={{
+            marginBottom: 16,
+            height: 300,
+            overflowY: 'scroll',
+            border: '1px solid #ddd',
+            padding: 8
+          }}
+        >
+          {chatHistory.map((chatItem, index) => (
+            <div key={index}>
+              <b>{chatItem.role}:</b> {chatItem.content}
+            </div>
+          ))}
+        </div>
+        <textarea
+          style={{ width: "100%", minHeight: 100, marginBottom: 8 }}
+          placeholder="Type your message here"
+          value={userInput}
+          onChange={handleUserInputChange}
+        />
+        <button 
+          style={{ marginBottom: 8 }}
+          onClick={handleSend}
+          disabled={loading || !userInput}
+        >
+          Send
+        </button>
+        <button 
+          style={{ marginBottom: 8 }}
+          onClick={()=> handeClearChat()}>Close</button>
+      </div>
+    );
+  };
+
+  /*-----------------------End of Chat Bot Plugin -----------------------*/
 
   /*-----------------------WIP: Recommend Urls component-----------------------*/
   const [recommendedUrls, setRecommendedUrls] = useState([]);
@@ -386,11 +478,12 @@ function IndexPopup() {
   };
   
   /*-----------------------Main popup component-----------------------*/
+
   console.log(xten);
   xten.printMsg();
   return (
     <div>
-      {!showAIPrompt && !showDropdowns ?(
+      {screen === 'home' && (
         <div
           style={{
             display: "flex",
@@ -413,15 +506,19 @@ function IndexPopup() {
           </h2>
           <button 
           style={{ marginBottom: 8 }}
-          onClick={toggleAIPrompt}>Create AI Prompt</button>
+          onClick={()=> setScreen('aiPrompt')}>Create AI Prompt</button>
           
           <button 
           style={{ marginBottom: 8 }}
-          onClick={toggleDropdowns}>Plugin Creation Screen</button>
+          onClick={()=> setScreen('dropdowns')}>Plugin Creation Screen</button>
           
           <button 
           style={{ marginBottom: 8 }}
-          onClick={suggestWebsites}>Suggest Websites</button>
+          onClick={()=> suggestWebsites}>Suggest Websites</button>
+
+          < button
+          style={{ marginBottom: 8 }}
+          onClick={()=> setScreen('chatbotSetup')}>Try Chatbot</button>
           <div>
             <h3>Recommended Websites:</h3>
             {recommendedUrls.map((url, index) => (
@@ -446,11 +543,11 @@ function IndexPopup() {
             ))}
           </div>
         </div>
-      ) : showDropdowns ? (
-        <DropdownsScreen />
-      ) : (
-        <AIPromptScreen />
       )}
+      {screen === 'dropdowns' && <DropdownsScreen />}
+      {screen === 'aiPrompt' && <AIPromptScreen />}
+      {screen === 'chatbotSetup' && <ChatbotSetupScreen />}
+      {screen === 'chat' && <ChatScreen />}
     </div>
   );
 }
