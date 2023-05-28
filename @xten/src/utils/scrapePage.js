@@ -48,5 +48,4 @@ export function scrapePage(tabs, contentTypes) {
         }
       })
       .catch(error => console.log(error));
-
     }
