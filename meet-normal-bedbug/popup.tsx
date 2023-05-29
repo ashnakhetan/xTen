@@ -556,7 +556,6 @@ function IndexPopup() {
   /*-----------------------Main popup component-----------------------*/
 
   console.log(xten);
-  xten.printMsg();
   return (
     <div>
       {screen === 'home' && (
