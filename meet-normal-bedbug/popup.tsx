@@ -8,9 +8,9 @@ import OpenAIPLugin from "../@xten/src/core/OpenAIPlugin"
 
 // Plugin builder modules, we want to be able to dynamically add to them in the future
 import { aiPrompts as initialAiPrompts } from "../@xten/src/plugin_builder_modules/aiPrompts";
-import { scrapeTypes as scrapeTypes } from "../@xten/src/plugin_builder_modules/scrapeTypes";
+import { scrapeTypes as inititalScrapeTypes } from "../@xten/src/plugin_builder_modules/scrapeTypes";
 import { dataSources as initialDataSources } from "../@xten/src/plugin_builder_modules/dataSources";
-import { dataMethods as dataMethods } from "../@xten/src/plugin_builder_modules/dataMethods.js";
+import { timePeriods as timePeriods } from "../@xten/src/plugin_builder_modules/timePeriods";
 import { displayMethods as initialDisplayMethods } from "../@xten/src/plugin_builder_modules/displayMethods";
 import { displayLoading } from "~../@xten/src/utils/display";
 import { hideTooltip } from "~../@xten/src/utils/display";
@@ -32,11 +32,11 @@ const contentTypes = ["title, h1, h2, h3, h4"]
 function IndexPopup() {
   const [screen, setScreen] = useState("home");
   /* TODO: Add interface for scrapper plug in */
-  const scrapperPlugin = () => {
-    const scraperPlug = new ScraperPlugin()
-    const listElements = scraperPlug.scrape(contentTypes)
-    console.log("list elements: ", listElements)
-  }
+  // const scraperPlugin = () => {
+  //   const scraperPlug = new ScraperPlugin()
+  //   const listElements = scraperPlug.scrape(contentTypes)
+  //   console.log("list elements: ", listElements)
+  // }
 
   const [customPlugins, setCustomPlugins] = useState([]);
 
@@ -53,13 +53,15 @@ function IndexPopup() {
 
   /* TODO: Break down popup.tsx into components */
 
-  /* Initialie the modules for the plugin builder */
+  /* Initialize the modules for the plugin builder */
+  const [scrapeTypes, setScrapeTypes] = useState([]);
   const [aiPrompts, setAiPrompts] = useState([]);
   const [dataSources, setDataSources] = useState([]);
   const [displayMethods, setDisplayMethods] = useState([]);
 
   // Initialize local copies of modules when the component mounts
   useEffect(() => {
+    setScrapeTypes([...inititalScrapeTypes]);
     setAiPrompts([...initialAiPrompts]);
     setDataSources([...initialDataSources]);
     setDisplayMethods([...initialDisplayMethods]);
@@ -102,7 +104,7 @@ function IndexPopup() {
         } 
       */
 
-      const newAiPrompt = {
+    const newAiPrompt = {
         /* Generate a random id for the plugin to prevent duplicates in the AiPromptList */
         id: Math.floor(Math.random() * 1000000),
         name: pluginName,
@@ -173,7 +175,7 @@ function IndexPopup() {
       setPluginName(e.target.value);
     };
 
-    const [selectedMethod, setSelectedMethod] = useState("");
+    // const [selectedMethod, setSelectedMethod] = useState("");
     const [selectedType, setSelectedType] = useState("");
     const [selectedData, setSelectedData] = useState("");
     const [selectedPrompt, setSelectedPrompt] = useState("");
@@ -181,7 +183,7 @@ function IndexPopup() {
     const [inputData, setInputData] = useState('');
 
     const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-      setSelectedMethod(event.target.value);
+      setSelectedData(event.target.value);
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -191,7 +193,8 @@ function IndexPopup() {
     // Iterate over the names of the data sources from the dataSources array
     // and display them as options in the dropdown, same for prompts and displays
     const dataOption = Object.values(dataSources).map((source) => source.name);
-    const methodOption = Object.values(dataMethods).map((source) => source.name);
+    const timeOption = Object.values(timePeriods).map((source) => source.name);
+    // const methodOption = Object.values(dataMethods).map((source) => source.name);
     const displayOption = Object.values(displayMethods).map((display) => display.name);
     const promptOption = Object.values(aiPrompts).map((prompt) => prompt.name);
     const scrapeOption = Object.values(scrapeTypes).map((type) => type.name);
@@ -200,7 +203,7 @@ function IndexPopup() {
       // Get the selected data source, AI prompt, and display method
       // const selectedMethod = dataMethods.find(method => method.name === selectedMethod);
       // console.log(selectedMethod);
-      // const selectedType = scrapeTypes.find(type => type.name === selectedType);
+      const selectedDataType = scrapeTypes.find(type => type.name === selectedType);
       const selectedDataSource = dataSources.find(source => source.name === selectedData);
       const selectedAiPrompt = aiPrompts.find(prompt => prompt.name === selectedPrompt);
       const selectedDisplayMethod = displayMethods.find(display => display.name === selectedDisplay);
@@ -211,9 +214,10 @@ function IndexPopup() {
       console.log('selectedDisplayMethod: ', selectedDisplayMethod);
 
       // Define a new function that uses these components
-      const newPluginExecute = async function () {
+      const newPluginExecute = async function (selectedDataType) {
         // Execute the data source function and pass its output to the AI plugin
-        const data = await selectedDataSource.execute();
+        console.log("selectedDataType: ", selectedDataType)
+        const data = await selectedDataSource.execute(selectedDataType);
         // We initialize the plugin once, we need to call the customprompt call with the selectedAiPrompt.prompt
         // and the data as the prompt input
         // DEBUG 
@@ -230,7 +234,7 @@ function IndexPopup() {
 
       const newPlugin = {
         name: pluginName,
-        execute: newPluginExecute
+        execute: newPluginExecute(selectedDataType)
       };
 
       setCustomPlugins([...customPlugins, newPlugin]);
@@ -247,54 +251,6 @@ function IndexPopup() {
       }}>
         <h2>Plugin Creation Screen</h2>
 
-
-        <h3>Collect Data Sources</h3>
-        <div style={{
-          marginBottom: 8,
-          display: "flex",
-          flexDirection: "row"
-        }}>
-          <select
-            value={selectedMethod}
-            onChange={(e) => {
-              setSelectedMethod(e.target.value);
-              console.log('New selectedMethod: ', e.target.value);
-            }}
-          >
-            <option value="">Select a collection method</option>
-            {methodOption.map((option, index) => (
-              <option key={index} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-
-          <span style={{ margin: "0 8px" }}>+</span>
-
-          {/* if the selected method was manual, then have the next box be an input box; otherwise drop-down! */}
-          {selectedMethod === 'Scraping' ? (
-            <select
-              value={selectedType}
-              onChange={(e) => {
-                setSelectedType(e.target.value);
-                console.log('New selectedTyoe: ', e.target.value);
-              }}
-            >
-              <option value="">Select a data type</option>
-              {scrapeOption.map((option, index) => (
-                <option key={index} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input type="text" value={inputData} onChange={handleInputChange} />
-          )}
-
-          <span style={{ margin: "0 8px" }}>+</span>
-        </div>
-
-
         <div style={{
           marginBottom: 8,
           display: "flex",
@@ -304,17 +260,58 @@ function IndexPopup() {
             value={selectedData}
             onChange={(e) => {
               setSelectedData(e.target.value);
-              console.log('New selectedData: ', e.target.value);
+              console.log('New selectedMethod: ', e.target.value);
             }}
           >
-            <option value="">Select a data source ...</option>
+            <option value="">Select a data source</option>
             {dataOption.map((option, index) => (
               <option key={index} value={option}>
                 {option}
               </option>
             ))}
           </select>
+
           <span style={{ margin: "0 8px" }}>+</span>
+
+          {/* if the selected method was manual: have an input box; if scraping: dropdown; if browsing history, time period dropdown! */}
+          {selectedData === 'Scraping' ? (
+            <select
+              value={selectedType}
+              onChange={(e) => {
+                setSelectedType(e.target.value);
+                console.log('New selectedType: ', e.target.value);
+              }}
+            >
+              <option value="">Select a data type</option>
+              {scrapeOption.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          ) : (selectedData === 'Manual') ? (
+            <input type="text" value={inputData} onChange={handleInputChange} />
+          ) :
+          (
+            <select
+            value={selectedData}
+            onChange={(e) => {
+              setSelectedType(e.target.value);
+              console.log('New selectedData: ', e.target.value);
+            }}
+          >
+            <option value="">Select a time period</option>
+            {timeOption.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          )}
+
+        <span style={{ margin: "0 8px" }}>+</span>
+        {/* </div> */}
+
           <select
             value={selectedPrompt}
             onChange={(e) => {
@@ -540,7 +537,7 @@ function IndexPopup() {
     /* TODO: Replace this with the actual code to execute the plugin and display the response */
     console.log("Executing custom plugin...");
     console.log(plugin);
-    plugin.execute();
+    plugin.execute(scrapeTypes[0]);
   };
 
   /*-----------------------Main popup component-----------------------*/

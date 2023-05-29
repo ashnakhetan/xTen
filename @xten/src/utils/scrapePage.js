@@ -15,6 +15,7 @@ export function scrapePage(tabs, contentTypes) {
         const doc = parser.parseFromString(html, 'text/html');
   
         // get all elements that might be one of the contentTypes
+        console.log(contentTypes);
         const possibleElements = doc.querySelectorAll(contentTypes);
   
         // Find the first element that has either a title attribute or an alt attribute
