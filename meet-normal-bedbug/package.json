@@ -34,7 +34,8 @@
       "scripting", 
       "history",
       "filesystem",
-      "storage"
+      "storage",
+      "contextMenus"
     ]
   }
 }

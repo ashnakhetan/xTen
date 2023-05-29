@@ -48,6 +48,7 @@ export default class OpenAIPLugin {
         console.log(jsonResponse);
         return jsonResponse.choices[0].text;
       }
+      
     // More OpenAI API functions
     // Get list of avilable models
     async getAvailableModels() {

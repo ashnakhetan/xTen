@@ -5,6 +5,7 @@ import { ScraperPlugin } from "../@xten/src/plugins/scraper/scraperPlugin"
 import { scrapePage } from "../@xten/src/utils/scrapePage"
 import { saveAs } from "file-saver";
 import OpenAIPLugin from "../@xten/src/core/OpenAIPlugin"
+import { SummarizerPlugin } from "../@xten/src/plugins/summarizer/summarizerPlugin";
 
 // Plugin builder modules, we want to be able to dynamically add to them in the future
 import { aiPrompts as initialAiPrompts} from "../@xten/src/plugin_builder_modules/aiPrompts";
@@ -17,18 +18,60 @@ import { hideTooltip } from "~../@xten/src/utils/display";
 import { chatBotPlugin } from "../@xten/src/plugins/chatbot/chatbotPlugin.js";
 
 const apiKey = "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";
-const recommenderPlugin = new urlRecommenderPlugin(apiKey);
 
 // Base chatgpt plugin used for plugin builder
 const chatGptPlugin = new OpenAIPLugin(apiKey);
 
+// Recommender plugin
+const recommenderPlugin = new urlRecommenderPlugin(apiKey);
+
+// Chatbot PLugin
 const chatbot = new chatBotPlugin(apiKey);
+
+// Summarizer plugin
+let summarizerPlugin = new SummarizerPlugin(apiKey, true);
 
 
 const contentTypes = ["title, h1, h2, h3, h4"]
 
 function IndexPopup() {
+
+  // Sumarizer plugin
+  const [smartSummarizer, setSmartSummarizer] = useState(false);
+
+  useEffect(() => {
+    chrome.storage.local.get(['smartSummarizer'], function(result) {
+      setSmartSummarizer(!!result.smartSummarizer);
+    });
+  }, []);
+  
+  function handleSmartSummarizerToggle() {
+    setSmartSummarizer((prevState) => {
+      const newState = !prevState;
+  
+      // If the new state is true, attach the plugin, otherwise detach
+      if (newState) {
+        summarizerPlugin.attach();
+      } else {
+        summarizerPlugin.detach();
+      }
+  
+      chrome.storage.local.set({ 'smartSummarizer': newState });
+  
+      return newState;
+    });
+  }
+
+  // Main screen state
   const [screen, setScreen] = useState("home");
+  // Main screen buttons
+  // State to handle button hover
+  const [isButtonHovered_1, setIsButtonHovered_1] = useState(false);
+  const [isButtonHovered_2, setIsButtonHovered_2] = useState(false);
+  const [isButtonHovered_3, setIsButtonHovered_3] = useState(false);
+  const [isButtonHovered_4, setIsButtonHovered_4] = useState(false);
+  const [isButtonHovered_5, setIsButtonHovered_5] = useState(false);
+
 
   useEffect(() => {
     // Get the stored screen when the component is loaded
@@ -446,7 +489,8 @@ function IndexPopup() {
             height: 300,
             overflowY: 'scroll',
             border: '1px solid #ddd',
-            padding: 8
+            padding: 8,
+            borderRadius: 4
           }}
         >
           {chatHistory.map((chatItem, index) => (
@@ -462,7 +506,10 @@ function IndexPopup() {
           onChange={handleUserInputChange}
         />
         <button 
-          style={{ marginBottom: 8 }}
+          style={{ 
+            marginBottom: 8,
+           
+           }}
           onClick={handleSend}
           disabled={loading || !userInput}
         >
@@ -521,39 +568,92 @@ function IndexPopup() {
             padding: 16,
             minHeight: 400,
             minWidth: 400,
-            fontFamily: "monospace"
+            fontFamily: "monospace",
+            backgroundColor: "#faf0f0" // light Carnation color for the background
           }}
         >
           <h2>
             Welcome to your{" "}
             <a
-              href="https://github.com/cs210/2023-87Capital/wiki"
+              href="https://cs210.github.io/2023-87Capital/"
               target="_blank"
+              style={{color: "#f95d6a"}} // Carnation color for the hyperlink
             >
               xTen
             </a>
             sion!
           </h2>
           <button 
-          style={{ marginBottom: 8 }}
-          onClick={()=> handleSetScreen('aiPrompt')}>Create AI Prompt</button>
+          style={{ 
+            marginBottom: 8,
+            backgroundColor: isButtonHovered_1 ? "#f95d6a" : "#ffadad", // change color on hover
+            color: "#ffffff" // White color for the text
+          }}
+          onMouseEnter={() => setIsButtonHovered_1(true)}
+          onMouseLeave={() => setIsButtonHovered_1(false)}
+          onClick={()=> {
+            setIsButtonHovered_1(false);
+            handleSetScreen('aiPrompt');
+          }}
+          >
+          Create AI Prompt
+        </button>
           
           <button 
-          style={{ marginBottom: 8 }}
-          onClick={()=> handleSetScreen('dropdowns')}>Plugin Creation Screen</button>
+          style={{ 
+            marginBottom: 8,
+            backgroundColor: isButtonHovered_2 ? "#f95d6a" : "#ffadad", // change color on hover
+            color: "#ffffff" // White color for the text
+          }}
+          onMouseEnter={() => setIsButtonHovered_2(true)}
+          onMouseLeave={() => setIsButtonHovered_2(false)}
+          onClick={()=> {
+            setIsButtonHovered_2(false);
+            handleSetScreen('dropdowns');
+          }}>
+            Plugin Creation Screen</button>
           
           <button 
-          style={{ marginBottom: 8 }}
+          style={{ 
+            marginBottom: 8,
+            backgroundColor: isButtonHovered_3 ? "#f95d6a" : "#ffadad", // change color on hover
+            color: "#ffffff" // White color for the text
+          }}
+          onMouseEnter={() => setIsButtonHovered_3(true)}
+          onMouseLeave={() => setIsButtonHovered_3(false)}
           disabled={loading}
-          onClick={()=> suggestWebsites()}>Suggest Websites</button>
-
-          < button
-          style={{ marginBottom: 8 }}
-          onClick={()=> handleSetScreen('chatbotSetup')}>Try Chatbot</button>
+          onClick={()=> {
+            suggestWebsites();
+            setIsButtonHovered_3(false);
+          }}>Suggest Websites</button>
 
           <button
-          style={{ marginBottom: 8 }}
-          onClick={()=> window.open('https://google.com', '_blank')}>Feedback</button>
+          style={{ 
+            marginBottom: 8,
+            backgroundColor: isButtonHovered_4 ? "#f95d6a" : "#ffadad", // change color on hover
+            color: "#ffffff" // White color for the text
+          }}
+          onMouseEnter={() => setIsButtonHovered_4(true)}
+          onMouseLeave={() => setIsButtonHovered_4(false)}
+          onClick={()=> {
+            handleSetScreen('chatbotSetup');
+            setIsButtonHovered_4(false);
+          }}>Try Chatbot</button>
+
+          <div>
+            <label className="switch">
+              <input 
+                type="checkbox"
+                checked={smartSummarizer}
+                onChange={handleSmartSummarizerToggle}
+              />
+              <span className="slider round"></span>
+            </label>
+            <span style={{ marginLeft: 8 }}>
+              {smartSummarizer ? 'Smart Summarizer Enabled' : 'Smart Summarizer Disabled'}
+            </span>
+          </div>
+
           <div>
             <h3>Recommended Websites:</h3>
             {recommendedUrls.map((url, index) => (
@@ -578,6 +678,31 @@ function IndexPopup() {
               </div>
             ))}
           </div>
+
+          <div
+          style={{
+            marginTop: 24,
+            paddingTop: 24,
+            borderTop: '1px solid #ddd'
+          }}
+          >
+          <button
+            style={{
+              backgroundColor: '#f8f9fa',
+              padding: 10,
+              borderRadius: 5,
+              border: '1px solid #ccc',
+              cursor: 'pointer',
+              textAlign: 'center',
+              width: '100%',
+              fontWeight: 'bold',
+              color: '#007BFF'
+            }}
+            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSeUwu4YyApqiRREobOfti3-TrZRxrxfuNSZ9fSgI0YWZdJ8Qg/viewform?usp=sf_link', '_blank')}
+          >
+            We value your feedback!
+          </button>
+        </div>
 
         </div>
       )}
