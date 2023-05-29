@@ -29,6 +29,21 @@ const contentTypes = ["title, h1, h2, h3, h4"]
 
 function IndexPopup() {
   const [screen, setScreen] = useState("home");
+
+  useEffect(() => {
+    // Get the stored screen when the component is loaded
+    chrome.storage.local.get('screen', function(result) {
+      if (result.screen) {
+        setScreen(result.screen);
+      }
+    });
+  }, []);
+
+  const handleSetScreen = (screen) => {
+    setScreen(screen);
+    chrome.storage.local.set({ 'screen': screen });
+  };
+  
   /* TODO: Add interface for scrapper plug in */
   const scrapperPlugin = () => {
     const scraperPlug = new ScraperPlugin()
@@ -65,11 +80,11 @@ function IndexPopup() {
 
   /*------------------ AI Prompt Creation Component ------------------*/
   const AIPromptScreen = () => {
-    const [pluginName, setPluginName] = useState('');
+    const [promptName, setPromptName] = useState('');
     const [promptText, setPromptText] = useState('');
 
     const handlePluginNameChange = (e) => {
-      setPluginName(e.target.value);
+      setPromptName(e.target.value);
     };
 
     const handlePromptTextChange = (e) => {
@@ -77,8 +92,8 @@ function IndexPopup() {
     };
 
     const handleSaveCompletion = () => {
-      console.log("Plugin Name:", pluginName, "Prompt:", promptText);
-      const fileName = `${pluginName}.js`;
+      console.log("Prompt Name:", promptName, "Prompt:", promptText);
+      const fileName = `${promptName}.js`;
 
       // Create the template with the user-defined prompt and plugin name
       // const fileContent = createCompletionPlugin(promptText, pluginName);
@@ -93,7 +108,7 @@ function IndexPopup() {
       /*
         aiPrompt: {
             id: 1,
-            name: 'plugin name',
+            name: 'prompt name',
             type: 'aiPrompt',
             description: 'This is a description of aiPrompt1',
             prompt: 'This is the prompt itself'
@@ -103,7 +118,7 @@ function IndexPopup() {
       const newAiPrompt = {
         /* Generate a random id for the plugin to prevent duplicates in the AiPromptList */
         id: Math.floor(Math.random() * 1000000),
-        name: pluginName,
+        name: promptName,
         type: "aiPrompt",
         description: "This is a description of aiPrompt1",
         text: promptText
@@ -114,7 +129,7 @@ function IndexPopup() {
     };
 
     const handleSaveChat = () => {
-      console.log("Plugin Name:", pluginName, "Prompt:", promptText);
+      console.log("Plugin Name:", promptName, "Prompt:", promptText);
       // TODO: Do something with the pluginName and promptText here
     };
 
@@ -133,29 +148,33 @@ function IndexPopup() {
         <input
           style = {{ width: "100%", marginBottom: 8, fontFamily: "monospace" }}
           type="text"
-          placeholder="Plugin Name"
-          value={pluginName}
+          placeholder="Prompt Name"
+          value={promptName}
           onChange={handlePluginNameChange}
         />
         <textarea
-          style={{ width: "100%", minHeight: 200 }}
+          style={{ width: "100%", minHeight: 200 , fontFamily: "monospace", marginBottom: 8}}
           placeholder="Prompt Text"
           value={promptText}
           onChange={handlePromptTextChange}
         />
         <button 
+        style={{ marginBottom: 8 }}
         onClick={handleSaveChat} 
-        disabled={!pluginName || !promptText}
+        disabled={!promptName || !promptText || true}
         >
-          Save as Chat Prompt
+          Save as Chat Prompt (WIP)
         </button>
         <button
+          style={{ marginBottom: 8 }}
           onClick={handleSaveCompletion}
-          disabled={!pluginName || !promptText}
+          disabled={!promptName || !promptText}
         >
           Save as Completion Prompt
         </button>
-        <button onClick={()=> setScreen('home')}>Close</button>
+        <button 
+        style={{ marginBottom: 8 }}
+        onClick={()=> handleSetScreen('home')}>Close</button>
       </div>
     );
   };
@@ -292,7 +311,7 @@ function IndexPopup() {
         disabled={!pluginName || !selectedData || !selectedPrompt || !selectedDisplay}
         onClick={saveCustomPlugin}>Save Plugin
         </button>
-        <button onClick={() =>setScreen('home')}>Close</button>
+        <button onClick={() =>handleSetScreen('home')}>Close</button>
       </div>
     );
   };
@@ -315,7 +334,7 @@ function IndexPopup() {
           } catch (error) {
             console.error(error);
           } finally {
-            setScreen('chat');
+            handleSetScreen('chat');
             setStartSession(false);
             setLoading(false);
           }
@@ -354,7 +373,7 @@ function IndexPopup() {
         onClick={()=>handleStartChat()}
         disabled={loading}
         >Start Chat</button>
-        <button onClick={()=> setScreen('home')}>Close</button>
+        <button onClick={()=> handleSetScreen('home')}>Close</button>
       </div>
     );
   };
@@ -363,14 +382,24 @@ function IndexPopup() {
     const [chatHistory, setChatHistory] = useState([]);
     const [userInput, setUserInput] = useState('');
     const [loading, setLoading] = useState(true);
-
+  
     useEffect(() => {
       // Get chat history when the component is loaded
-      // remove loading message
-      hideTooltip();
-      setLoading(false);
-      setChatHistory(chatbot.getHistory().slice(1));
+      chrome.storage.local.get('chatHistory', function(result) {
+        if (result.chatHistory) {
+          setChatHistory(result.chatHistory);
+        } else {
+          hideTooltip();
+          setChatHistory(chatbot.getHistory().slice(1));
+        }
+        setLoading(false);
+      });
     }, []);
+  
+    useEffect(() => {
+      // Store chat history whenever it changes
+      chrome.storage.local.set({ 'chatHistory': chatHistory });
+    }, [chatHistory]);
   
     const handleUserInputChange = (e) => {
       setUserInput(e.target.value);
@@ -381,23 +410,23 @@ function IndexPopup() {
       try {
         // Add the user's input to the chat history to be displayed locally
         setUserInput('');
-        chatHistory.push({"role" : "user", "content": userInput});
+        setChatHistory(prevHistory => [...prevHistory, {"role" : "user", "content": userInput}]);
         let response = await chatbot.askQuestion(userInput);
-        setChatHistory(chatbot.getHistory().slice(1));
+        setChatHistory(prevHistory => [...prevHistory, {"role" : "system", "content": response}]);
         setLoading(false);
       } catch (error) {
         console.error(error);
       }
     };
-
-    const handeClearChat = () => {
+  
+    const handeClearChat = async () => {
       // if still waiting for response, wait for it to finish before clearing
-      setScreen('home');
-      while (loading) {
-        console.log('waiting for response');
-      }
-      chatbot.clearHistory();
+      setLoading(true);
+      await chatbot.clearHistory();
       setChatHistory([]);
+      chrome.storage.local.remove('chatHistory');  // Clear stored chat history
+      setLoading(false);
+      handleSetScreen('home');
     };
   
     return (
@@ -450,8 +479,10 @@ function IndexPopup() {
 
   /*-----------------------WIP: Recommend Urls component-----------------------*/
   const [recommendedUrls, setRecommendedUrls] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const suggestWebsites = async () => {
+    setLoading(true);
     console.log("Suggesting websites...");
     const urls = await recommenderPlugin.recommendUrlsMonth();
     console.log("Printing suggested websites!");
@@ -467,11 +498,10 @@ function IndexPopup() {
     setRecommendedUrls(new_arr);
     console.log("Recommended URLs state after setting:");
     console.log(recommendedUrls);
+    setLoading(false);
   };
 
-
   const executeCustomPlugin = async (plugin) => {
-  /* TODO: Replace this with the actual code to execute the plugin and display the response */
     console.log("Executing custom plugin...");
     console.log(plugin);
     plugin.execute();
@@ -506,19 +536,24 @@ function IndexPopup() {
           </h2>
           <button 
           style={{ marginBottom: 8 }}
-          onClick={()=> setScreen('aiPrompt')}>Create AI Prompt</button>
+          onClick={()=> handleSetScreen('aiPrompt')}>Create AI Prompt</button>
           
           <button 
           style={{ marginBottom: 8 }}
-          onClick={()=> setScreen('dropdowns')}>Plugin Creation Screen</button>
+          onClick={()=> handleSetScreen('dropdowns')}>Plugin Creation Screen</button>
           
           <button 
           style={{ marginBottom: 8 }}
-          onClick={()=> suggestWebsites}>Suggest Websites</button>
+          disabled={loading}
+          onClick={()=> suggestWebsites()}>Suggest Websites</button>
 
           < button
           style={{ marginBottom: 8 }}
-          onClick={()=> setScreen('chatbotSetup')}>Try Chatbot</button>
+          onClick={()=> handleSetScreen('chatbotSetup')}>Try Chatbot</button>
+
+          <button
+          style={{ marginBottom: 8 }}
+          onClick={()=> window.open('https://google.com', '_blank')}>Feedback</button>
           <div>
             <h3>Recommended Websites:</h3>
             {recommendedUrls.map((url, index) => (
@@ -529,6 +564,7 @@ function IndexPopup() {
               </p>
             ))}
           </div>
+
 
           <div>
             <h3>Custom Plugins:</h3>
@@ -542,6 +578,7 @@ function IndexPopup() {
               </div>
             ))}
           </div>
+
         </div>
       )}
       {screen === 'dropdowns' && <DropdownsScreen />}

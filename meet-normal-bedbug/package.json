@@ -33,7 +33,8 @@
     "permissions": [
       "scripting", 
       "history",
-      "filesystem"
+      "filesystem",
+      "storage"
     ]
   }
 }
