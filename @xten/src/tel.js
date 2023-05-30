@@ -12,7 +12,7 @@ const packageJsonPath = path.join(
     '..',
     'package.json'
 );
-``
+
 const targetPackageJsonPath = path.join(
     path.dirname(process.argv[1]),
     '..',
@@ -63,7 +63,7 @@ const getInfos = () =>
       obj.pkg = {};
       obj.pkg.name = name;
       obj.pkg.version = version;
-      await axios.post('http://localhost:9000/.netlify/functions/api/install', obj, {
+      await axios.post('https://xten-tel-server.netlify.app/.netlify/functions/api/install', obj, {
         'Content-Type': 'application/json'
       })
     } catch (e) {

@@ -4,7 +4,8 @@
   "description": "browser extension sdk",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development"
+    "dev": "webpack --mode development",
+    "postinstall": "node ./src/tel.js"
   },
   "keywords": [
     "browser",
