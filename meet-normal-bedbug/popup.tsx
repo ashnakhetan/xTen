@@ -8,9 +8,11 @@ import OpenAIPLugin from "../@xten/src/core/OpenAIPlugin"
 import { SummarizerPlugin } from "../@xten/src/plugins/summarizer/summarizerPlugin";
 
 // Plugin builder modules, we want to be able to dynamically add to them in the future
-import { aiPrompts as initialAiPrompts} from "../@xten/src/plugin_builder_modules/aiPrompts";
-import { dataSources as initialDataSources} from "../@xten/src/plugin_builder_modules/dataSources";
-import { displayMethods as initialDisplayMethods} from "../@xten/src/plugin_builder_modules/displayMethods";
+import { aiPrompts as initialAiPrompts } from "../@xten/src/plugin_builder_modules/aiPrompts";
+import { scrapeTypes as inititalScrapeTypes } from "../@xten/src/plugin_builder_modules/scrapeTypes";
+import { dataSources as initialDataSources } from "../@xten/src/plugin_builder_modules/dataSources";
+import { timePeriods as timePeriods } from "../@xten/src/plugin_builder_modules/timePeriods";
+import { displayMethods as initialDisplayMethods } from "../@xten/src/plugin_builder_modules/displayMethods";
 import { displayLoading } from "~../@xten/src/utils/display";
 import { hideTooltip } from "~../@xten/src/utils/display";
 
@@ -32,7 +34,7 @@ const chatbot = new chatBotPlugin(apiKey);
 let summarizerPlugin = new SummarizerPlugin(apiKey, true);
 
 
-const contentTypes = ["title, h1, h2, h3, h4"]
+var contentTypes = ["title, h1, h2, h3, h4"]
 
 function IndexPopup() {
 
@@ -88,11 +90,11 @@ function IndexPopup() {
   };
   
   /* TODO: Add interface for scrapper plug in */
-  const scrapperPlugin = () => {
-    const scraperPlug = new ScraperPlugin()
-    const listElements = scraperPlug.scrape(contentTypes)
-    console.log("list elements: ", listElements)
-  }
+  // const scraperPlugin = () => {
+  //   const scraperPlug = new ScraperPlugin()
+  //   const listElements = scraperPlug.scrape(contentTypes)
+  //   console.log("list elements: ", listElements)
+  // }
 
   const [customPlugins, setCustomPlugins] = useState([])
 
@@ -109,16 +111,18 @@ function IndexPopup() {
 
   /* TODO: Break down popup.tsx into components */
 
-  /* Initialie the modules for the plugin builder */
+  /* Initialize the modules for the plugin builder */
+  const [scrapeTypes, setScrapeTypes] = useState([]);
   const [aiPrompts, setAiPrompts] = useState([]);
   const [dataSources, setDataSources] = useState([]);
   const [displayMethods, setDisplayMethods] = useState([]);
 
   // Initialize local copies of modules when the component mounts
   useEffect(() => {
-    setAiPrompts([ ...initialAiPrompts ]);
-    setDataSources([ ...initialDataSources ]);
-    setDisplayMethods([ ...initialDisplayMethods ]);
+    setScrapeTypes([...inititalScrapeTypes]);
+    setAiPrompts([...initialAiPrompts]);
+    setDataSources([...initialDataSources]);
+    setDisplayMethods([...initialDisplayMethods]);
   }, []);
 
   /*------------------ AI Prompt Creation Component ------------------*/
@@ -158,7 +162,7 @@ function IndexPopup() {
         } 
       */
 
-      const newAiPrompt = {
+    const newAiPrompt = {
         /* Generate a random id for the plugin to prevent duplicates in the AiPromptList */
         id: Math.floor(Math.random() * 1000000),
         name: promptName,
@@ -168,7 +172,7 @@ function IndexPopup() {
       };
 
       setAiPrompts([...aiPrompts, newAiPrompt]);
-  
+
     };
 
     const handleSaveChat = () => {
@@ -224,26 +228,42 @@ function IndexPopup() {
 
   /*-----------------------WIP: Custom Plug in creation component-----------------------*/
 
-  const DropdownsScreen = () => {
+    const DropdownsScreen = () => {
     const [pluginName, setPluginName] = useState("")
 
     const handlePluginNameChange = (e) => {
       setPluginName(e.target.value);
     };
 
-    
+    // const [selectedMethod, setSelectedMethod] = useState("");
+    const [selectedType, setSelectedType] = useState("");
     const [selectedData, setSelectedData] = useState("");
     const [selectedPrompt, setSelectedPrompt] = useState("");
     const [selectedDisplay, setSelectedDisplay] = useState("");
-    
+    const [inputData, setInputData] = useState('');
+
+    const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedData(event.target.value);
+    };
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      setInputData(event.target.value);
+    };
+
     // Iterate over the names of the data sources from the dataSources array
     // and display them as options in the dropdown, same for prompts and displays
     const dataOption = Object.values(dataSources).map((source) => source.name);
+    const timeOption = Object.values(timePeriods).map((source) => source.name);
+    // const methodOption = Object.values(dataMethods).map((source) => source.name);
     const displayOption = Object.values(displayMethods).map((display) => display.name);
     const promptOption = Object.values(aiPrompts).map((prompt) => prompt.name);
+    const scrapeOption = Object.values(scrapeTypes).map((type) => type.name);
 
     const saveCustomPlugin = () => {
       // Get the selected data source, AI prompt, and display method
+      // const selectedMethod = dataMethods.find(method => method.name === selectedMethod);
+      // console.log(selectedMethod);
+      const selectedDataType = scrapeTypes.find(type => type.name === selectedType);
       const selectedDataSource = dataSources.find(source => source.name === selectedData);
       const selectedAiPrompt = aiPrompts.find(prompt => prompt.name === selectedPrompt);
       const selectedDisplayMethod = displayMethods.find(display => display.name === selectedDisplay);
@@ -252,11 +272,12 @@ function IndexPopup() {
       console.log('selectedDataSource: ', selectedDataSource);
       console.log('selectedAiPrompt: ', selectedAiPrompt);
       console.log('selectedDisplayMethod: ', selectedDisplayMethod);
-    
+
       // Define a new function that uses these components
-      const newPluginExecute = async function () {
+      const newPluginExecute = async function (selectedDataType) {
         // Execute the data source function and pass its output to the AI plugin
-        const data = await selectedDataSource.execute();
+        console.log("selectedDataType: ", selectedDataType)
+        const data = await selectedDataSource.execute(selectedDataType);
         // We initialize the plugin once, we need to call the customprompt call with the selectedAiPrompt.prompt
         // and the data as the prompt input
         // DEBUG 
@@ -268,18 +289,20 @@ function IndexPopup() {
           console.log(err);
         }
         // Pass the AI prompt's output to the display method
+        console.log("selected display befpre");
         selectedDisplayMethod.execute(requestOutput);
+        console.log("selected display afgter");
       };
-    
+
       const newPlugin = {
         name: pluginName,
-        execute: newPluginExecute
+        execute: newPluginExecute(selectedDataType)
       };
-    
+
       setCustomPlugins([...customPlugins, newPlugin]);
     };
 
-  
+
     return (
       <div
         style={{
@@ -290,26 +313,68 @@ function IndexPopup() {
           minWidth: 400
         }}>
         <h2>Plugin Creation Screen</h2>
-        <div style={{ 
+
+        <div style={{
           marginBottom: 8,
           display: "flex",
           flexDirection: "row"
-          }}>
+        }}>
           <select
             value={selectedData}
             onChange={(e) => {
               setSelectedData(e.target.value);
-              console.log('New selectedData: ', e.target.value);
+              console.log('New selectedMethod: ', e.target.value);
             }}
           >
-            <option value="">Select a data source ...</option>
+            <option value="">Select a data source</option>
             {dataOption.map((option, index) => (
               <option key={index} value={option}>
                 {option}
               </option>
             ))}
           </select>
+
           <span style={{ margin: "0 8px" }}>+</span>
+
+          {/* if the selected method was manual: have an input box; if scraping: dropdown; if browsing history, time period dropdown! */}
+          {selectedData === 'Scraping' ? (
+            <select
+              value={selectedType}
+              onChange={(e) => {
+                setSelectedType(e.target.value);
+                console.log('New selectedType: ', e.target.value);
+              }}
+            >
+              <option value="">Select a data type</option>
+              {scrapeOption.map((option, index) => (
+                <option key={index} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          ) : (selectedData === 'Manual') ? (
+            <input type="text" value={inputData} onChange={handleInputChange} />
+          ) :
+          (
+            <select
+            value={selectedData}
+            onChange={(e) => {
+              setSelectedType(e.target.value);
+              console.log('New selectedData: ', e.target.value);
+            }}
+          >
+            <option value="">Select a time period</option>
+            {timeOption.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          )}
+
+        <span style={{ margin: "0 8px" }}>+</span>
+        {/* </div> */}
+
           <select
             value={selectedPrompt}
             onChange={(e) => {
@@ -348,10 +413,10 @@ function IndexPopup() {
           value={pluginName}
           onChange={handlePluginNameChange}
         />
-        <button 
-        style={{ marginBottom: 8 }}
-        disabled={!pluginName || !selectedData || !selectedPrompt || !selectedDisplay}
-        onClick={saveCustomPlugin}>Save Plugin
+        <button
+          style={{ marginBottom: 8 }}
+          disabled={!pluginName || !selectedData || !selectedPrompt || !selectedDisplay}
+          onClick={saveCustomPlugin}>Save Plugin
         </button>
         <button onClick={() =>handleSetScreen('home')}>Close</button>
       </div>
@@ -365,7 +430,7 @@ function IndexPopup() {
     const [loading, setLoading] = useState(false);
     const [personality, setPersonality] = useState('');
     const [startSession, setStartSession] = useState(false);
-  
+
     useEffect(() => {
       const initializeChatbot = async () => {
         if (startSession) {
@@ -384,15 +449,15 @@ function IndexPopup() {
       };
       initializeChatbot();
     }, [startSession]);
-  
+
     const handlePersonalityChange = (e) => {
       setPersonality(e.target.value);
     };
-  
+
     const handleStartChat = () => {
       setStartSession(true);
     };
-  
+
     return (
       <div
         style={{
@@ -410,10 +475,10 @@ function IndexPopup() {
           value={personality}
           onChange={handlePersonalityChange}
         />
-        <button 
-        style={{ marginBottom: 8 }}
-        onClick={()=>handleStartChat()}
-        disabled={loading}
+        <button
+          style={{ marginBottom: 8 }}
+          onClick={() => handleStartChat()}
+          disabled={loading}
         >Start Chat</button>
         <button onClick={()=> handleSetScreen('home')}>Close</button>
       </div>
@@ -437,7 +502,7 @@ function IndexPopup() {
         setLoading(false);
       });
     }, []);
-  
+    
     useEffect(() => {
       // Store chat history whenever it changes
       chrome.storage.local.set({ 'chatHistory': chatHistory });
@@ -446,13 +511,15 @@ function IndexPopup() {
     const handleUserInputChange = (e) => {
       setUserInput(e.target.value);
     };
-  
+
     const handleSend = async () => {
       setLoading(true);
       try {
         // Add the user's input to the chat history to be displayed locally
         setUserInput('');
+
         setChatHistory(prevHistory => [...prevHistory, {"role" : "user", "content": userInput}]);
+
         let response = await chatbot.askQuestion(userInput);
         setChatHistory(prevHistory => [...prevHistory, {"role" : "system", "content": response}]);
         setLoading(false);
@@ -470,7 +537,7 @@ function IndexPopup() {
       setLoading(false);
       handleSetScreen('home');
     };
-  
+
     return (
       <div
         style={{
@@ -504,19 +571,21 @@ function IndexPopup() {
           value={userInput}
           onChange={handleUserInputChange}
         />
+        
         <button 
           style={{ 
             marginBottom: 8,
            
            }}
+
           onClick={handleSend}
           disabled={loading || !userInput}
         >
           Send
         </button>
-        <button 
+        <button
           style={{ marginBottom: 8 }}
-          onClick={()=> handeClearChat()}>Close</button>
+          onClick={() => handeClearChat()}>Close</button>
       </div>
     )
   }
@@ -550,9 +619,9 @@ function IndexPopup() {
   const executeCustomPlugin = async (plugin) => {
     console.log("Executing custom plugin...");
     console.log(plugin);
-    plugin.execute();
+    plugin.execute;
   };
-  
+
   /*-----------------------Main popup component-----------------------*/
 
   console.log(xten);
@@ -581,6 +650,7 @@ function IndexPopup() {
             </a>
             sion!
           </h2>
+          
           <button 
           style={{ 
             marginBottom: 8,
