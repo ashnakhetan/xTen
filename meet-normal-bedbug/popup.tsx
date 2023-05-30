@@ -6,6 +6,8 @@ import { scrapePage } from "../@xten/src/utils/scrapePage"
 import { saveAs } from "file-saver";
 import OpenAIPLugin from "../@xten/src/core/OpenAIPlugin"
 import { SummarizerPlugin } from "../@xten/src/plugins/summarizer/summarizerPlugin";
+import './popup.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Plugin builder modules, we want to be able to dynamically add to them in the future
 import { aiPrompts as initialAiPrompts } from "../@xten/src/plugin_builder_modules/aiPrompts";
@@ -188,7 +190,7 @@ function IndexPopup() {
           padding: 16,
           minHeight: 400,
           minWidth: 400,
-          fontFamily: "monospace"
+          fontFamily: "Poppin"
         }}>
         <h2>Create AI Prompt</h2>
         <input
@@ -309,7 +311,7 @@ function IndexPopup() {
           display: "flex",
           flexDirection: "column",
           padding: 16,
-          fontFamily: "monospace",
+          fontFamily: "Poppins",
           minWidth: 400
         }}>
         <h2>Plugin Creation Screen</h2>
@@ -635,7 +637,8 @@ function IndexPopup() {
             padding: 16,
             minHeight: 400,
             minWidth: 400,
-            fontFamily: "monospace",
+            fontFamily: "Poppins",
+            fontWeight:500,
             backgroundColor: "#faf0f0" // light Carnation color for the background
           }}
         >
@@ -667,7 +670,7 @@ function IndexPopup() {
           Create AI Prompt
         </button>
           
-          <button 
+          <button
           style={{ 
             marginBottom: 8,
             backgroundColor: isButtonHovered_2 ? "#f95d6a" : "#ffadad", // change color on hover
