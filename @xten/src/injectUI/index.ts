@@ -70,7 +70,7 @@ class Inject {
     console.log(imageIds);;
     return imageIds;
   }
-  
+
 
   // Custom functions for getting elements
   private querySelectorFn = (selector) => document.querySelector(selector);
@@ -102,20 +102,217 @@ class Inject {
     if (options.elem) this.renderElem(options.elem)
     if (options.config) this.configure(options.config)
   }
+
+  // Replace all images in a web page with JSX element
+  replaceImage = (elem: JSX.Element) => {
+    // Retrieve all images in the webpage
+    const images = this.getAllImageIds();
+
+    for (let i = 0; i < images.length; i++) {
+      const imageId: string = images[i];
+      const imageElement: HTMLElement = document.getElementById(imageId);
+      const parentElement: HTMLElement = imageElement.parentElement;
+      parentElement.removeChild(imageElement);
+      this.appendChild(elem, parentElement.id);
+    }
+
+  }
+
+  // Appends JSX element to component with given id
+  appendChild = (elem: JSX.Element, id: string) => {
+    const parentElement: HTMLElement = document.getElementById(id);
+    if (parentElement) {
+      // validating whether parent element exists
+      const root = createRoot(parentElement);
+      root.render(elem);
+    }
+  }
+
+  // Insert an element before a certain element
+  insertBeforeElement = (parent: HTMLElement, succeedingElement: HTMLElement, child: HTMLElement) => {
+    parent.insertBefore(child, succeedingElement);
+  }
+
+  // Insert an element as the first child of another element
+  insertAsFirst = (parent: HTMLElement, child: HTMLElement) => {
+    this.insertBeforeElement(parent, parent.firstChild as HTMLElement, child);
+  }
+
+  // Change background color (given hex as input) of element with given id
+  backgroundColorChange = (id: string, color: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.style.backgroundColor = color;
+    }
+  }
+
+  // Modify text content of an element with a given id
+  modifyText = (id: string, text: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.textContent = text;
+    }
+  }
+
+  // Remove an element from the DOM
+  removeElement = (id: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element && element.parentNode) {
+      // validating whether element and its parent exists
+      element.parentNode.removeChild(element);
+    }
+  }
+
+  // Toggle visibility of element with given id
+  toggleDisplay = (id: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.style.display = (element.style.display === 'block') ? 'none' : 'block';
+    }
+  }
+
+  // Toggle enable/disable of button with given id
+  toggleButton = (id: string) => {
+    const element: HTMLButtonElement = document.getElementById(id) as HTMLButtonElement;
+    if (element) {
+      // validating whether element exists
+      element.disabled = !element.disabled;
+    }
+  }
+
+  // Add a CSS class to an element
+  addClass = (id: string, className: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.classList.add(className);
+    }
+  }
+
+  // Remove a CSS class from an element
+  removeClass = (id: string, className: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.classList.remove(className);
+    }
+  }
+
+  // Add an event listener to an element
+  addEventListener = (id: string, event: string, callback: () => void) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.addEventListener(event, callback);
+    }
+  }
+
+  // Remove an event listener from an element
+  removeEventListener = (id: string, event: string, callback: () => void) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.removeEventListener(event, callback);
+    }
+  }
+
+  // Set the inner HTML of an element
+  setInnerHTML = (id: string, html: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.innerHTML = html;
+    }
+  }
+
+  // Replace element with given id with JSX element
+  replaceElement = (elem: JSX.Element, id: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      const parentElement: HTMLElement = element.parentElement;
+      const elementToRemove: HTMLElement = document.getElementById(id);
+      parentElement.removeChild(elementToRemove);
+      this.appendChild(elem, parentElement.id);
+    }
+  }
+
+  // Set the value of an input element
+  setValue = (id: string, value: string) => {
+    const inputElement: HTMLInputElement = document.getElementById(id) as HTMLInputElement;
+    if (inputElement) {
+      // validating whether element exists
+      inputElement.value = value;
+    }
+  }
+
+  // Set an attribute on an element
+  setAttribute = (id: string, attribute: string, value: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.setAttribute(attribute, value);
+    }
+  }
+
+  // Scroll to a specific position within an element
+  scrollToPosition = (id: string, x: number, y: number) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.scrollTo(x, y);
+    }
+  }
+
+  // Set the width of an element
+  setWidth = (id: string, width: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.style.width = width;
+    }
+  }
+
+  // Set the height of an element
+  setHeight = (id: string, height: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.style.height = height;
+    }
+  }
+
+  // Set the position of an element
+  setPosition = (id: string, position: string) => {
+    const element: HTMLElement = document.getElementById(id);
+    if (element) {
+      // validating whether element exists
+      element.style.position = position;
+    }
+  }
+
+  // Set the value of a checkbox or radio input element
+  setCheckboxValue = (id: string, value: boolean) => {
+    const inputElement: HTMLInputElement = document.getElementById(id) as HTMLInputElement;
+    if (inputElement && inputElement.type === 'checkbox') {
+      // validating whether element exists and it's a checkbox input
+      inputElement.checked = value;
+    }
+  }
+
+  // Set the value of a select element
+  setSelectValue = (id: string, value: string) => {
+    const selectElement: HTMLSelectElement = document.getElementById(id) as HTMLSelectElement;
+    if (selectElement) {
+      // validating whether element exists
+      selectElement.value = value;
+    }
+  }
+
 }
-
-// Replace all images in a web page with JSX element
-replaceImage = (elem: JSX.Element) => {
-  // Retrieve all images in the webpage
-  const images = document.getElementsByTagName('img');
-  for (let i = 0; i < images.length; i++) {
-    this.render(elem, images[i]);
-  });
-}
-
-// Adding a moto, chat box
-
-// 
 
 export type Injection = typeof Injector;
 
