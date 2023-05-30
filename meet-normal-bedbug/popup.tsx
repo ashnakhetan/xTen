@@ -27,7 +27,7 @@ const chatGptPlugin = new OpenAIPLugin(apiKey);
 const chatbot = new chatBotPlugin(apiKey);
 
 
-const contentTypes = ["title, h1, h2, h3, h4"]
+var contentTypes = ["title, h1, h2, h3, h4"]
 
 function IndexPopup() {
   const [screen, setScreen] = useState("home");
@@ -229,7 +229,9 @@ function IndexPopup() {
           console.log(err);
         }
         // Pass the AI prompt's output to the display method
+        console.log("selected display befpre");
         selectedDisplayMethod.execute(requestOutput);
+        console.log("selected display afgter");
       };
 
       const newPlugin = {
@@ -537,7 +539,7 @@ function IndexPopup() {
     /* TODO: Replace this with the actual code to execute the plugin and display the response */
     console.log("Executing custom plugin...");
     console.log(plugin);
-    plugin.execute(scrapeTypes[0]);
+    plugin.execute;
   };
 
   /*-----------------------Main popup component-----------------------*/

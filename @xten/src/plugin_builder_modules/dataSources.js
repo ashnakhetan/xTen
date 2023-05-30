@@ -26,8 +26,8 @@ export const dataSources = [
         description: 'Collect specific information from the page.',
         // This is the function that will be called when the user clicks on the dataSource
         execute: async function (dataType) {
-            console.log('dataMethod2 was clicked');
-            console.log(dataType.tags);
+            console.log('we are inside dataSources');
+            // console.log("tags:", dataType.tags);
             /* Add a wrapper to retreive this as text*/
             const scraperPlug = new ScraperPlugin()
             return scraperPlug.scrape(dataType.tags);
