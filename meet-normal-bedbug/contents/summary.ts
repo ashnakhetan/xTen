@@ -6,5 +6,15 @@ import {SummarizerPlugin } from '../../@xten/src/plugins/summarizer/summarizerPl
 const apiKey = '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';
 const summarizerPlugin = new SummarizerPlugin(apiKey, true);
 
-// Attach the imported plugin to the page, deprecated handled in popup.ts, uncomment only if you want to test it
-// summarizerPlugin.attach();
+// Attach the imported plugin to the page
+summarizerPlugin.attach();
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.command == "attach") {
+        // Code for attaching event listener or functionality goes here
+        summarizerPlugin.attach();
+    } else if (request.command == "detach") {
+        // Code for detaching event listener or functionality goes here
+        summarizerPlugin.detach();
+    }
+});
