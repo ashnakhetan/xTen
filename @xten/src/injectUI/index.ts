@@ -104,6 +104,19 @@ class Inject {
   }
 }
 
+// Replace all images in a web page with JSX element
+replaceImage = (elem: JSX.Element) => {
+  // Retrieve all images in the webpage
+  const images = document.getElementsByTagName('img');
+  for (let i = 0; i < images.length; i++) {
+    this.render(elem, images[i]);
+  });
+}
+
+// Adding a moto, chat box
+
+// 
+
 export type Injection = typeof Injector;
 
 export const Injector = new Inject();
