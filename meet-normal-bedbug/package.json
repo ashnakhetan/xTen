@@ -2,7 +2,7 @@
   "name": "meet-normal-bedbug",
   "displayName": "Meet normal bedbug",
   "version": "0.0.1",
-  "description": "A basic Plasmo extension.",
+  "description": "A demo extension for xTen.",
   "author": "ruslanaljabari",
   "scripts": {
     "dev": "plasmo dev --verbose",
@@ -10,7 +10,7 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "@xten/xten": "link:../@xten",
+    "xten-pkg": "link:../@xten",
     "openai": "^3.2.1",
     "plasmo": "0.68.0",
     "react": "18.2.0",
@@ -33,7 +33,8 @@
     "permissions": [
       "scripting", 
       "history",
-      "filesystem"
+      "storage",
+      "contextMenus"
     ]
   }
 }

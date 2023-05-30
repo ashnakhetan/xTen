@@ -5,10 +5,11 @@ Open AI API Plugin, used to interact with the OpenAI API
 and perform various tasks such as summarizing text. 
 Add more tasks by generating more prompts for functions.
 */
+
 export default class OpenAIPLugin {
     constructor(apiKey) {
       this.apiKey = apiKey;
-      this.apiEndpoint =     'https://api.openai.com/v1/completions';
+      this.apiEndpoint     = 'https://api.openai.com/v1/completions';
       this.apiChatEndpoint = 'https://api.openai.com/v1/chat/completions';
       this.apiEditEndpoint = 'https://api.openai.com/v1/edits';
       this.configuration = new Configuration({ apiKey });
@@ -47,6 +48,7 @@ export default class OpenAIPLugin {
         console.log(jsonResponse);
         return jsonResponse.choices[0].text;
       }
+      
     // More OpenAI API functions
     // Get list of avilable models
     async getAvailableModels() {

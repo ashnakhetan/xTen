@@ -11,6 +11,18 @@ const getOverlayAnchorList: PlasmoGetOverlayAnchorList = async (point) => docume
 
 type HookPoint = FC<PlasmoCSUIProps>;
 
+type injectionOptions = {
+  config?: PlasmoCSConfig
+  byId?: string
+  byQuery?: string
+  elem?: JSX.Element
+  hookPoint?: HookPoint
+  getOverlayAnchor?: PlasmoGetOverlayAnchor
+  getOverlayAnchorList?: PlasmoGetOverlayAnchorList
+  mountShadowHost?: PlasmoMountShadowHost
+  createShadowRoot?: PlasmoCreateShadowRoot
+};
+
 class Inject {
   config: PlasmoCSConfig
   render: PlasmoRender
@@ -59,8 +71,15 @@ class Inject {
       root.render(elem)
     }
   }
+
+  replaceUI = (options: injectionOptions) => {
+    if (options.byId) this.injectById(options.byId)
+    if (options.byQuery) this.injectByQuery(options.byQuery)
+    if (options.elem) this.renderElem(options.elem)
+    if (options.config) this.configure(options.config)
+  }
 }
 
 export type Injection = typeof Injector;
 
-export const Injector = new Inject()
+export const Injector = new Inject();

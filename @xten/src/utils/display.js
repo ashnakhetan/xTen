@@ -1,4 +1,3 @@
-
 // This function is used to display a tooltip or modal with the given text
 
 export function displayText(text, x, y) {
