@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import xten from "@xten/xten";
+// import xten from "@xten/xten";
 import { urlRecommenderPlugin } from "../@xten/src/plugins/recommender/urlRecommenderPlugin";
 import { ScraperPlugin } from "../@xten/src/plugins/scraper/scraperPlugin"
 import { scrapePage } from "../@xten/src/utils/scrapePage"
@@ -37,8 +37,9 @@ const contentTypes = ["title, h1, h2, h3, h4"]
 function IndexPopup() {
 
   // Sumarizer plugin
-  const [smartSummarizer, setSmartSummarizer] = useState(false);
+  const [smartSummarizer, setSmartSummarizer] = useState(true);
 
+  // Use effect to set the smart summarizer state
   useEffect(() => {
     chrome.storage.local.get(['smartSummarizer'], function(result) {
       setSmartSummarizer(!!result.smartSummarizer);
@@ -47,21 +48,26 @@ function IndexPopup() {
   
   function handleSmartSummarizerToggle() {
     setSmartSummarizer((prevState) => {
+      console.log("Smart Summarizer toggle, current state: ", prevState);
+      console.log("Smart Summarizer toggle, new state: ", !prevState)
+
       const newState = !prevState;
   
       // If the new state is true, attach the plugin, otherwise detach
       if (newState) {
-        summarizerPlugin.attach();
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, {command: "attach"});
+      });
       } else {
-        summarizerPlugin.detach();
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, {command: "detach"});
+      });
       }
-  
+      // Set local storage
       chrome.storage.local.set({ 'smartSummarizer': newState });
-  
       return newState;
     });
   }
-
   // Main screen state
   const [screen, setScreen] = useState("home");
   // Main screen buttons
@@ -70,7 +76,6 @@ function IndexPopup() {
   const [isButtonHovered_2, setIsButtonHovered_2] = useState(false);
   const [isButtonHovered_3, setIsButtonHovered_3] = useState(false);
   const [isButtonHovered_4, setIsButtonHovered_4] = useState(false);
-  const [isButtonHovered_5, setIsButtonHovered_5] = useState(false);
 
 
   useEffect(() => {
@@ -555,7 +560,7 @@ function IndexPopup() {
   
   /*-----------------------Main popup component-----------------------*/
 
-  console.log(xten);
+  // console.log(xten);
   return (
     <div>
       {screen === 'home' && (

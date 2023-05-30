@@ -34,7 +34,9 @@
       "scripting", 
       "history",
       "storage",
-      "contextMenus"
+      "contextMenus",
+      "activeTab", 
+      "tabs"
     ]
   }
 }
