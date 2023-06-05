@@ -1,6 +1,7 @@
 // This function is used to display a tooltip or modal with the given text
 
 export function displayText(text, x, y) {
+  console.log(text);
   // Create a tooltip or modal with the summarized text
   /* if no coordinates are provided grab the center of the page */
   if (!x || !y) {

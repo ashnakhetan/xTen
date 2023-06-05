@@ -30,7 +30,7 @@ export async function collectBrowsingHistoryDay() {
     const history = await searchHistory({
         text: '',
         startTime: (new Date()).getTime() - day,
-        maxResults: 1000000000
+        maxResults: 10
     });
     return history;
 }

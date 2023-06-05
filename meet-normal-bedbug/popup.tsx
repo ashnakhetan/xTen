@@ -36,7 +36,7 @@ const chatbot = new chatBotPlugin(apiKey);
 let summarizerPlugin = new SummarizerPlugin(apiKey, true);
 
 
-var contentTypes = ["title, h1, h2, h3, h4"]
+// var contentTypes = ["title, h1, h2, h3, h4"]
 
 function IndexPopup() {
 
@@ -278,7 +278,7 @@ function IndexPopup() {
       // Define a new function that uses these components
       const newPluginExecute = async function (selectedDataType) {
         // Execute the data source function and pass its output to the AI plugin
-        console.log("selectedDataType: ", selectedDataType)
+        console.log("selectedDataType: ", selectedDataType);
         const data = await selectedDataSource.execute(selectedDataType);
         // We initialize the plugin once, we need to call the customprompt call with the selectedAiPrompt.prompt
         // and the data as the prompt input
