@@ -37,7 +37,7 @@ const contentTypes = ["title, h1, h2, h3, h4"]
 function IndexPopup() {
 
   // Sumarizer plugin
-  const [smartSummarizer, setSmartSummarizer] = useState(true);
+  const [smartSummarizer, setSmartSummarizer] = useState(false);
 
   // Use effect to set the smart summarizer state
   useEffect(() => {
@@ -87,10 +87,23 @@ function IndexPopup() {
     });
   }, []);
 
+  // Set the screen in local storage when it changes
+
   const handleSetScreen = (screen) => {
     setScreen(screen);
     chrome.storage.local.set({ 'screen': screen });
   };
+
+  const [customPlugins, setCustomPlugins] = useState([]);
+
+  // Fetch the list of custom plugins from chrome storage when the component is loaded
+  useEffect(() => {
+    chrome.storage.local.get(['customPlugins'], function(result) {
+      if (result.customPlugins) {
+        setCustomPlugins(result.customPlugins);
+      }
+    });
+  }, []); 
   
   /* TODO: Add interface for scrapper plug in */
   const scrapperPlugin = () => {
@@ -98,8 +111,6 @@ function IndexPopup() {
     const listElements = scraperPlug.scrape(contentTypes)
     console.log("list elements: ", listElements)
   }
-
-  const [customPlugins, setCustomPlugins] = useState([])
 
   /* TODO: Add backend for custom plugins
    * user plugin structure:
@@ -148,9 +159,6 @@ function IndexPopup() {
 
       // const blob = new Blob([fileContent], { type: "text/javascript;charset=utf-8" });
       // const file = new File([blob], fileName, { type: "text/javascript;charset=utf-8" });
-
-      // saveAs(file);
-
 
       /* Add the ai prompt to the list of ai modules plugins following this structure */
       /*
@@ -241,6 +249,7 @@ function IndexPopup() {
     const [selectedPrompt, setSelectedPrompt] = useState("");
     const [selectedDisplay, setSelectedDisplay] = useState("");
     
+    
     // Iterate over the names of the data sources from the dataSources array
     // and display them as options in the dropdown, same for prompts and displays
     const dataOption = Object.values(dataSources).map((source) => source.name);
@@ -252,20 +261,11 @@ function IndexPopup() {
       const selectedDataSource = dataSources.find(source => source.name === selectedData);
       const selectedAiPrompt = aiPrompts.find(prompt => prompt.name === selectedPrompt);
       const selectedDisplayMethod = displayMethods.find(display => display.name === selectedDisplay);
-
-      //DEBUG
-      console.log('selectedDataSource: ', selectedDataSource);
-      console.log('selectedAiPrompt: ', selectedAiPrompt);
-      console.log('selectedDisplayMethod: ', selectedDisplayMethod);
     
       // Define a new function that uses these components
       const newPluginExecute = async function () {
         // Execute the data source function and pass its output to the AI plugin
         const data = await selectedDataSource.execute();
-        // We initialize the plugin once, we need to call the customprompt call with the selectedAiPrompt.prompt
-        // and the data as the prompt input
-        // DEBUG 
-        console.log('data: ', data);
         try {
           var requestOutput = await chatGptPlugin.customPrompt(selectedAiPrompt.text, data);
         }
@@ -280,9 +280,18 @@ function IndexPopup() {
         name: pluginName,
         execute: newPluginExecute
       };
-    
-      setCustomPlugins([...customPlugins, newPlugin]);
+      // Update the state with the new plugin
+      console.log("previous custom plugins: ", customPlugins);
+      const updatedCustomPlugins = [...customPlugins, newPlugin];
+      console.log("updated custom plugins: ", updatedCustomPlugins);
+      setCustomPlugins(updatedCustomPlugins);
+
+      // Store the updated list in local storage
+      // localStorage.setItem('customPlugins', JSON.stringify(updatedCustomPlugins));
+      chrome.storage.local.set({ customPlugins: updatedCustomPlugins });
+  
     };
+    
 
   
     return (
@@ -557,6 +566,16 @@ function IndexPopup() {
     console.log(plugin);
     plugin.execute();
   };
+
+  const deleteCustomPlugin = async (index) => {
+    // Remove the plugin from the state
+    const newCustomPlugins = [...customPlugins];
+    newCustomPlugins.splice(index, 1);
+    setCustomPlugins(newCustomPlugins);
+  
+    // Update the storage
+    chrome.storage.local.set({ 'customPlugins': newCustomPlugins });
+  };
   
   /*-----------------------Main popup component-----------------------*/
 
@@ -589,6 +608,7 @@ function IndexPopup() {
           <button 
           style={{ 
             marginBottom: 8,
+            padding: "3px 10px",
             backgroundColor: isButtonHovered_1 ? "#f95d6a" : "#ffadad", // change color on hover
             color: "#ffffff" // White color for the text
           }}
@@ -605,6 +625,7 @@ function IndexPopup() {
           <button 
           style={{ 
             marginBottom: 8,
+            padding: "3px 10px",
             backgroundColor: isButtonHovered_2 ? "#f95d6a" : "#ffadad", // change color on hover
             color: "#ffffff" // White color for the text
           }}
@@ -619,6 +640,7 @@ function IndexPopup() {
           <button 
           style={{ 
             marginBottom: 8,
+            padding: "3px 10px",
             backgroundColor: isButtonHovered_3 ? "#f95d6a" : "#ffadad", // change color on hover
             color: "#ffffff" // White color for the text
           }}
@@ -633,6 +655,7 @@ function IndexPopup() {
           <button
           style={{ 
             marginBottom: 8,
+            padding: "3px 10px",
             backgroundColor: isButtonHovered_4 ? "#f95d6a" : "#ffadad", // change color on hover
             color: "#ffffff" // White color for the text
           }}
@@ -668,19 +691,57 @@ function IndexPopup() {
             ))}
           </div>
 
-
           <div>
-            <h3>Custom Plugins:</h3>
-            {customPlugins.map((plugin, index) => (
-              <div key={index}>
-                <button
-                  style={{ marginBottom: 8 }}
-                  onClick={() => executeCustomPlugin(plugin)}>
-                  {plugin.name}
-                </button>
-              </div>
-            ))}
-          </div>
+          <h3>Custom Plugins:</h3>
+          {customPlugins.map((plugin, index) => (
+            <div
+              key={index}
+              style={{
+                display: "flex",
+                // only align the buttons to the right
+                alignItems: "center",
+                // Place the buttons to the right
+                justifyContent: "space-between",
+                marginBottom: 8
+              }}
+            >
+              <span style={{ marginRight: 8}}>{plugin.name}</span>
+
+              <button
+                onClick={() => executeCustomPlugin(plugin)}
+                style={{
+                  marginRight: 8,
+                  marginLeft: 250,
+                  backgroundColor: "#f95d6a",
+                  color: "#ffffff",
+                  padding: "3px 10px",
+                  // border: "none",
+                  cursor: "pointer"
+                }}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f95d6a")}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#ffadad")}
+              >
+                Execute
+              </button>
+
+              <button
+                onClick={() => deleteCustomPlugin(index)}
+                style={{
+                  backgroundColor: "#f95d6a",
+                  color: "#ffffff",
+                  padding: "3px 10px",
+                  // border: "none",
+                  cursor: "pointer"
+                }}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f95d6a")}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#d43f00")}
+              >
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
+
 
           <div
           style={{
