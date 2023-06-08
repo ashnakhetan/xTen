@@ -30,11 +30,18 @@
     "host_permissions": [
       "https://*/*"
     ],
+    "background": {
+      "scripts": ["contents/summary.ts"],
+      "persistent": true
+    },
     "permissions": [
+      "background",
       "scripting", 
       "history",
       "storage",
-      "contextMenus"
+      "contextMenus",
+      "activeTab", 
+      "tabs"
     ]
   }
 }
