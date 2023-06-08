@@ -30,7 +30,8 @@ export async function collectBrowsingHistoryDay() {
     const history = await searchHistory({
         text: '',
         startTime: (new Date()).getTime() - day,
-        maxResults: 1000000000
+        // maxResults: 1000000000
+        maxResults:20
     });
     return history;
 }
@@ -40,7 +41,8 @@ export async function collectBrowsingHistoryWeek() {
     const history = await searchHistory({
         text: '',
         startTime: (new Date()).getTime() - week,
-        maxResults: 1000000000
+        // maxResults: 1000000000
+        maxResults:10
     });
     return history;
 }
@@ -50,7 +52,8 @@ export async function collectBrowsingHistoryMonth() {
     const history = await searchHistory({
         text: '',
         startTime: (new Date()).getTime() - month,
-        maxResults: 1000000000
+        // maxResults: 1000000000
+        maxResults:20
     });
     return history;
 }
@@ -60,7 +63,8 @@ export async function collectBrowsingHistoryYear() {
     const history = await searchHistory({
         text: '',
         startTime: (new Date()).getTime() - year,
-        maxResults: 1000000000
+        // maxResults: 1000000000
+        maxResults:20
     });
     return history;
 }
