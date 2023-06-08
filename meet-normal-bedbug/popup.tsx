@@ -94,17 +94,29 @@ function IndexPopup() {
     chrome.storage.local.set({ 'screen': screen });
   };
 
+  // get the stored custom plugins by default when the component is loaded
+  // Array of loading states for each plugin
   const [customPlugins, setCustomPlugins] = useState([]);
+  const [loadingStates, setLoadingStates] = useState([]);
 
-  // Fetch the list of custom plugins from chrome storage when the component is loaded
   useEffect(() => {
     chrome.storage.local.get(['customPlugins'], function(result) {
       if (result.customPlugins) {
-        setCustomPlugins(result.customPlugins);
+        const parsedPlugins = JSON.parse(result.customPlugins);
+        console.log("parsed plugins: ", parsedPlugins);
+        setCustomPlugins(parsedPlugins);
+        // Initialize the loading states
+        const initialLoadingStates = parsedPlugins.map(() => {
+          return false;
+        });
+        setLoadingStates(initialLoadingStates); // <- This is the part that was missing
       }
     });
-  }, []); 
-  
+}, []);
+
+  useEffect(() => {
+    console.log("loadingStates updated:", loadingStates);
+  }, [loadingStates]);
   /* TODO: Add interface for scrapper plug in */
   const scrapperPlugin = () => {
     const scraperPlug = new ScraperPlugin()
@@ -257,39 +269,26 @@ function IndexPopup() {
     const promptOption = Object.values(aiPrompts).map((prompt) => prompt.name);
 
     const saveCustomPlugin = () => {
-      // Get the selected data source, AI prompt, and display method
-      const selectedDataSource = dataSources.find(source => source.name === selectedData);
-      const selectedAiPrompt = aiPrompts.find(prompt => prompt.name === selectedPrompt);
-      const selectedDisplayMethod = displayMethods.find(display => display.name === selectedDisplay);
-    
-      // Define a new function that uses these components
-      const newPluginExecute = async function () {
-        // Execute the data source function and pass its output to the AI plugin
-        const data = await selectedDataSource.execute();
-        try {
-          var requestOutput = await chatGptPlugin.customPrompt(selectedAiPrompt.text, data);
-        }
-        catch (err) {
-          console.log(err);
-        }
-        // Pass the AI prompt's output to the display method
-        selectedDisplayMethod.execute(requestOutput);
-      };
-    
+      // Get the names of the selected data source, prompt, and display method
+      const selectedDataSource = dataSources.find((source) => source.name === selectedData);
+      const selectedAiPrompt = aiPrompts.find((prompt) => prompt.name === selectedPrompt);
+      const selectedDisplayMethod = displayMethods.find((display) => display.name === selectedDisplay);
+      
       const newPlugin = {
         name: pluginName,
-        execute: newPluginExecute
+        dataSourceName : selectedDataSource.name,
+        aiPromptName: selectedAiPrompt.name,
+        displayMethodName: selectedDisplayMethod.name,
+        loading: false
       };
+
       // Update the state with the new plugin
       console.log("previous custom plugins: ", customPlugins);
       const updatedCustomPlugins = [...customPlugins, newPlugin];
       console.log("updated custom plugins: ", updatedCustomPlugins);
       setCustomPlugins(updatedCustomPlugins);
-
       // Store the updated list in local storage
-      // localStorage.setItem('customPlugins', JSON.stringify(updatedCustomPlugins));
-      chrome.storage.local.set({ customPlugins: updatedCustomPlugins });
-  
+      chrome.storage.local.set({ customPlugins: JSON.stringify(updatedCustomPlugins) });
     };
     
 
@@ -561,10 +560,36 @@ function IndexPopup() {
     setLoading(false);
   };
 
-  const executeCustomPlugin = async (plugin) => {
-    console.log("Executing custom plugin...");
-    console.log(plugin);
-    plugin.execute();
+  const executeCustomPlugin = async (plugin, index) => {
+      console.log(plugin);
+
+      // Set the loading state for this plugin to true
+      setLoadingStates({ ...loadingStates, [index]: true });
+
+      const dataSource = dataSources.find(d => d.name === plugin.dataSourceName);
+      console.log("Data source:");
+      console.log(dataSource);
+      const aiPrompt = aiPrompts.find(ai => ai.name === plugin.aiPromptName);
+      console.log("AI Prompt:");
+      console.log(aiPrompt);
+      const displayMethod = displayMethods.find(d => d.name === plugin.displayMethodName);
+      // execute the data extraction function
+      const data = await dataSource.execute();
+      try {
+        var requestOutput = await chatGptPlugin.customPrompt(aiPrompt.text, data);
+        displayMethod.execute(requestOutput);
+      }
+      catch (err) {
+        console.log(err);
+      }
+      // After executing the plugin
+      console.log("Setting loading state to false");
+      console.log("loading states before setting:");
+      console.log(loadingStates);
+      // After executing the plugin, set the loading state to false
+      setLoadingStates({ ...loadingStates, [index]: false });
+      console.log("loading states after setting:");
+      console.log(loadingStates);
   };
 
   const deleteCustomPlugin = async (index) => {
@@ -572,7 +597,6 @@ function IndexPopup() {
     const newCustomPlugins = [...customPlugins];
     newCustomPlugins.splice(index, 1);
     setCustomPlugins(newCustomPlugins);
-  
     // Update the storage
     chrome.storage.local.set({ 'customPlugins': newCustomPlugins });
   };
@@ -650,7 +674,7 @@ function IndexPopup() {
           onClick={()=> {
             suggestWebsites();
             setIsButtonHovered_3(false);
-          }}>Suggest Websites</button>
+          }}>{loading? "Loading..." : "Suggest Websites"}</button>
 
           <button
           style={{ 
@@ -708,33 +732,40 @@ function IndexPopup() {
               <span style={{ marginRight: 8}}>{plugin.name}</span>
 
               <button
-                onClick={() => executeCustomPlugin(plugin)}
+                onClick={() => executeCustomPlugin(plugin, index)}
+                // disabled if loadingplugin index is set to true
+                disabled={loadingStates[index]}
                 style={{
-                  marginRight: 8,
-                  marginLeft: 250,
-                  backgroundColor: "#f95d6a",
-                  color: "#ffffff",
-                  padding: "3px 10px",
-                  // border: "none",
-                  cursor: "pointer"
+                    marginRight: 8,
+                    marginLeft: 250,
+                    backgroundColor:  loadingStates[index]? "#ccc" : "#ffadad", // Change color if loading
+                    color: "#ffffff",
+                    padding: "3px 10px",
+                    cursor:  loadingStates[index]? "not-allowed" : "pointer" // Change cursor style while loading.
                 }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f95d6a")}
-                onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#ffadad")}
-              >
-                Execute
-              </button>
+                onMouseEnter={e =>
+                    ! loadingStates[index] &&
+                    (e.currentTarget.style.backgroundColor = "#f95d6a")
+                }
+                onMouseLeave={e =>
+                    !loadingStates[index] &&
+                    (e.currentTarget.style.backgroundColor = "#ffadad")
+                }
+            >
+                {loadingStates[index]? "Loading..." : "Execute"} {}
+            </button>
 
               <button
                 onClick={() => deleteCustomPlugin(index)}
                 style={{
-                  backgroundColor: "#f95d6a",
+                  backgroundColor: "#ffadad",
                   color: "#ffffff",
                   padding: "3px 10px",
                   // border: "none",
                   cursor: "pointer"
                 }}
-                onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#f95d6a")}
-                onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#d43f00")}
+                onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#d43f00")}
+                onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#ffadad")}
               >
                 Delete
               </button>
