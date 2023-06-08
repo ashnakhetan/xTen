@@ -9,7 +9,7 @@ export class ScraperPlugin {
   scrape(contentTypes) {
     let listElements = new Array();
     chrome.tabs.query({ active: true, currentWindow: true }, listElements = tabs => scrapePage(tabs, contentTypes));
-    // console.log(listElements);
+    console.log(listElements);
     return listElements;
   }
 }
