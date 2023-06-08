@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+.card {
+    width: 300px;
+    /* border: 1px solid #ccc; */
+    /* border-radius: 5px; */
+    padding: 10px;
+    margin: 10px;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    /* padding: 10px; */
+    background-color: #f2f2f2;
+  }
+  
+  .logo {
+    width: 50px;
+    height: 50px;
+    /* Add your logo image URL here */
+    /* background-image: url('logo.png'); */
+    background-size: cover;
+  }
+  
+  .title {
+    margin-left: 15px;
+    /* align-items: center; */
+    font-size: 18px;
+    font-weight: bold;
+    font-family:"Poppins";
+  }
+  
+  .text-section {
+    padding: 20px;
+    font-family:"Poppins";
+  }
+  
+  .box {
+    height: 100px;
+    background-color: #f2f2f2;
+    border-color: black;
+    border-radius: 5px;
+    border-width: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .add-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    /* align-items: center; */
+    justify-content: flex-end;
+  }
+
+  .try-chatbot {
+    background-color: #aeaaaa;
+    color: #0d0d0d;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    /* align-items: center; */
+    justify-content: flex-end;
+  }
+  
