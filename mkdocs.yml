@@ -8,9 +8,9 @@ nav:
   - Problem description and design criteria : problem.md
   - Software outline: outline.md 
   - Functions:
-    - Summarize: docs/plugins/summarizer
-    - Recommender: docs/plugins/recommender
+    - Summarize: plugins/summarizer/README.md
+    - Recommender: plugins/recommender/README.md
     - OpenAI Plugin:
-      - Overview: docs/plugins/openAiPlugins
-      - Plugin Builder: docs/plugins/openAiPlugins/plugin_builder
-    - Chatbot: docs/plugins/chatbot
+      - Overview: plugins/openAiPlugins/README.md
+      - Plugin Builder: plugins/openAiPlugins/plugin_builder/README.md
+    - Chatbot: plugins/chatbot/README.md
