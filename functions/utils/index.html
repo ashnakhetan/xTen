@@ -11,21 +11,17 @@
       
       
       
-        <link rel="prev" href="../../outline/">
-      
-      
-        <link rel="next" href="../scraper/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.9">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
     
     
       
-        <title>Summarize - xTen documentation</title>
+        <title>Utility Functions Documentation - xTen documentation</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -63,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#setting-up-and-using-the-summarizer-functions" class="md-skip">
+        <a href="#utility-functions-documentation" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Summarize
+              Utility Functions Documentation
             
           </span>
         </div>
@@ -184,7 +180,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../index.md" class="md-nav__link">
         Home
       </a>
     </li>
@@ -199,7 +195,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../problem/" class="md-nav__link">
+      <a href="../../problem.md" class="md-nav__link">
         Problem description and design criteria
       </a>
     </li>
@@ -214,7 +210,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../outline/" class="md-nav__link">
+      <a href="../../outline.md" class="md-nav__link">
         Software outline
       </a>
     </li>
@@ -227,16 +223,14 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
       
       
       
@@ -245,7 +239,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Functions
@@ -256,21 +250,11 @@
               
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../summarize.md" class="md-nav__link">
         Summarize
       </a>
-      
     </li>
   
 
@@ -282,7 +266,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../scraper/" class="md-nav__link">
+      <a href="../scraper.md" class="md-nav__link">
         Scraper
       </a>
     </li>
@@ -296,7 +280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ui_injection/" class="md-nav__link">
+      <a href="../ui_injection.md" class="md-nav__link">
         UI Injection
       </a>
     </li>
@@ -330,6 +314,77 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#scrapepagetabs-contenttypes" class="md-nav__link">
+    scrapePage(tabs, contentTypes)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detecthighlightedtexttextarea" class="md-nav__link">
+    detectHighlightedText(textarea)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#displaytexttext-x-y" class="md-nav__link">
+    displayText(text, x, y)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#displayloadingx-y" class="md-nav__link">
+    displayLoading(x, y)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hidetooltip" class="md-nav__link">
+    hideTooltip()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collectbrowsinghistoryday" class="md-nav__link">
+    collectBrowsingHistoryDay()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collectbrowsinghistoryweek" class="md-nav__link">
+    collectBrowsingHistoryWeek()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collectbrowsinghistorymonth" class="md-nav__link">
+    collectBrowsingHistoryMonth()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collectbrowsinghistoryyear" class="md-nav__link">
+    collectBrowsingHistoryYear()
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -343,23 +398,52 @@
                   
 
 
-<h1 id="setting-up-and-using-the-summarizer-functions">Setting up and using the summarizer function(s)</h1>
-<p>scrape_summarize_data(): Scrape user-specified data from the page
-extract_user_profile(): Scrape a standard list of info from every page visited</p>
-<p>Steps:
-  1. Import summarizer plugin
-  <code>import {SummarizerPlugin } from '../@xten/src/plugins/summarizer/summarizerPlugin';</code></p>
-<ol>
-<li>
-<p>Paste in your API key and use the imported plugin
-  <code>const summarizerPlugin = new SummarizerPlugin(apiKey);</code></p>
-</li>
-<li>
-<p>Attach the imported plugin to the page
-  <code>summarizerPlugin.attach();</code></p>
-</li>
-</ol>
-<p>Almost done! Happy building :)</p>
+<h1 id="utility-functions-documentation">Utility Functions Documentation</h1>
+<p>This documentation provides an overview of the utility functions included in the provided code.</p>
+<h2 id="scrapepagetabs-contenttypes">scrapePage(tabs, contentTypes)</h2>
+<p>This function scrapes a web page and extracts specific elements based on the provided <code>contentTypes</code>.</p>
+<ul>
+<li><code>tabs</code>: An array of tabs representing the current browsing session.</li>
+<li><code>contentTypes</code>: A string selector for the types of elements to be extracted.</li>
+</ul>
+<p>The function retrieves the HTML content of the current tab's URL, parses it using the DOMParser, and searches for elements that match the given <code>contentTypes</code>. It looks for elements with either a <code>title</code> attribute or an <code>alt</code> attribute and stores them in an array. If no such elements are found, it selects the first element from the matched elements. The function logs the text content or source URL of the selected element and returns it.</p>
+<h2 id="detecthighlightedtexttextarea">detectHighlightedText(textarea)</h2>
+<p>This function detects the highlighted text within a textarea element.</p>
+<ul>
+<li><code>textarea</code>: The textarea element from which to extract the highlighted text.</li>
+</ul>
+<p>The function retrieves the selected text from the <code>textarea</code> by using the <code>selectionStart</code> and <code>selectionEnd</code> properties of its value. It returns the selected text.</p>
+<h2 id="displaytexttext-x-y">displayText(text, x, y)</h2>
+<p>This function displays a tooltip or modal with the given text.</p>
+<ul>
+<li><code>text</code>: The text to be displayed in the tooltip.</li>
+<li><code>x</code> (optional): The X-coordinate position of the tooltip. If not provided, it defaults to the center of the page.</li>
+<li><code>y</code> (optional): The Y-coordinate position of the tooltip. If not provided, it defaults to the center of the page.</li>
+</ul>
+<p>The function creates a tooltip element, sets its position, styling, and content based on the input parameters, and appends it to the document body. It also adds an event listener to remove the tooltip when clicking anywhere on the document.</p>
+<h2 id="displayloadingx-y">displayLoading(x, y)</h2>
+<p>This function displays a loading indicator.</p>
+<ul>
+<li><code>x</code> (optional): The X-coordinate position of the loading indicator. If not provided, it defaults to the center of the page.</li>
+<li><code>y</code> (optional): The Y-coordinate position of the loading indicator. If not provided, it defaults to the center of the page.</li>
+</ul>
+<p>The function creates a loading indicator element, sets its position, styling, and content, and appends it to the document body. It removes any existing loading indicators before displaying a new one.</p>
+<h2 id="hidetooltip">hideTooltip()</h2>
+<p>This function hides or removes the currently displayed tooltip or loading indicator.</p>
+<p>The function selects the tooltip and loading indicator elements using CSS class selectors and removes them from the document if found.</p>
+<h2 id="collectbrowsinghistoryday">collectBrowsingHistoryDay()</h2>
+<p>This function collects the browsing history for the past 24 hours.</p>
+<p>The function uses the <code>chrome.history.search</code> API to search for history items within the specified time range. It returns a Promise that resolves to an array of history objects.</p>
+<h2 id="collectbrowsinghistoryweek">collectBrowsingHistoryWeek()</h2>
+<p>This function collects the browsing history for the past week.</p>
+<p>The function uses the <code>chrome.history.search</code> API to search for history items within the specified time range. It returns a Promise that resolves to an array of history objects.</p>
+<h2 id="collectbrowsinghistorymonth">collectBrowsingHistoryMonth()</h2>
+<p>This function collects the browsing history for the past month.</p>
+<p>The function uses the <code>chrome.history.search</code> API to search for history items within the specified time range. It returns a Promise that resolves to an array of history objects.</p>
+<h2 id="collectbrowsinghistoryyear">collectBrowsingHistoryYear()</h2>
+<p>This function collects the browsing history for the past year.</p>
+<p>The function uses the <code>chrome.history.search</code> API to search for history items within the specified time range. It returns a Promise that resolves to an array of history objects.</p>
+<p>Note: The <code>collectBrowsingHistoryDay()</code>, <code>collectBrowsingHistoryWeek()</code>, <code>collectBrowsingHistoryMonth()</code>, and <code>collectBrowsingHistoryYear()</code> functions are specific to the Google Chrome browser extension environment and rely on the <code>chrome.history.search</code> API.</p>
 
 
 
@@ -400,7 +484,7 @@ extract_user_profile(): Scrape a standard list of info from every page visited</
     <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.fac441b0.min.js"></script>
+      <script src="../../assets/javascripts/bundle.b4d07000.min.js"></script>
       
     
   </body>
