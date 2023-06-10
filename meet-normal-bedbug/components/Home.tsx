@@ -154,6 +154,21 @@ const Home = ({ setScreen }) => {
                   setIsButtonHovered_3(false);
               }}>{loading? "Loading..." : "Suggest Websites"}
         </button>
+        <button
+            className="inject-ui"
+            style={{ 
+              marginBottom: 8,
+              padding: "3px 10px",
+              backgroundColor: isButtonHovered_4 ? "#ffadad" : "#7b3747", // change color on hover
+              color: "#ffffff" // White color for the text
+          }}
+            onMouseEnter={() => setIsButtonHovered_4(true)}
+            onMouseLeave={() => setIsButtonHovered_4(false)}
+            onClick={() => {
+              handleSetScreen('injectionPlugin');
+              setIsButtonHovered_4(false);
+            }}>Try InjectionUI
+        </button>
         <div>
             <label className="switch">
               <input 

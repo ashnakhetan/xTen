@@ -10,12 +10,13 @@
     "package": "plasmo package"
   },
   "dependencies": {
-    "xten-pkg": "link:../@xten",
+    "@plasmohq/messaging": "^0.3.3",
+    "file-saver": "^2.0.5",
     "openai": "^3.2.1",
     "plasmo": "0.68.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "file-saver": "^2.0.5"
+    "xten-pkg": "link:../@xten"
   },
   "devDependencies": {
     "@plasmohq/prettier-plugin-sort-imports": "3.6.4",
@@ -31,18 +32,19 @@
       "https://*/*"
     ],
     "background": {
-      "scripts": ["contents/summary.ts"],
+      "scripts": [
+        "contents/summary.ts"
+      ],
       "persistent": true
     },
     "permissions": [
       "background",
-      "scripting", 
+      "scripting",
       "history",
       "storage",
       "contextMenus",
-      "activeTab", 
+      "activeTab",
       "tabs"
     ]
-    
   }
 }

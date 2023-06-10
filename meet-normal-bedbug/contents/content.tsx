@@ -4,21 +4,64 @@ import { createRoot } from "react-dom/client"
  
 import xten from "/Users/ishita/2023-87Capital/@xten"
 
-var i = xten.Injector
+
+const i = xten.Injector
+
+// chrome.runtime.onMessage.addListener(
+//   function(request, sender, sendResponse) {
+//     console.log(sender.tab ?
+//                 "from a content script:" + sender.tab.url :
+//                 "from the extension");
+//     if (request.command === "injection") {
+//       console.log("adjhadjhsvd", request.injection)
+//     }
+
+//       // i.injectById(request.object.id);
+
+//   }
+//   );
 
 // configure url matches
+console.log("Loaded**************")
 i.configure({
-  matches: ["https://www.utu.fi/*"]
+  matches: ["https://www.utu.fi/*", "https://docs.plasmo.com/*"]
 })
+
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  console.log("we netural fr", request);
+  if (request.command == "inject") {
+    // console.log("we up fr", request.data);
+    PlasmoOverlay = request.data;
+  }
+});
 
 // get root container by id
 i.injectById("block-herotitleblock")
+
+let PlasmoOverlay: FC<PlasmoCSUIProps> = () => {
+  return (
+    <span
+      style={{
+        background: "yellow",
+        padding: 12
+      }}>
+        should get replaced
+    </span>
+  )
+}
+
 // inject element
-i.renderElem(<PlasmoOverlay />)
+//i.renderElem(<PlasmoOverlay />)
+// replace images
+//i.backgroundColorChange("block-herotitleblock", "#F08080")
+// change background color 
+
 
 export const config = (() => i.getConfig())()
 export const getRootContainer = (() => i.getRootContainerConfig())()
 export const render = (() => i.getRenderer())()
+
 
 
 // Replace the URL below with the website you want to scrape

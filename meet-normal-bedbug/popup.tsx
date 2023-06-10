@@ -4,6 +4,7 @@ import xten from "@xten/xten";
 import React from 'react';
 import Home from './components/Home'
 import PluginCreation from "~PluginCreation";
+import InjectionPlugin from "~InjectionPlugin";
 import ChatbotSetupScreen from "~ChatbotSetupScreen";
 import './popup.css'
 
@@ -20,8 +21,10 @@ const Main: React.FC = () => {
       {screen === 'home' && <Home setScreen={setScreen} />}
       {screen === 'pluginCreation' && <PluginCreation setScreen={setScreen}/>}
       {screen === 'chatbotSetup' && <ChatbotSetupScreen setScreen={setScreen}/>}
+      {screen === 'injectionPlugin' && <InjectionPlugin setScreen={setScreen}/>}
     </div>
   );
 };
+
 
 export default Main;
