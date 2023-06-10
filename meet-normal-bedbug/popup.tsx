@@ -5,6 +5,7 @@ import React from 'react';
 import Home from './components/Home'
 import PluginCreation from "~PluginCreation";
 import ChatbotSetupScreen from "~ChatbotSetupScreen";
+import AIPromptScreen from "~AIPromptScreen";
 import './popup.css'
 
 const Main: React.FC = () => {
@@ -20,6 +21,7 @@ const Main: React.FC = () => {
       {screen === 'home' && <Home setScreen={setScreen} />}
       {screen === 'pluginCreation' && <PluginCreation setScreen={setScreen}/>}
       {screen === 'chatbotSetup' && <ChatbotSetupScreen setScreen={setScreen}/>}
+      {screen === 'aiPromptCreation' && <AIPromptScreen setScreen={setScreen}/>}
     </div>
   );
 };

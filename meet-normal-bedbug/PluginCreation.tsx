@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
-// import xten from "@xten/xten";
-import { urlRecommenderPlugin } from "../@xten/src/plugins/recommender/urlRecommenderPlugin";
-import OpenAIPLugin from "../@xten/src/core/OpenAIPlugin"
-import { SummarizerPlugin } from "../@xten/src/plugins/summarizer/summarizerPlugin";
+import './PluginCreation.css'
+import icon from './assets/icon.png'
 
 // Plugin builder modules, we want to be able to dynamically add to them in the future
 import { aiPrompts as initialAiPrompts} from "../@xten/src/plugin_builder_modules/aiPrompts";
@@ -11,9 +9,6 @@ import { scrapeTypes as inititalScrapeTypes } from "../@xten/src/plugin_builder_
 import { dataSources as initialDataSources } from "../@xten/src/plugin_builder_modules/dataSources";
 import { timePeriods as timePeriods } from "../@xten/src/plugin_builder_modules/timePeriods";
 import { displayMethods as initialDisplayMethods} from "../@xten/src/plugin_builder_modules/displayMethods";
-
-// Chatbot plugin
-import { chatBotPlugin } from "../@xten/src/plugins/chatbot/chatbotPlugin.js";
 
 const apiKey = "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";
 
@@ -140,28 +135,34 @@ const PluginCreation = ({setScreen}) => {
 
   
     return (
-      <div
+      <div className="card"
         style={{
           display: "flex",
           flexDirection: "column",
-          padding: 16,
-          fontFamily: "monospace",
-          minWidth: 400
+          // padding: 16,
         }}>
-        <h2>Plugin Creation Screen</h2>
+          <div className="header">
+        <div className="logo"></div>
+        {/* <h2 className="title">Browser Extension</h2> */}
+        <a href="https://cs210.github.io/2023-87Capital/" target="_blank" rel="noopener noreferrer">
+          <img src={icon} width={180}></img>
+        </a>
+      </div>
+        <h1>Create a Custom Plugin</h1>
         <div style={{ 
           marginBottom: 8,
           display: "flex",
           flexDirection: "row"
+          // overflow:"auto"
           }}>
-          <select
+          <select className="dropdown"
             value={selectedData}
             onChange={(e) => {
               setSelectedData(e.target.value);
               console.log('New selectedData: ', e.target.value);
             }}
           >
-            <option value="">Select a data source ...</option>
+            <option value="">Select data source</option>
             {dataOption.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -173,14 +174,14 @@ const PluginCreation = ({setScreen}) => {
 
           {/* if the selected method was manual: have an input box; if scraping: dropdown; if browsing history, time period dropdown! */}
           {selectedData === 'Scraping' ? (
-            <select
+            <select className="dropdown"
               value={selectedType}
               onChange={(e) => {
                 setSelectedType(e.target.value);
                 console.log('New selectedType: ', e.target.value);
               }}
             >
-              <option value="">Select a data type</option>
+              <option value="">Select data type</option>
               {scrapeOption.map((option, index) => (
                 <option key={index} value={option}>
                   {option}
@@ -191,14 +192,14 @@ const PluginCreation = ({setScreen}) => {
             <input type="text" value={inputData} onChange={handleInputChange} />
           ) :
           (
-            <select
+            <select className="dropdown"
             value={selectedData}
             onChange={(e) => {
               setSelectedType(e.target.value);
               console.log('New selectedData: ', e.target.value);
             }}
           >
-            <option value="">Select a time period</option>
+            <option value="">Select time period</option>
             {timeOption.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -206,18 +207,23 @@ const PluginCreation = ({setScreen}) => {
             ))}
           </select>
           )}
+        </div>
+        <div style={{ 
+          marginBottom: 8,
+          display: "flex",
+          flexDirection: "row"
+          // overflow:"auto"
+          }}>
+          {/* <span style={{ margin: "0 8px" }}>+</span> */}
 
-
-<span style={{ margin: "0 8px" }}>+</span>
-
-          <select
+          <select className="dropdown"
             value={selectedPrompt}
             onChange={(e) => {
               setSelectedPrompt(e.target.value);
               console.log('New selectedPrompt: ', e.target.value);
             }}
           >
-            <option value="">Select an AI query...</option>
+            <option value="">Select an AI query</option>
             {promptOption.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -225,14 +231,14 @@ const PluginCreation = ({setScreen}) => {
             ))}
           </select>
           <span style={{ margin: "0 8px" }}>+</span>
-          <select
+          <select className="dropdown"
             value={selectedDisplay}
             onChange={(e) => {
               setSelectedDisplay(e.target.value);
               console.log('New selectedDisplay: ', e.target.value);
             }}
           >
-            <option value="">Select a display option...</option>
+            <option value="">Select display option</option>
             {displayOption.map((option, index) => (
               <option key={index} value={option}>
                 {option}
@@ -240,20 +246,26 @@ const PluginCreation = ({setScreen}) => {
             ))}
           </select>
         </div>
+        <button
+          className="ai-button"
+          onClick={() => handleSetScreen('aiPromptCreation')}
+        >
+          + Create AI Prompt
+        </button>
         <h2>Name your Plugin</h2>
-        <input
-          style={{ width: "100%", marginBottom: 8, fontFamily: "monospace" }}
+        <input className="input"
+          // style={{ width: "100%", marginBottom: 8}}
           type="text"
           placeholder="Plugin Name"
           value={pluginName}
           onChange={handlePluginNameChange}
         />
-        <button 
+        <button className="add-button"
         style={{ marginBottom: 8 }}
         disabled={!pluginName || !selectedData || !selectedPrompt || !selectedDisplay}
         onClick={saveCustomPlugin}>Save Plugin
         </button>
-        <button onClick={() =>handleSetScreen('home')}>Close</button>
+        <button className="back-button"onClick={() =>handleSetScreen('home')}></button>
       </div>
     );
   };

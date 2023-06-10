@@ -110,7 +110,7 @@ const Home = ({ setScreen }) => {
         </a>
       </div>
       <div className="text-section">
-        <p><strong>Demo</strong> our features. Create a sample browser extension or utilize one of our <span className="highlighted">examples</span>.</p>
+        <p><span className="big">Demo our features</span>. Create a sample browser extension or utilize one of our <span className="highlighted">examples</span>.</p>
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <h3 className="title">Plugins</h3>
@@ -128,7 +128,7 @@ const Home = ({ setScreen }) => {
             style={{ 
               marginBottom: 8,
               padding: "3px 10px",
-              backgroundColor: isButtonHovered_4 ? "#ffadad" : "#7b3747", // change color on hover
+              backgroundColor: isButtonHovered_4 ? "#f95d6a" : "#ef9d9d", // change color on hover
               color: "#ffffff" // White color for the text
           }}
             onMouseEnter={() => setIsButtonHovered_4(true)}
@@ -143,7 +143,7 @@ const Home = ({ setScreen }) => {
               style={{ 
                   marginBottom: 8,
                   padding: "3px 10px",
-                  backgroundColor: isButtonHovered_3 ? "#ffadad" : "#7b3747", // change color on hover
+                  backgroundColor: isButtonHovered_3 ? "#f95d6a" : "#ef9d9d", // change color on hover
                   color: "#ffffff" // White color for the text
               }}
               onMouseEnter={() => setIsButtonHovered_3(true)}
@@ -154,7 +154,7 @@ const Home = ({ setScreen }) => {
                   setIsButtonHovered_3(false);
               }}>{loading? "Loading..." : "Suggest Websites"}
         </button>
-        <div>
+        <div style={{ display: "flex", alignItems: "center" }}>
             <label className="switch">
               <input 
                 type="checkbox"

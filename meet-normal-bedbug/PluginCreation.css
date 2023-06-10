@@ -23,6 +23,8 @@
     /* Add your logo image URL here */
     /* background-image: url('logo.png'); */
     background-size: cover;
+    /* flex-grow: 1;
+    text-align: center; */
   }
   
   .title {
@@ -37,7 +39,6 @@
   .text-section {
     padding: 10px;
     font-family:"Poppins";
-    font-size: 15;
   }
   
   .box {
@@ -64,6 +65,21 @@
     /* justify-content: flex-end; */
   }
 
+  .ai-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 3px;
+    border-radius: 5px;
+    width: 47%;
+    font-family: "Poppins";
+    font-size: 10px;
+    /* margin:10px; */
+    /* margin-bottom: 60px; */
+    /* align-items: center; */
+    /* justify-content: flex-end; */
+  }
+
   .try-chatbot {
     background-color: #aeaaaa;
     color: #0d0d0d;
@@ -74,11 +90,25 @@
     /* align-items: center; */
     justify-content: flex-end;
   }
-  .curly-brace {
-    display: inline-block;
-    font-size: 30px;
-    vertical-align: middle;
-    transform: scaleX(-1);
+  
+  .dropdown {
+    padding: 4px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    color: #333;
+    /* width: 200px; */
+    font-family:"Poppins";
+  }
+  
+  .dropdown:hover {
+    border-color: #999;
+  }
+  
+  .dropdown:focus {
+    outline: none;
+    box-shadow: 0 0 5px #999;
   }
 
   .highlighted {
@@ -88,6 +118,52 @@
     color:#ef9d9d;
   }
 
+  .input {
+    width: 93%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+    color: #333;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family:"Poppins";
+    margin-right:40px;
+    margin-bottom: 8px;
+  }
+
+  .input:focus {
+    outline: none;
+    border: 2px solid #4e9cff;
+    box-shadow: 0 2px 8px rgba(78, 156, 255, 0.4);
+  }
+  
+  .input::placeholder {
+    color: #999;
+  }
+
+  .back-button {
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    border: none;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .back-button::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid #fff;
+    border-left: 2px solid #fff;
+  }
+  
   .big {
     font-size: 24px;
   }

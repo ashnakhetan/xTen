@@ -79,65 +79,6 @@ const CustomPlugins = (props) => {
       chrome.storage.local.set({ 'customPlugins': newCustomPlugins });
     };
 
-// return (
-//     <div>
-//     {/* <h3>Custom Plugins:</h3> */}
-//     {customPlugins.map((plugin, index) => (
-//     <div
-//         key={index}
-//         style={{
-//         display: "flex",
-//         // only align the buttons to the right
-//         alignItems: "center",
-//         // Place the buttons to the right
-//         justifyContent: "space-between",
-//         marginBottom: 8
-//         }}
-//     >
-//         <span style={{ marginRight: 8}}>{plugin.name}</span>
-
-//         <button
-//         onClick={() => executeCustomPlugin(plugin, index)}
-//         // disabled if loadingplugin index is set to true
-//         disabled={loadingStates[index]}
-//         style={{
-//             marginRight: 8,
-//             marginLeft: 100,
-//             backgroundColor:  loadingStates[index]? "#ccc" : "#ffadad", // Change color if loading
-//             color: "#ffffff",
-//             padding: "3px 10px",
-//             cursor:  loadingStates[index]? "not-allowed" : "pointer" // Change cursor style while loading.
-//         }}
-//         onMouseEnter={e =>
-//             ! loadingStates[index] &&
-//             (e.currentTarget.style.backgroundColor = "#f95d6a")
-//         }
-//         onMouseLeave={e =>
-//             !loadingStates[index] &&
-//             (e.currentTarget.style.backgroundColor = "#ffadad")
-//         }
-//     >
-//         {loadingStates[index]? "Loading..." : "Execute"} {}
-//     </button>
-
-//         <button
-//         onClick={() => deleteCustomPlugin(index)}
-//         style={{
-//             backgroundColor: "#ffadad",
-//             color: "#ffffff",
-//             padding: "3px 10px",
-//             // border: "none",
-//             cursor: "pointer"
-//         }}
-//         onMouseEnter={e => (e.currentTarget.style.backgroundColor = "#d43f00")}
-//         onMouseLeave={e => (e.currentTarget.style.backgroundColor = "#ffadad")}
-//         >
-//         Delete
-//         </button>
-//     </div>
-//     ))}
-//     </div>
-// )
 return (
     <div style={{ width: "300px" }}>
       {/* <h3>Custom Plugins:</h3> */}
@@ -164,6 +105,7 @@ return (
                 color: "#ffffff",
                 padding: "3px 10px",
                 cursor: loadingStates[index] ? "not-allowed" : "pointer",
+                border: "none"
               }}
               onMouseEnter={(e) =>
                 !loadingStates[index] &&
@@ -183,7 +125,7 @@ return (
                 backgroundColor: "#f95d6a",
                 color: "#ffffff",
                 padding: "3px 10px",
-                // border: "none",
+                border: "none",
                 cursor: "pointer",
               }}
               onMouseEnter={(e) =>
