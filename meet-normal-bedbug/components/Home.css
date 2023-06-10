@@ -73,3 +73,14 @@
     /* align-items: center; */
     justify-content: flex-end;
   }
+  .curly-brace {
+    display: inline-block;
+    font-size: 30px;
+    vertical-align: middle;
+    transform: scaleX(-1);
+  }
+  .highlighted {
+    background-color: #7b3747;
+    border-radius: 5px;
+    color: white;
+  }

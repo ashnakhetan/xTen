@@ -149,6 +149,7 @@ return (
             alignItems: "center",
             justifyContent: "space-between",
             marginBottom: 8,
+            marginLeft:8
           }}
         >
           <span style={{ marginRight: 8 }}>{plugin.name}</span>
@@ -159,18 +160,18 @@ return (
               disabled={loadingStates[index]}
               style={{
                 marginRight: 8,
-                backgroundColor: loadingStates[index] ? "#ccc" : "#ffadad",
+                backgroundColor: loadingStates[index] ? "#ccc" : "#f95d6a",
                 color: "#ffffff",
                 padding: "3px 10px",
                 cursor: loadingStates[index] ? "not-allowed" : "pointer",
               }}
               onMouseEnter={(e) =>
                 !loadingStates[index] &&
-                (e.currentTarget.style.backgroundColor = "#f95d6a")
+                (e.currentTarget.style.backgroundColor = "#ffadad")
               }
               onMouseLeave={(e) =>
                 !loadingStates[index] &&
-                (e.currentTarget.style.backgroundColor = "#ffadad")
+                (e.currentTarget.style.backgroundColor = "#f95d6a")
               }
             >
               {loadingStates[index] ? "Loading..." : "Execute"} {}
@@ -179,17 +180,17 @@ return (
             <button
               onClick={() => deleteCustomPlugin(index)}
               style={{
-                backgroundColor: "#ffadad",
+                backgroundColor: "#f95d6a",
                 color: "#ffffff",
                 padding: "3px 10px",
                 // border: "none",
                 cursor: "pointer",
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.backgroundColor = "#d43f00")
+                (e.currentTarget.style.backgroundColor = "#ffadad")
               }
               onMouseLeave={(e) =>
-                (e.currentTarget.style.backgroundColor = "#ffadad")
+                (e.currentTarget.style.backgroundColor = "#f95d6a")
               }
             >
               Delete
