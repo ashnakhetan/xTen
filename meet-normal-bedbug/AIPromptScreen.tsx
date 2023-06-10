@@ -30,13 +30,13 @@ const AIPromptScreen = ({ setScreen }) => {
       const fileName = `${promptName}.js`;
 
       var curAIPrompt = {
-        id: 1,
-        name: 'prompt name',
+        id: 5,
+        name: promptName,
         type: 'aiPrompt',
-        description: 'This is a description of aiPrompt1',
-        prompt: 'This is the prompt itself'
-      } 
-      localStorage.setItem('myData', JSON.stringify(curAIPrompt));
+        description: 'This is a description of the prompt',
+        text: promptText
+      }
+      localStorage.setItem('aiPromptData', JSON.stringify(curAIPrompt));
 
       // Create the template with the user-defined prompt and plugin name
       // const fileContent = createCompletionPlugin(promptText, pluginName);
@@ -113,7 +113,7 @@ const AIPromptScreen = ({ setScreen }) => {
         </button>
         <button 
         style={{ marginBottom: 8 }}
-        onClick={()=> handleSetScreen('home')}>Close</button>
+        onClick={()=> handleSetScreen('pluginCreation')}>Close</button>
       </div>
     );
   };

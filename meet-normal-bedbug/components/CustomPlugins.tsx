@@ -46,6 +46,13 @@ const CustomPlugins = (props) => {
         console.log("Data source:", dataSource);
         const dataType = props.dataTypes.find(d => d.name === plugin.dataTypeName);
         console.log("Data type:", dataType);
+        const storedData = localStorage.getItem('aiPromptData');
+        console.log(storedData);
+        const aiPromptData = JSON.parse(storedData);
+        if (! props.aiPrompts.includes(aiPromptData)) {
+          props.aiPrompts.push(aiPromptData);
+          console.log( props.aiPrompts);
+        }
         const aiPrompt = props.aiPrompts.find(ai => ai.name === plugin.aiPromptName);
         console.log("AI Prompt:", aiPrompt);
         const displayMethod = props.displayMethods.find(d => d.name === plugin.displayMethodName);
@@ -54,6 +61,7 @@ const CustomPlugins = (props) => {
         var data = await dataSource.execute(dataType);
         console.log("the data:", data);
         try {
+          console.log(aiPrompt);
           var requestOutput = await chatGptPlugin.customPrompt(aiPrompt.text, data);
           displayMethod.execute(requestOutput);
         }

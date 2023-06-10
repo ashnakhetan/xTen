@@ -103,7 +103,15 @@ const PluginCreation = ({setScreen}) => {
     const dataOption = Object.values(dataSources).map((source) => source.name);
     const timeOption = Object.values(timePeriods).map((source) => source.name);
     const displayOption = Object.values(displayMethods).map((display) => display.name);
+    const storedData = localStorage.getItem('aiPromptData');
+    console.log(storedData);
+    const data = JSON.parse(storedData);
+    if (!aiPrompts.includes(data)) {
+      aiPrompts.push(data);
+      console.log(aiPrompts);
+    }
     const promptOption = Object.values(aiPrompts).map((prompt) => prompt.name);
+    console.log(promptOption);
     const scrapeOption = Object.values(scrapeTypes).map((type) => type.name);
 
 
@@ -117,7 +125,7 @@ const PluginCreation = ({setScreen}) => {
       const newPlugin = {
         name: pluginName,
         dataSourceName : selectedDataSource.name,
-        dataTypeName: selectedDataType.name,
+        dataTypeName: selectedDataType ? selectedDataType.name : "",
         aiPromptName: selectedAiPrompt.name,
         displayMethodName: selectedDisplayMethod.name,
         loading: false
