@@ -7,7 +7,7 @@ let currentTrackedSites = [];
 let timeSpentInSeconds = 0;
 let popupOpen = false;
 let displayingQuote = false;
-let quoteLimit = 15
+let quoteLimit = 20;
 
 
 const apiKey = "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";

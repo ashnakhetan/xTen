@@ -902,7 +902,7 @@ function IndexPopup() {
                 style={{ marginBottom: 8 }}
               >
                 <option value="">Select Check-in Interval</option>
-                <option value=".16">10 seconds (demo)</option>
+                <option value=".32">20 seconds (demo)</option>
                 <option value="5">5 minutes</option>
                 <option value="10">10 minutes</option>
                 <option value="20">20 minutes</option>
@@ -914,7 +914,7 @@ function IndexPopup() {
                 <ul>
                   {selectedSites.filter(site => site.timeSpent !== null).map((site, index) => (
                     <li key={index}>
-                      {site.name} ({site.url}) - {site.timeSpent} minutes
+                      {site.name} ({site.url}) - {site.timeSpent} seconds
                     </li>
                   ))}
                 </ul>

@@ -50,22 +50,36 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 const displayTimesUpMessage = (quote) => {
     const timesUpDiv = document.createElement('div');
-    timesUpDiv.id = 'timesUpDiv'; // ID
-    timesUpDiv.style.position = 'fixed';
-    timesUpDiv.style.top = '0';
-    timesUpDiv.style.left = '0';
-    timesUpDiv.style.width = '100vw';
-    timesUpDiv.style.height = '100vh';
-    timesUpDiv.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-    timesUpDiv.style.zIndex = '10000';
-    timesUpDiv.style.display = 'flex';
-    timesUpDiv.style.justifyContent = 'center';
-    timesUpDiv.style.alignItems = 'center';
-    timesUpDiv.style.color = 'white';
-    timesUpDiv.style.fontSize = '2em';
-    timesUpDiv.innerHTML = `<p>Time's Up</p><p>${quote}</p>`;
+    
+    // Assign ID
+    timesUpDiv.id = 'timesUpDiv';
+
+    // Assign styles
+    Object.assign(timesUpDiv.style, {
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        zIndex: '10000',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        color: 'white',
+        fontSize: '2em'
+    });
+    
+    // Set inner HTML
+    timesUpDiv.innerHTML = `
+        <p>Time's Up</p>
+        <p>${quote}</p>
+    `;
+
+    // Append to body
     document.body.appendChild(timesUpDiv);
 };
+
 
 const removeTimesUpMessage = () => {
     const timesUpDiv = document.getElementById("timesUpDiv");
