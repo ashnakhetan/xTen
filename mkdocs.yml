@@ -8,6 +8,9 @@ nav:
   - Problem description and design criteria : problem.md
   - Software outline: outline.md 
   - Functions:
-    - Summarize: functions/summarize.md
+    - Summarize: docs/plugins/summarizer
+    - Recommender: docs/plugins/recommender
+    - OpenAI Plugin: docs/plugins/openAiPlugins
+      - Plugin Builder: docs/plugins/openAiPlugins/plugin builder
     - Scraper: functions/scraper.md
     - UI Injection: functions/ui_injection.md
