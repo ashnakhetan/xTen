@@ -1,0 +1,13 @@
+site_name: xTen documentation
+site_description: >-
+  Welcome to xTen! xTen makes it easy to incorporate AI tools into your extensions — try it out today!
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Problem description and design criteria : problem.md
+  - Software outline: outline.md 
+  - Functions:
+    - Summarize: functions/summarize.md
+    - Scraper: functions/scraper.md
+    - UI Injection: functions/ui_injection.md
