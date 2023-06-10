@@ -10,6 +10,7 @@ nav:
   - Functions:
     - Summarize: docs/plugins/summarizer
     - Recommender: docs/plugins/recommender
-    - OpenAI Plugin: docs/plugins/openAiPlugins
+    - OpenAI Plugin:
+      - Overview: docs/plugins/openAiPlugins
       - Plugin Builder: docs/plugins/openAiPlugins/plugin_builder
     - Chatbot: docs/plugins/chatbot
