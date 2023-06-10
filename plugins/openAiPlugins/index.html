@@ -11,13 +11,17 @@
       
       
       
+        <link rel="prev" href="../recommender/">
+      
+      
+        <link rel="next" href="plugin_builder/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
     
     
       
-        <title>OpenAIPlugin - xTen documentation</title>
+        <title>Overview - xTen documentation</title>
       
     
     
@@ -94,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              OpenAIPlugin
+              Overview
             
           </span>
         </div>
@@ -223,14 +227,16 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
@@ -239,7 +245,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           Functions
@@ -252,7 +258,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/plugins/summarizer" class="md-nav__link">
+      <a href="../summarizer/" class="md-nav__link">
         Summarize
       </a>
     </li>
@@ -266,7 +272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/plugins/recommender" class="md-nav__link">
+      <a href="../recommender/" class="md-nav__link">
         Recommender
       </a>
     </li>
@@ -278,14 +284,16 @@
               
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
       
       
-      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" checked>
       
       
       
@@ -294,7 +302,7 @@
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4_3">
           <span class="md-nav__icon md-icon"></span>
           OpenAI Plugin
@@ -305,11 +313,187 @@
               
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../docs/plugins/openAiPlugins" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Overview
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Overview
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#constructor" class="md-nav__link">
+    Constructor
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#constructorapikey" class="md-nav__link">
+    constructor(apiKey)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    Methods
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summarizetexttext" class="md-nav__link">
+    summarizeText(text)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-summarizetexttext" class="md-nav__link">
+    async summarizeText(text)
+  </a>
+  
+    <nav class="md-nav" aria-label="async summarizeText(text)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getavailablemodels" class="md-nav__link">
+    getAvailableModels()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-getavailablemodels" class="md-nav__link">
+    async getAvailableModels()
+  </a>
+  
+    <nav class="md-nav" aria-label="async getAvailableModels()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#recommendurlsurls-numurls" class="md-nav__link">
+    recommendUrls(urls, numUrls)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-recommendurlsurls-numurls" class="md-nav__link">
+    async recommendUrls(urls, numUrls)
+  </a>
+  
+    <nav class="md-nav" aria-label="async recommendUrls(urls, numUrls)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#custompromptuserprompt-data" class="md-nav__link">
+    customPrompt(userPrompt, data)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-custompromptuserprompt-data" class="md-nav__link">
+    async customPrompt(userPrompt, data)
+  </a>
+  
+    <nav class="md-nav" aria-label="async customPrompt(userPrompt, data)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chatquery" class="md-nav__link">
+    chat(query)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-chatquery" class="md-nav__link">
+    async chat(query)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#note" class="md-nav__link">
+    Note
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -321,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/plugins/openAiPlugins/plugin_builder" class="md-nav__link">
+      <a href="plugin_builder/" class="md-nav__link">
         Plugin Builder
       </a>
     </li>
@@ -342,7 +526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../docs/plugins/chatbot" class="md-nav__link">
+      <a href="../chatbot/" class="md-nav__link">
         Chatbot
       </a>
     </li>
