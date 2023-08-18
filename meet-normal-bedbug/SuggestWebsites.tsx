@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { urlRecommenderPlugin } from "../@xten/src/plugins/recommender/urlRecommenderPlugin";
 
-const apiKey = "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";
+const apiKey = "INSERT API KEY HERE";
 
 // Recommender plugin
 const recommenderPlugin = new urlRecommenderPlugin(apiKey);
