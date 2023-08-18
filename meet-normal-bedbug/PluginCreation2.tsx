@@ -19,7 +19,7 @@ import { displayMethods as initialDisplayMethods } from "../@xten/src/plugin_bui
 import { displayLoading } from "~../@xten/src/utils/display";
 import { hideTooltip } from "~../@xten/src/utils/display";
 
-const apiKey = "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";
+const apiKey = "INSERT API KEY HERE";
 
 // Base chatgpt plugin used for plugin builder
 const chatGptPlugin = new OpenAIPLugin(apiKey);
