@@ -10,7 +10,7 @@ import { dataSources as initialDataSources } from "../@xten/src/plugin_builder_m
 import { timePeriods as timePeriods } from "../@xten/src/plugin_builder_modules/timePeriods";
 import { displayMethods as initialDisplayMethods} from "../@xten/src/plugin_builder_modules/displayMethods";
 
-const apiKey = "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";
+const apiKey = "INSERT API KEY HERE";
 
 const PluginCreation = ({setScreen}) => {
 
