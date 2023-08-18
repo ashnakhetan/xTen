@@ -10,7 +10,7 @@ let displayingQuote = false;
 let quoteLimit = 15
 
 
-const apiKey = "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";
+const apiKey = "INSERT API KEY HERE";
 
 // Chatbot PLugin
 const chatbot = new ChatBotPlugin(apiKey);
