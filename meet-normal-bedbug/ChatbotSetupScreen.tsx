@@ -3,7 +3,7 @@ import React from "react";
 import xten from "@xten/xten";
 import { chatBotPlugin } from "../@xten/src/plugins/chatbot/chatbotPlugin.js";
 
-const apiKey = "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";
+const apiKey = "INSERT API KEY HERE";
 
 // Chatbot PLugin
 const chatbot = new chatBotPlugin(apiKey);
