@@ -18,7 +18,7 @@ import { hideTooltip } from "~../@xten/src/utils/display";
 // Chatbot plugin
 import { chatBotPlugin } from "../@xten/src/plugins/chatbot/chatbotPlugin.js";
 
-const apiKey = "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";
+const apiKey = "INSERT API KEY HERE";
 
 // Base chatgpt plugin used for plugin builder
 const chatGptPlugin = new OpenAIPLugin(apiKey);
